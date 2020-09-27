@@ -1,1 +1,0 @@
-chrome_location = '/Users/tannerhleigh/downloads/chromedriver'
