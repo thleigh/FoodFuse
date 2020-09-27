@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Restaurant, User
+from .models import Restaurant, User, Test
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
@@ -44,3 +44,25 @@ def about(request):
 
 def index(request):
   return render(request, 'index.html')
+
+class Test(CreateView):
+    model = Test
+    fields = '__all__'
+    success_url = '/test'
+
+def testfrontpage(request):
+    return render(request, 'testfrontpage.html')
+
+  
+
+#   class CatToyCreate(CreateView):
+#     model = CatToy
+#     fields = '__all__'
+#     success_url = '/cattoys'
+
+class RestaurantCreate(CreateView):
+    model = Restaurant
+    fields = '__all__'
+    success_url = '/restaurants/'
+
+# class UserCreate(CreateView):
