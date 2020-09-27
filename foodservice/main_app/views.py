@@ -31,6 +31,23 @@ def login_view(request):
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})
 
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return HttpResponseRedirect('/user/'+str(user))
+        else:
+            return HttpResponse('<h1>Try Again</h1>')
+    else:
+        form = UserCreationForm()
+        return render(request, 'signup.html', {'form': form})
+
 #PROFILE
 @login_required
 def profile(request, username):
@@ -53,7 +70,6 @@ class Test(CreateView):
 def testfrontpage(request):
     return render(request, 'testfrontpage.html')
 
-  
 
 #   class CatToyCreate(CreateView):
 #     model = CatToy

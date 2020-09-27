@@ -1,1 +1,1 @@
-chrome_location = '/Users/tannerhleigh/downloads/chromedriver'
+chrome_location = '/Users/cristinanguyen/Downloads/chromedriver'
