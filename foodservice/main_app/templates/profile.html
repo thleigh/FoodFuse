@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ username }}'s collection:</h1>
-
-    {% for cat in cats %}
-    <a href="/cats/{{cat.id}}">
-        <h3>{{ cat.name }}</h3>
-    </a>
-
-    {% endfor %}
+<h1>Profile Page</h1>
+  
 
     <a href="/">Home</a> <br>
 
