@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+from .forms import TestForm
 # Create your views here.
 
 # LOGIN
@@ -62,13 +63,28 @@ def about(request):
 def index(request):
   return render(request, 'index.html')
 
-class Test(CreateView):
-    model = Test
-    fields = '__all__'
-    success_url = '/test'
+# class Test(CreateView):
+#     model = Test
+#     fields = '__all__'
+#     success_url = '/test'
+
 
 def testfrontpage(request):
-    return render(request, 'testfrontpage.html')
+
+    # Checks if the request is a POST 
+    if request.method == "GET":
+        # Will populate our form with what the user submits
+        form = TestForm(request.GET)
+        # If what the user inputs works
+        if form.is_valid():
+            # Gets the data in a clean format
+            location = form.cleaned_data['location']
+            restaurant = form.cleaned_data['restaurant']
+
+            print(location, restaurant)
+
+    form = TestForm()
+    return render(request, 'testfrontpage.html', {'form': form})
 
 
 #   class CatToyCreate(CreateView):
