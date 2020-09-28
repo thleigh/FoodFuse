@@ -2,13 +2,13 @@
 
 {% block page_content %}
 <h1>THIS IS A TEST</h1>
-<form method="get">
+<form method="post">
     {% csrf_token %}
 
         {{ form }}
 
     <button type="submit">Submit</button>
-    <input type="button" id='script' name="scriptbutton" value="submit script" onclick="exec('python3 doordash.py');"> 
+    <!-- <input type="button" id='script' name="scriptbutton" value="submit script" onclick="exec('python3 doordash.py');">  -->
 </form>
 
 {% endblock %}
