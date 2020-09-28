@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+from .doordash import doordash
 from .forms import TestForm
 # Create your views here.
 
@@ -72,19 +73,23 @@ def index(request):
 def testfrontpage(request):
 
     # Checks if the request is a POST 
-    if request.method == "GET":
+    if request.method == "POST":
         # Will populate our form with what the user submits
-        form = TestForm(request.GET)
+        form = TestForm(request.POST)
         # If what the user inputs works
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
-            restaurant = form.cleaned_data['restaurant']
+            # restaurant = form.cleaned_data['restaurant']
 
-            print(location, restaurant)
+            print(location)
+            doordash(location)
+
+            # return HttpResponseRedirect(reverse(app_name:'test'))
 
     form = TestForm()
     return render(request, 'testfrontpage.html', {'form': form})
+
 
 
 #   class CatToyCreate(CreateView):
