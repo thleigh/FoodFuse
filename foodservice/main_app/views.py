@@ -8,14 +8,9 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-<<<<<<< HEAD
-from .doordash import doordash
-from .forms import TestForm
-=======
 
 from .doordash import doordash, final_list
 from .forms import SearchForm
->>>>>>> 8272c206d393fc4f9e0d5d1f5054ba4500dee77e
 # Create your views here.
 
 # LOGIN
