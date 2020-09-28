@@ -24,6 +24,7 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user) # log the user in by creating a session
+                    # return HttpResponseRedirect('/')
                     return HttpResponseRedirect('/user/'+u)
                 else:
                     print('The account has been disabled.')
@@ -32,6 +33,15 @@ def login_view(request):
     else: # it was a GET request so send the empty login form
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})
+
+##trying to add email to login form
+class EmailLoginForm(AuthenticationForm):
+    def clean(self):
+        try:
+            self.cleaned_data["username"] = get_user_model().objects.get(email=self.data["username"])
+        except ObjectDoesNotExist:
+            self.cleaned_data["username"] = "a_username_that_do_not_exists_anywhere_in_the_site"
+        return super(EmailLoginForm, self).clean()
 
 def logout_view(request):
     logout(request)
@@ -53,9 +63,9 @@ def signup_view(request):
 #PROFILE
 @login_required
 def profile(request, username):
-    # user = User.objects.get(username=username)
+    user = User.objects.get(username=username)
     # cats = Cat.objects.filter(user=user)
-    return render(request, 'profile.html')
+    return render(request, 'profile.html', {'username': username })
 
 # DEFAULT
 def about(request):
