@@ -22,11 +22,27 @@ Site: Link
 * [Selenium](https://www.selenium.dev/)
 * [Bootstrap](https://getbootstrap.com/)
 
+## ERD
+---
+## Wireframe
+---
+* [Wireframe](https://whimsical.com/8ZG1we7qiPufc8D7ZoJwhb)
+
+## Installation
+---
+
+## Models
+---
+
+## Routes
+---
+
 ## Sprints
 ---
 ### 0
 
-## ERD
+## Code Snippets
 ---
-## Wireframe
+
+## Conclusion
 ---
