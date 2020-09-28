@@ -11,6 +11,9 @@ options.set_headless(True)
 
 # locates the chrome_driver app in the local system
 driver = webdriver.Chrome(chrome_location, chrome_options=options)
+#, chrome_options=options
+
+final_list = []
 
 def doordash(data):
     # Goes to Doordash Website
@@ -30,19 +33,19 @@ def doordash(data):
     time.sleep(0.5)
     # Clicks the submit button
     address_button.click()
-    time.sleep(3)
+    time.sleep(5)
     print('Going to address page')
     print('on the Restaurant page!')
 
     # Finds the DIV containing all of the restaurant data
-
     restaurant_data = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[2]/div/div/div[1]/div[6]/div/div[2]').text
     restaurant_list = restaurant_data.split('\n')
 
     # Between the 0th and 7th index, append that range and repeat.
     # Between 0 and 7 is all of the info for one restaurant.
-    final_list = []
+    
     for i in range(0, len(restaurant_list), 7):
         final_list.append(restaurant_list[i:i+7])
-        print(final_list)
+        # print(final_list)
 
+    return final_list

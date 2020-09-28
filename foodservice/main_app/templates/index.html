@@ -34,11 +34,12 @@
     <div class="text-center" id="main">
         <h1>FoodFuse homepage</h1>
         <hr />
-        <a href="/test">TEST</a> <br>
-        <form action="" method="">
+        <!-- <a href="/test">TEST</a> <br> -->
+        <form method="post">
             {% csrf_token %}
-            <input type="text" value="Enter a zipcode">
-            <input type="submit" value="Submit!">
+            {{ form }}
+            <button type="submit">Submit</button>
+            {{ data }}
         </form>
     </div>
     <br>
