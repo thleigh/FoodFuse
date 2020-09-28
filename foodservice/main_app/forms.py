@@ -1,5 +1,5 @@
 from django import forms
 
-class TestForm(forms.Form):
+class SearchForm(forms.Form):
     location = forms.CharField()
     # restaurant = forms.CharField()
