@@ -1,0 +1,24 @@
+body {
+    background-color: #F0ECEB;
+    font-family: 'Montserrat', sans-serif;
+    overflow-y: scroll;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+#carouselExampleControls {
+    opacity: 0.8;
+}
+
+img {
+    background-size: contain;
+}
+
+/* .d-block {
+    width: 100%;
+} */
+
+
