@@ -1,21 +1,17 @@
-{% load static %}
+{% extends "layout.html" %}
 
+{% block page_content %}
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Food Service</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
+    <title>FoodFuse</title>
   </head>
   <body>
     <div class="jumbotron text-center">
-        <h1>Foodservice homepage</h1>
+        <h1>FoodFuse homepage</h1>
     </div>
     <hr />
     <a href="/test">TEST</a> <br>
-    <a href="/login">Login Here</a> <br>
-    <a href="/signup">Sign Up</a> <br>
-    <a href="/about">About Us</a> <br>
 
-    <footer>All Rights Reserved, FoodService 2020</footer>
   </body>
+  {% endblock %}
