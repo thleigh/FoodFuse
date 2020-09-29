@@ -77,6 +77,7 @@ def index(request):
             # Gets the data in a clean format
             location = form.cleaned_data['location']
             doordash(location)
+            
             final_data = []
             for each_data in final_list:
                 parsed_data(each_data)
