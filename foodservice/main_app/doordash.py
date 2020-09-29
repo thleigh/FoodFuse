@@ -46,13 +46,42 @@ def doordash(data):
     for names in restaurant_data:
         text = names.text
         parsed_text = text.split('\n')
-        final_list.append(parsed_text)
-    
-    # Between the 0th and 7th index, append that range and repeat.
-    # Between 0 and 7 is all of the info for one restaurant.
-    
-    # for i in range(0, len(restaurant_list), 7):
-    #     final_list.append(restaurant_list[i:i+7])
-    #     # print(final_list)
+        if "Currently Closed" in parsed_text:
+            pass
+        else:
+            final_list.append(parsed_text)
 
     return final_list
+
+def add_this_arg(func):
+    def wrapped(*args, **kwargs):
+        return func(wrapped, *args, **kwargs)
+    return wrapped
+
+@add_this_arg
+def parsed_data(this, data):
+    restaurant_name = data[0]
+    pricing = data[1]
+    categories = data[2]
+    delivery_time = data[3]
+    if "Newly Added" in data: 
+        rating = data[4]
+        delivery_cost = data[5]
+    else:
+        rating = " ".join(data[4:5])
+        delivery_cost = data[6]
+        
+    this.results = {
+        'restaurant_name': restaurant_name,
+        'pricing': pricing,
+        'categories': categories,
+        'delivery_time': delivery_time,
+        'rating': rating,
+        # 'rating_amt': rating_amt,
+        'delivery_cost': delivery_cost,
+    }
+    return data
+
+
+    # rating_amt = final_list[i][5]
+    # delivery_cost = final_list[i][6]

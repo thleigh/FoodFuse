@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from .doordash import doordash, final_list
+from .doordash import doordash, final_list, parsed_data
 from .forms import SearchForm
 # Create your views here.
 
@@ -76,13 +76,17 @@ def index(request):
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
-            
-            # print(location)
             doordash(location)
-            print(final_list)
-
+            final_data = []
+            for each_data in final_list:
+                parsed_data(each_data)
+                if "Currently Closed" in final_list:
+                    pass
+                else:
+                    final_data.append(parsed_data.results)
+            # print(final_data)
     form = SearchForm()
-    return render(request, 'index.html', {'form': form, 'data': final_list})
+    return render(request, 'index.html', {'form': form, 'data': final_data})
 
 # def datapage(request):
 #     print(final_list)
