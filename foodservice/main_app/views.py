@@ -11,7 +11,10 @@ from django.utils.decorators import method_decorator
 
 from .doordash import doordash, final_list
 from .forms import SearchForm
+<<<<<<< HEAD
+=======
 
+>>>>>>> 33ba3df446e53578f7b06fe791bbd08294a0dbd2
 # Create your views here.
 
 # LOGIN

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
-<div class="container">
+<!-- <div class="container">
   <div class="text-center">
     <h1>{{ username }}'s collection:</h1>
       <img src="..." alt="..." class="rounded">
@@ -11,9 +11,20 @@
             <input type="file" class="form-control-file" id="exampleFormControlFile1">
           </div>
         </form>
+  </div> -->
+
+  <div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading"> {{ username }}</h2>
+        <p class="text-secondary">username@email.com</p>
+      </div>
+    </div>
+    <!-- FORM HERE -->
   </div>
     
       <a href="/">Home</a> <br>
-</div>
+<!-- </div> -->
 
 {% endblock %}
