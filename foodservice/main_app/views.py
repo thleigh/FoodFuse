@@ -11,6 +11,10 @@ from django.utils.decorators import method_decorator
 
 from .doordash import doordash, final_list
 from .forms import SearchForm
+<<<<<<< HEAD
+=======
+
+>>>>>>> 33ba3df446e53578f7b06fe791bbd08294a0dbd2
 # Create your views here.
 
 # LOGIN
@@ -108,11 +112,10 @@ def index(request):
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
-            # restaurant = form.cleaned_data['restaurant']
-
+            
             # print(location)
             doordash(location)
-            # print(final_list)
+            print(final_list)
 
     form = SearchForm()
     return render(request, 'index.html', {'form': form, 'data': final_list})
