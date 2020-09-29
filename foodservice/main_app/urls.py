@@ -12,6 +12,6 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('user/<username>/', views.profile, name='profile'),
     # path('data/', views.datapage, name='data'),
-
+]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
