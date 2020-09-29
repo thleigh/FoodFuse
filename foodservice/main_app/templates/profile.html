@@ -1,30 +1,35 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
-<!-- <div class="container">
-  <div class="text-center">
-    <h1>{{ username }}'s collection:</h1>
-      <img src="..." alt="..." class="rounded">
-      <form>
-          <div class="form-group text-center">
-            <label for="exampleFormControlFile1">Choose profile picture</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-          </div>
-        </form>
-  </div> -->
 
-  <div class="content-section">
-    <div class="media">
-      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-      <div class="media-body">
-        <h2 class="account-heading"> {{ username }}</h2>
-        <p class="text-secondary">username@email.com</p>
-      </div>
+<div class="container text-center">
+  <br>
+  <h1>Profile Page</h1>
+  <img class="img-thumbnail" src="{{ user.profile.image.url }}" width="30%">
+  <h2 class="account-heading"> {{ username }}</h2>
+  <p class="text-secondary"></p>
+
+  <!-- <form>
+    <div class="form-group text-center">
+      <label for="exampleFormControlFile1">Choose profile picture</label>
+      <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      <input type="submit" class="form-control-file" id="exampleFormControlFile1">
     </div>
-    <!-- FORM HERE -->
-  </div>
-    
-      <a href="/">Home</a> <br>
-<!-- </div> -->
+  </form> -->
+  
+    <form method="POST">
+      <div class="form-group text-center">
+        {% csrf_token %}
+        <label for="exampleFormControlFile1">Example file input</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+    </form>
 
+  <!-- <div class="custom-file">
+    <input type="file" class="custom-file-input" id="customFile">
+    <label class="custom-file-label" for="customFile">Choose file</label>
+  </div> -->
+  <a href="/">Home</a> <br>
+  <a href="/favorites">Favorites</a> <br>
+</div>
 {% endblock %}
