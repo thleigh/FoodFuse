@@ -121,6 +121,11 @@ class RestaurantDelete(DeleteView):
     model = Restaurant
     # success_url = '/cats'
 
+def favorites(request):
+    # Get all cats from the db
+    data = Restaurant.objects.all()
+    return render(request, 'favorites.html', {'data': data})
+
 
 #CRUD ROUTES FOR USER MODEL
 class UsersCreate(CreateView):

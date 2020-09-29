@@ -50,9 +50,9 @@
           <p>Delivery Cost: {{ data.delivery_cost }}</p>
           <p>Delivery Time: {{ data.delivery_time }}</p>
         
-          <form action="" method="post">
+          <form action="{% url 'favorites' %}" method="post">
             {% csrf_token %}
-            <button type="submit">Add a favorite</button>
+            <button type="submit">Add {{ data.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>

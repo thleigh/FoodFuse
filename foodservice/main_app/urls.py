@@ -13,9 +13,9 @@ urlpatterns = [
     path('user/<username>/', views.profile, name='profile'),
     path('favorites/', views.favorites, name='favorites'),
     # path('data/', views.datapage, name='data'),
-    # path('restaurants/create/', views.RestaurantCreate.as_view(), name='restaurant_create'),
-    # path('restaurants/<int:pk>/update/', views.RestaurantUpdate.as_view(), name='restaurant_update'),
-    # path('restaurants/<int:pk>/delete/', views.RestaurantDelete.as_view(), name='restaurant_delete'),
+    # path('favorites/create/', views.RestaurantCreate.as_view(), name='restaurant_create'),
+    # path('favorites/<int:pk>/update/', views.RestaurantUpdate.as_view(), name='restaurant_update'),
+    # path('favorites/<int:pk>/delete/', views.RestaurantDelete.as_view(), name='restaurant_delete'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

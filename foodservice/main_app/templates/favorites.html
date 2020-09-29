@@ -1,12 +1,20 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
-<!-- show favorited restaurants here -->
-<!-- include option to edit and delete a restaurant -->
+
 <h1>Favorites page</h1>
-<!-- for each favorite have the option to update and delete -->
-<!-- <a href="{% url 'restaurant_update' restaurant.id %}">Update Details</a>
-<a href="{% url 'restaurant_delete' restaurant.id %}">Delete from Favorites</a> -->
+{% for data in data %}
+        <div>
+          <p>Restaurant: {{ data.restaurant_name }}</p>
+          <p>Expensive?: {{ data.pricing }}</p>
+          <p>Tags: {{ data.categories }}</p>
+          <p>Rating: {{ data.rating }}</p>
+          <!-- <p>{{ data.rating_amt }}</p> -->
+          <p>Delivery Cost: {{ data.delivery_cost }}</p>
+          <p>Delivery Time: {{ data.delivery_time }}</p>
+        </div>
+
+        {% endfor %}
 <a href="/">Home</a> <br>
 
 {% endblock %}
