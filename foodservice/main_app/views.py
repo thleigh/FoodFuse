@@ -35,15 +35,6 @@ def login_view(request):
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})
 
-##trying to add email to login form
-# class EmailLoginForm(AuthenticationForm):
-#     def clean(self):
-#         try:
-#             self.cleaned_data["username"] = get_user_model().objects.get(email=self.data["username"])
-#         except ObjectDoesNotExist:
-#             self.cleaned_data["username"] = "a_username_that_do_not_exists_anywhere_in_the_site"
-#         return super(EmailLoginForm, self).clean()
-
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
@@ -55,30 +46,11 @@ def signup_view(request):
             user = form.save()
             login(request, user)
             return HttpResponseRedirect('/user/'+str(user))
-        # elif User.objects.filter(user=user.exists()):
-        #     return HttpResponse('<h1>username already exists</h1>')
         else:
             return HttpResponse('<h1>Try Again</h1>')
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
-
-# Sign Up Form
-# class signup_view(UserCreationForm):
-#     first_name = forms.CharField(max_length=30, required=False, help_text='Optional')
-#     last_name = forms.CharField(max_length=30, required=False, help_text='Optional')
-#     email = forms.EmailField(max_length=254, help_text='Enter a valid email address')
-
-#     class Meta:
-#         model = User
-#         fields = [
-#             'username', 
-#             'first_name', 
-#             'last_name', 
-#             'email', 
-#             'password1', 
-#             'password2', 
-#             ]
 
 #PROFILE
 @login_required
@@ -91,13 +63,9 @@ def profile(request, username):
 def about(request):
     return render(request, 'about.html')
 
-# def index(request):
-#   return render(request, 'index.html')
+def favorites(request):
+    return render(request, 'favorites.html')
 
-# class Test(CreateView):
-#     model = Test
-#     fields = '__all__'
-#     success_url = '/test'
 
 def index(request):
     # Checks if the request is a POST 
@@ -124,14 +92,42 @@ def index(request):
 #     print(final_list)
 #     return render(request, 'data.html', {'data': final_list})
 
-#   class CatToyCreate(CreateView):
-#     model = CatToy
-#     fields = '__all__'
-#     success_url = '/cattoys'
-
+###################################################
+#CRUD ROUTES FOR RESTAURANT MODEL
+#CREATE
 class RestaurantCreate(CreateView):
     model = Restaurant
     fields = '__all__'
-    success_url = '/restaurants/'
+    # success_url = '/restaurants/'
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        print('!!!!! SELF.OBJECT:', self.object)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/')
 
-# class UserCreate(CreateView):
+#UPDATE
+class RestaurantUpdate(UpdateView):
+    model = Restaurant
+    fields = '__all__'
+    # success_url = '/restaurants/'
+
+    def form_valid(self, form): # this will allow us to catch the pk to redirect to the show page
+        self.object = form.save(commit=False) # don't post to the db until we say so
+        self.object.save()
+        # return HttpResponseRedirect('/cats/'+str(self.object.pk))
+
+#DELETE
+class RestaurantDelete(DeleteView):
+    model = Restaurant
+    # success_url = '/cats'
+
+
+#CRUD ROUTES FOR USER MODEL
+class UsersCreate(CreateView):
+    model = Users
+    success_url = '/'
+
+class UsersDelete(DeleteView):
+    model = Users
+    success_url = '/'
