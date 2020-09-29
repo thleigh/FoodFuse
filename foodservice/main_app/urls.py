@@ -9,5 +9,8 @@ urlpatterns = [
     # path('test/', views.testfrontpage, name='testfrontpage'),
     path('signup/', views.signup_view, name='signup'),
     path('user/<username>/', views.profile, name='profile'),
+<<<<<<< HEAD
+=======
     # path('data/', views.datapage, name='data'),
+>>>>>>> 8272c206d393fc4f9e0d5d1f5054ba4500dee77e
 ]

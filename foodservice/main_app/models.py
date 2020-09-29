@@ -18,20 +18,8 @@ class Restaurant(models.Model):
 class Users(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=50)
-    email = models.EmailField(('email address'), unique=True)
     location = models.CharField(max_length=50)
     restaurants = models.ManyToManyField(Restaurant)
-
-    def __str__(self):
-        return self.name
-
-
-###TEST#####
-class Test(models.Model):
-    name = models.CharField(max_length=100)
-    password = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    location = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name

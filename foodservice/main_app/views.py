@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Restaurant, User, Test
+from django.urls import reverse_lazy
+from .models import Restaurant, Users
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
@@ -10,6 +11,7 @@ from django.utils.decorators import method_decorator
 
 from .doordash import doordash, final_list
 from .forms import SearchForm
+
 # Create your views here.
 
 # LOGIN
@@ -35,13 +37,13 @@ def login_view(request):
         return render(request, 'login.html', {'form': form})
 
 ##trying to add email to login form
-class EmailLoginForm(AuthenticationForm):
-    def clean(self):
-        try:
-            self.cleaned_data["username"] = get_user_model().objects.get(email=self.data["username"])
-        except ObjectDoesNotExist:
-            self.cleaned_data["username"] = "a_username_that_do_not_exists_anywhere_in_the_site"
-        return super(EmailLoginForm, self).clean()
+# class EmailLoginForm(AuthenticationForm):
+#     def clean(self):
+#         try:
+#             self.cleaned_data["username"] = get_user_model().objects.get(email=self.data["username"])
+#         except ObjectDoesNotExist:
+#             self.cleaned_data["username"] = "a_username_that_do_not_exists_anywhere_in_the_site"
+#         return super(EmailLoginForm, self).clean()
 
 def logout_view(request):
     logout(request)
@@ -54,11 +56,30 @@ def signup_view(request):
             user = form.save()
             login(request, user)
             return HttpResponseRedirect('/user/'+str(user))
+        # elif User.objects.filter(user=user.exists()):
+        #     return HttpResponse('<h1>username already exists</h1>')
         else:
             return HttpResponse('<h1>Try Again</h1>')
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
+
+# Sign Up Form
+# class signup_view(UserCreationForm):
+#     first_name = forms.CharField(max_length=30, required=False, help_text='Optional')
+#     last_name = forms.CharField(max_length=30, required=False, help_text='Optional')
+#     email = forms.EmailField(max_length=254, help_text='Enter a valid email address')
+
+#     class Meta:
+#         model = User
+#         fields = [
+#             'username', 
+#             'first_name', 
+#             'last_name', 
+#             'email', 
+#             'password1', 
+#             'password2', 
+#             ]
 
 #PROFILE
 @login_required
@@ -78,7 +99,6 @@ def about(request):
 #     model = Test
 #     fields = '__all__'
 #     success_url = '/test'
-
 
 def index(request):
     # Checks if the request is a POST 
