@@ -85,3 +85,6 @@ def parsed_data(this, data):
 
     # rating_amt = final_list[i][5]
     # delivery_cost = final_list[i][6]
+
+
+    #favorite_button 

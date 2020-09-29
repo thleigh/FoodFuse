@@ -66,8 +66,8 @@ def about(request):
 def favorites(request):
     return render(request, 'favorites.html')
 
-
 def index(request):
+    final_data = []
     # Checks if the request is a POST 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -77,8 +77,6 @@ def index(request):
             # Gets the data in a clean format
             location = form.cleaned_data['location']
             doordash(location)
-            
-            final_data = []
             for each_data in final_list:
                 parsed_data(each_data)
                 if "Currently Closed" in final_list:
