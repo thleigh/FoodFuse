@@ -7,6 +7,10 @@ from .chrome_driver import chrome_location
 
 # Allows the chrome_driver to open without a physical browser
 options = Options()
+options.add_argument('--disable-gpu')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+
 options.set_headless(True)
 
 # locates the chrome_driver app in the local system
@@ -23,7 +27,7 @@ def doordash(data):
 
     # Finds the Address form and the Submit button by their XPATH
     address_link = driver.find_element_by_xpath('//input[starts-with(@id,"FieldWrapper")]')
-    address_button = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[2]/div/div[1]/div[2]/div/div/div/div/div/div/div/div[3]/div/button')
+    address_button = driver.find_element_by_class_name('sc-jFpLkX')
 
     # Clicks the address form
     address_link.click()
@@ -38,14 +42,17 @@ def doordash(data):
     print('on the Restaurant page!')
 
     # Finds the DIV containing all of the restaurant data
-    restaurant_data = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[2]/div/div/div[1]/div[6]/div/div[2]').text
-    restaurant_list = restaurant_data.split('\n')
+    restaurant_data = driver.find_elements_by_class_name('sc-boCWhm')
+    for names in restaurant_data:
+        text = names.text
+        parsed_text = text.split('\n')
+        final_list.append(parsed_text)
 
     # Between the 0th and 7th index, append that range and repeat.
     # Between 0 and 7 is all of the info for one restaurant.
     
-    for i in range(0, len(restaurant_list), 7):
-        final_list.append(restaurant_list[i:i+7])
-        # print(final_list)
+    # for i in range(0, len(restaurant_list), 7):
+    #     final_list.append(restaurant_list[i:i+7])
+    #     # print(final_list)
 
     return final_list

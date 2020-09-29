@@ -81,7 +81,6 @@ def about(request):
 
 
 def index(request):
-
     # Checks if the request is a POST 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -90,11 +89,10 @@ def index(request):
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
-            # restaurant = form.cleaned_data['restaurant']
-
+            
             # print(location)
             doordash(location)
-            # print(final_list)
+            print(final_list)
 
     form = SearchForm()
     return render(request, 'index.html', {'form': form, 'data': final_list})
