@@ -99,13 +99,7 @@ def about(request):
 #     fields = '__all__'
 #     success_url = '/test'
 
-<<<<<<< HEAD
-def testfrontpage(request):
-=======
-
 def index(request):
-
->>>>>>> 8272c206d393fc4f9e0d5d1f5054ba4500dee77e
     # Checks if the request is a POST 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -123,13 +117,10 @@ def index(request):
     form = SearchForm()
     return render(request, 'index.html', {'form': form, 'data': final_list})
 
-<<<<<<< HEAD
-=======
 # def datapage(request):
 #     print(final_list)
 #     return render(request, 'data.html', {'data': final_list})
 
->>>>>>> 8272c206d393fc4f9e0d5d1f5054ba4500dee77e
 #   class CatToyCreate(CreateView):
 #     model = CatToy
 #     fields = '__all__'
