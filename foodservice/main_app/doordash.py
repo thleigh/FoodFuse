@@ -47,7 +47,7 @@ def doordash(data):
         text = names.text
         parsed_text = text.split('\n')
         final_list.append(parsed_text)
-
+    
     # Between the 0th and 7th index, append that range and repeat.
     # Between 0 and 7 is all of the info for one restaurant.
     
