@@ -8,14 +8,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-<<<<<<< HEAD
-from .doordash import doordash
-from .forms import TestForm
-=======
 
 from .doordash import doordash, final_list
 from .forms import SearchForm
->>>>>>> 8272c206d393fc4f9e0d5d1f5054ba4500dee77e
+
 # Create your views here.
 
 # LOGIN
@@ -104,13 +100,7 @@ def about(request):
 #     fields = '__all__'
 #     success_url = '/test'
 
-<<<<<<< HEAD
-def testfrontpage(request):
-=======
-
 def index(request):
-
->>>>>>> 8272c206d393fc4f9e0d5d1f5054ba4500dee77e
     # Checks if the request is a POST 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -119,22 +109,18 @@ def index(request):
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
-            # restaurant = form.cleaned_data['restaurant']
-
+            
             # print(location)
             doordash(location)
-            # print(final_list)
+            print(final_list)
 
     form = SearchForm()
     return render(request, 'index.html', {'form': form, 'data': final_list})
 
-<<<<<<< HEAD
-=======
 # def datapage(request):
 #     print(final_list)
 #     return render(request, 'data.html', {'data': final_list})
 
->>>>>>> 8272c206d393fc4f9e0d5d1f5054ba4500dee77e
 #   class CatToyCreate(CreateView):
 #     model = CatToy
 #     fields = '__all__'
