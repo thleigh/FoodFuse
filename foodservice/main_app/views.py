@@ -100,7 +100,6 @@ def about(request):
 #     fields = '__all__'
 #     success_url = '/test'
 
-
 def index(request):
     # Checks if the request is a POST 
     if request.method == "POST":
