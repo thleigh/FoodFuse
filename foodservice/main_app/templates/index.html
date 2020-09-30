@@ -34,30 +34,12 @@
     <div class="text-center" id="main">
         <h1>FoodFuse homepage</h1>
         <hr />
-        <!-- <a href="/test">TEST</a> <br> -->
-        <form action="" method="post">
+
+        <form action="{% url 'data' %}" method="post">
             {% csrf_token %}
             {{ form }}
             <button type="submit">Submit</button>
         </form>
-        {% for data in data %}
-        <div>
-          <p>Restaurant: {{ data.restaurant_name }}</p>
-          <p>Expensive?: {{ data.pricing }}</p>
-          <p>Tags: {{ data.categories }}</p>
-          <p>Rating: {{ data.rating }}</p>
-          <!-- <p>{{ data.rating_amt }}</p> -->
-          <p>Delivery Cost: {{ data.delivery_cost }}</p>
-          <p>Delivery Time: {{ data.delivery_time }}</p>
-        
-          <form action="" method="post">
-            {% csrf_token %}
-            <button type="submit">Add a favorite</button>
-          </form>
-          <br>
-          <br>
-        {% endfor %}
-        </div>
     </div>
     <br>
     <br>
