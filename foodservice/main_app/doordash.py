@@ -23,7 +23,7 @@ def doordash(data):
     # Goes to Doordash Website
     driver.get('https://www.doordash.com/en-US')
     time.sleep(5)
-    print('on the Home Page!')
+    print('on the Doordash Home Page!')
 
     # Finds the Address form and the Submit button by their XPATH
     address_link = driver.find_element_by_xpath('//input[starts-with(@id,"FieldWrapper")]')
@@ -38,8 +38,7 @@ def doordash(data):
     # Clicks the submit button
     address_button.click()
     time.sleep(5)
-    print('Going to address page')
-    print('on the Restaurant page!')
+    print('Going to Doordash Restaurant page')
 
     # Finds the DIV containing all of the restaurant data
     restaurant_data = driver.find_elements_by_class_name('sc-boCWhm')
@@ -81,10 +80,3 @@ def parsed_data(this, data):
         'delivery_cost': delivery_cost,
     }
     return data
-
-
-    # rating_amt = final_list[i][5]
-    # delivery_cost = final_list[i][6]
-
-
-    #favorite_button 
