@@ -41,7 +41,7 @@
             <button type="submit">Submit</button>
         </form>
         {% for data in data %}
-        <div>
+         <div>
           <p>Restaurant: {{ data.restaurant_name }}</p>
           <p>Expensive?: {{ data.pricing }}</p>
           <p>Tags: {{ data.categories }}</p>
@@ -50,10 +50,12 @@
           <p>Delivery Cost: {{ data.delivery_cost }}</p>
           <p>Delivery Time: {{ data.delivery_time }}</p>
         
-          <form action="{% url 'favorites' %}" method="post">
+          <form action="{% url 'favorites' %}" method="POST">
             {% csrf_token %}
             <button type="submit">Add {{ data.restaurant_name }} to favorites</button>
           </form>
+
+          <!-- <button type="submit" value={{data.data}} onclick="location.href='{% url 'favorites' %}'">Add {{ data.restaurant_name }}</button> -->
           <br>
           <br>
         {% endfor %}

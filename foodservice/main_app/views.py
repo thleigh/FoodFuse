@@ -63,8 +63,8 @@ def profile(request, username):
 def about(request):
     return render(request, 'about.html')
 
-def favorites(request):
-    return render(request, 'favorites.html')
+def data(request):
+    return render(request, 'data.html')
 
 def index(request):
     final_data = []
@@ -123,7 +123,8 @@ class RestaurantDelete(DeleteView):
 
 def favorites(request):
     # Get all cats from the db
-    data = Restaurant.objects.all()
+    if request.method == 'POST':
+        data = Restaurant.objects.all()
     return render(request, 'favorites.html', {'data': data})
 
 
