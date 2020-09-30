@@ -12,9 +12,9 @@ from asgiref.sync import sync_to_async
 
 from .doordash import doordash, doordash_unparsed_list, parsed_data
 from .postmates import postmates, postmates_unparsed_list, postmates_data
-from .forms import SearchForm, RestaurantForm
-
 import asyncio, time
+from .forms import SearchForm, RestaurantForm, FavoriteForm
+
 # Create your views here.
 
 # LOGIN
@@ -30,7 +30,7 @@ def login_view(request):
                 if user.is_active:
                     login(request, user) # log the user in by creating a session
                     # return HttpResponseRedirect('/')
-                    return HttpResponseRedirect('/user/'+u)
+                    return HttpResponseRedirect('/about/user/'+u+'/')
                 else:
                     print('The account has been disabled.')
         else:
@@ -113,6 +113,31 @@ def data(request):
         'postmates': final_pm_data,
     })
 
+def favorites_index(request):
+    if request.method == "POST":
+        print("posting on favs page") ### this works
+        # name = request.POST['name']
+        # print(name)
+    return render(request, 'Favorites/favorites.html')
+    
+    # if request.method == "post":
+    #     print("*****POST")
+        # model = Restaurant
+        # fields = '__all__'
+        # def form_valid(self, form):
+        #     self.object = form.save(commit=False)
+        #     print('!!!!! SELF.OBJECT:', self.object)
+        #     self.object.user = self.request.user
+        #     self.object.save()
+        #     return HttpResponseRedirect('/')
+        # doordash = Restaurant.objects.all()
+        # return render(request, 'favorites/favorites.html')
+        # return HttpResponseRedirect('/favorites/')
+
+def favorites_show(request, restaurant_id):
+    doordash = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'favorites/show.html', {'doordash': doordash})
+
 ###################################################
 #CRUD ROUTES FOR RESTAURANT MODEL
 #CREATE
@@ -141,14 +166,7 @@ class RestaurantUpdate(UpdateView):
 #DELETE
 class RestaurantDelete(DeleteView):
     model = Restaurant
-    # success_url = '/cats'
-
-def favorites(request):
-    # Get all cats from the db
-    forms = FavoriteForm()
-    if request.method == 'POST':
-        data = Restaurant.objects.all()
-    return render(request, 'favorites.html', {'data': data})
+    success_url = '/favorites'
 
 
 #CRUD ROUTES FOR USER MODEL
