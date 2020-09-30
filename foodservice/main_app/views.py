@@ -64,8 +64,8 @@ def profile(request, username):
 def about(request):
     return render(request, 'about.html')
 
-def favorites(request):
-    return render(request, 'favorites.html')
+def data(request):
+    return render(request, 'data.html')
 
 def index(request):
     # Checks if the request is a POST 
@@ -133,6 +133,12 @@ class RestaurantUpdate(UpdateView):
 class RestaurantDelete(DeleteView):
     model = Restaurant
     # success_url = '/cats'
+
+def favorites(request):
+    # Get all cats from the db
+    if request.method == 'POST':
+        data = Restaurant.objects.all()
+    return render(request, 'favorites.html', {'data': data})
 
 
 #CRUD ROUTES FOR USER MODEL

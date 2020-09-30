@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'foodservice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'users',
+        'NAME': 'FoodFuse',
     }
 }
 
