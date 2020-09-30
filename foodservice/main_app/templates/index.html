@@ -34,10 +34,12 @@
     <div class="text-center" id="main">
         <h1>FoodFuse homepage</h1>
         <hr />
-
+        <!-- Needs to wait for data to load before going to the next page -->
         <form action="" method="post">
             {% csrf_token %}
-            {{ form }}
+            <!-- {{ form }} -->
+            <label for="location">Location: </label>
+            <input type="text" name="location"></input>
             <button type="submit">Submit</button>
         </form>
     </div>

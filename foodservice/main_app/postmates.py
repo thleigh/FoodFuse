@@ -3,6 +3,8 @@ from selenium.webdriver.chrome.options import Options
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
 from .chrome_driver import chrome_location
+import asyncio
+from asgiref.sync import sync_to_async
 
 # Allows the chrome_driver to open without a physical browser
 options = Options()
@@ -23,10 +25,11 @@ driver = webdriver.Chrome(chrome_location, chrome_options=options)
 # , chrome_options=options
 
 postmates_unparsed_list = []
-def postmates(data):
+# @sync_to_async
+async def postmates(data):
     # Goes to Doordash Website
     driver.get('https://postmates.com')
-    time.sleep(5)
+    await asyncio.sleep(5)
     print('on the PostMates Page!')
 
     # Finds the Address form and the Submit button by their XPATH
@@ -35,13 +38,13 @@ def postmates(data):
 
     # # Clicks the address form
     address_link.click()
-    time.sleep(0.5)
+    await asyncio.sleep(0.5)
     # Input's the location into the form
     address_link.send_keys(data)
-    time.sleep(0.5)
+    await asyncio.sleep(0.5)
     # Clicks the submit button
     address_button.click()
-    time.sleep(3)
+    await asyncio.sleep(3)
     print('Going to PostMates Restaurant page')
 
     restaurant_data = driver.find_elements_by_class_name('e12wrbia0')
