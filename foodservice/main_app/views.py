@@ -102,10 +102,13 @@ def data(request):
         'postmates': final_pm_data,
     })
 
-def favorites(request):
+def favorites_index(request):
     doordash = Restaurant.objects.all()
-    return render(request, 'favorites.html', {'doordash': doordash})
+    return render(request, 'favorites/favorites.html', {'doordash': doordash})
 
+def favorites_show(request, restaurant_id):
+    doordash = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'favorites/show.html', {'doordash': doordash})
 
 ###################################################
 #CRUD ROUTES FOR RESTAURANT MODEL
