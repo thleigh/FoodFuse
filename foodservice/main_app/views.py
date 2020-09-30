@@ -138,7 +138,7 @@ class RestaurantUpdate(UpdateView):
 #DELETE
 class RestaurantDelete(DeleteView):
     model = Restaurant
-    # success_url = '/cats'
+    success_url = '/favorites'
 
 
 #CRUD ROUTES FOR USER MODEL
