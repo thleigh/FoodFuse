@@ -105,6 +105,8 @@ def data(request):
 def favorites_index(request):
     if request.method == "POST":
         print("posting on favs page") ### this works
+        # name = request.POST['name']
+        # print(name)
     return render(request, 'Favorites/favorites.html')
     
     # if request.method == "post":
