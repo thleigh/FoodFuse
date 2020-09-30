@@ -74,8 +74,8 @@ def index(request):
             # Gets the data in a clean format
             location = form.cleaned_data['location']
             # Calls the doordash function and postmates funcion while passing in the location entered
-        doordash(location)
-        postmates(location)
+            doordash(location)
+            postmates(location)
             
     form = SearchForm()
     return render(request, 'index.html', 
