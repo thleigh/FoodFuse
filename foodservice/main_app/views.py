@@ -64,9 +64,6 @@ def profile(request, username):
 def about(request):
     return render(request, 'about.html')
 
-def data(request):
-    return render(request, 'data.html')
-
 def index(request):
     # Checks if the request is a POST 
     if request.method == "POST":
@@ -76,8 +73,9 @@ def index(request):
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
-            # doordash(location)
-            # postmates(location)
+            # Calls the doordash function and postmates funcion while passing in the location entered
+        doordash(location)
+        postmates(location)
             
     form = SearchForm()
     return render(request, 'index.html', 
