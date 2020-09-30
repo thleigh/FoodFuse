@@ -3,20 +3,21 @@
 {% block page_content %}
 
 <h1>Favorites page</h1>
-{% for data in data %}
+<p>favorites page is obviously working. data from selenium is supposed to appear here...</p>
+<!-- {% for data in data %}
   <a href="{% url 'favorites_show' restaurant.id %}">
     <div class="card-content">
       <p>Restaurant: {{ data.restaurant_name }}</p>
       <p>Expensive?: {{ data.pricing }}</p>
       <p>Tags: {{ data.categories }}</p>
-      <p>Rating: {{ data.rating }}</p>
+      <p>Rating: {{ data.rating }}</p> -->
       <!-- <p>{{ data.rating_amt }}</p> -->
-      <p>Delivery Cost: {{ data.delivery_cost }}</p>
+      <!-- <p>Delivery Cost: {{ data.delivery_cost }}</p>
       <p>Delivery Time: {{ data.delivery_time }}</p>
     </div>
   </a>
 
-        {% endfor %}
+        {% endfor %} -->
 <a href="/">Home</a> <br>
 
 {% endblock %}

@@ -103,8 +103,12 @@ def data(request):
     })
 
 def favorites_index(request):
-    if request.method == "post":
-        print("*****POST")
+    if request.method == "POST":
+        print("posting on favs page") ### this works
+    return render(request, 'Favorites/favorites.html')
+    
+    # if request.method == "post":
+    #     print("*****POST")
         # model = Restaurant
         # fields = '__all__'
         # def form_valid(self, form):
@@ -114,8 +118,8 @@ def favorites_index(request):
         #     self.object.save()
         #     return HttpResponseRedirect('/')
         # doordash = Restaurant.objects.all()
-        return render(request, 'favorites/favorites.html')
-        return HttpResponseRedirect('/favorites/')
+        # return render(request, 'favorites/favorites.html')
+        # return HttpResponseRedirect('/favorites/')
 
 def favorites_show(request, restaurant_id):
     doordash = Restaurant.objects.get(id=restaurant_id)
