@@ -12,11 +12,11 @@
           <p>Delivery Time: {{ doordash.delivery_time }}</p>
           <form action="/favorites/" method="post">
             {% csrf_token %}
-            <input type="hidden" value={{ doordash.location }}>
-            <input type="hidden" value={{ doordash.restaurant_name }}>
-            <input type="hidden" value={{ doordash.delivery_cost }}>
-            <input type="hidden" value={{ doordash.delivery_time }}>
-            <input type="hidden" value={{ doordash.rating }}>
+            <!-- <input type="hidden" value="{{ doordash.location }}"> -->
+            <input type="hidden" value= {{ doordash.restaurant_name }}>
+            <!-- <input type="hidden" value="{{ doordash.delivery_cost }}">
+            <input type="hidden" value="{{ doordash.delivery_time }}">
+            <input type="hidden" value="{{ doordash.rating }}"> -->
             <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
           </form>
           <br>

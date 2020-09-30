@@ -27,7 +27,7 @@ def login_view(request):
                 if user.is_active:
                     login(request, user) # log the user in by creating a session
                     # return HttpResponseRedirect('/')
-                    return HttpResponseRedirect('/user/'+u)
+                    return HttpResponseRedirect('/about/user/'+u+'/')
                 else:
                     print('The account has been disabled.')
         else:
@@ -115,6 +115,7 @@ def favorites_index(request):
         #     return HttpResponseRedirect('/')
         # doordash = Restaurant.objects.all()
         return render(request, 'favorites/favorites.html')
+        return HttpResponseRedirect('/favorites/')
 
 def favorites_show(request, restaurant_id):
     doordash = Restaurant.objects.get(id=restaurant_id)
