@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from .models import Restaurant, Users
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -8,10 +8,13 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from asgiref.sync import sync_to_async
 
-from .doordash import doordash, final_list, parsed_data
+from .doordash import doordash, doordash_unparsed_list, parsed_data
 from .postmates import postmates, postmates_unparsed_list, postmates_data
+import asyncio, time
 from .forms import SearchForm, RestaurantForm, FavoriteForm
+
 # Create your views here.
 
 # LOGIN
@@ -64,7 +67,7 @@ def profile(request, username):
 def about(request):
     return render(request, 'about.html')
 
-def index(request):
+async def index(request):
     # Checks if the request is a POST 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -73,22 +76,30 @@ def index(request):
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
+            task1 = asyncio.ensure_future(doordash(location))
+            task2 = asyncio.ensure_future(postmates(location))
+            await asyncio.wait([
+                task1, task2
+            ])
+            return HttpResponseRedirect('/data/')
             # Calls the doordash function and postmates funcion while passing in the location entered
-            doordash(location)
-            postmates(location)
+            # loop = asyncio.get_event_loop()
+            # loop.close()
             
     form = SearchForm()
     return render(request, 'index.html', 
-    {
+        {
         'form': form, 
-    })
+        })
+    # elif form.is_valid() == True:
+    #     return redirect('data.html')
 
 def data(request):
     final_dd_data = []
     final_pm_data = []
-    for dd_data in final_list:
+    for dd_data in doordash_unparsed_list:
         parsed_data(dd_data)
-        if "Currently Closed" in final_list:
+        if "Currently Closed" in doordash_unparsed_list:
             pass
         else:
             final_dd_data.append(parsed_data.results)

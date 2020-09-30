@@ -4,6 +4,8 @@ import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
 # from main_app.views import location
 from .chrome_driver import chrome_location
+import asyncio
+from asgiref.sync import sync_to_async
 
 # Allows the chrome_driver to open without a physical browser
 options = Options()
@@ -17,12 +19,12 @@ options.set_headless(True)
 driver = webdriver.Chrome(chrome_location, chrome_options=options)
 #, chrome_options=options
 
-final_list = []
-
-def doordash(data):
+doordash_unparsed_list = []
+# @sync_to_async
+async def doordash(data):
     # Goes to Doordash Website
     driver.get('https://www.doordash.com/en-US')
-    time.sleep(5)
+    await asyncio.sleep(5)
     print('on the Doordash Home Page!')
 
     # Finds the Address form and the Submit button by their XPATH
@@ -31,13 +33,13 @@ def doordash(data):
 
     # Clicks the address form
     address_link.click()
-    time.sleep(0.5)
+    await asyncio.sleep(0.5)
     # Input's the location into the form
     address_link.send_keys(data)
-    time.sleep(0.5)
+    await asyncio.sleep(0.5)
     # Clicks the submit button
     address_button.click()
-    time.sleep(5)
+    await asyncio.sleep(5)
     print('Going to Doordash Restaurant page')
 
     # Finds the DIV containing all of the restaurant data
@@ -48,9 +50,9 @@ def doordash(data):
         if "Currently Closed" in parsed_text:
             pass
         else:
-            final_list.append(parsed_text)
+            doordash_unparsed_list.append(parsed_text)
 
-    return final_list
+    return doordash_unparsed_list
 
 def add_this_arg(func):
     def wrapped(*args, **kwargs):
