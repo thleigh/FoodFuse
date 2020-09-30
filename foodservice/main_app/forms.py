@@ -9,3 +9,5 @@ class SearchForm(forms.Form):
 class RestaurantForm(forms.Form):
     restaurant = forms.CharField()
 
+class FavoriteForm(forms.Form):
+    favorites = forms.CharField()

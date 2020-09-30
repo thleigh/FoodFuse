@@ -134,6 +134,7 @@ class RestaurantDelete(DeleteView):
 
 def favorites(request):
     # Get all cats from the db
+    forms = FavoriteForm()
     if request.method == 'POST':
         data = Restaurant.objects.all()
     return render(request, 'favorites.html', {'data': data})

@@ -11,7 +11,7 @@
       <p>Delivery Time: {{ doordash.delivery_time }}</p>
       <form action="" method="post">
         {% csrf_token %}
-        <button type="submit">Add a favorite</button>
+        <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
       </form>
       <br>
       <br>
@@ -25,7 +25,7 @@
         <p>Delivery: {{ postmates.delivery_data }}</p>
         <form action="" method="post">
           {% csrf_token %}
-          <button type="submit">Add a favorite</button>
+          <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button>
         </form>
         <br>
         <br>
