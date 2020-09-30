@@ -4,7 +4,6 @@
 
 <h1>Favorites page</h1>
 {% for data in data %}
-        <div>
           <p>Restaurant: {{ data.restaurant_name }}</p>
           <p>Expensive?: {{ data.pricing }}</p>
           <p>Tags: {{ data.categories }}</p>
@@ -12,7 +11,6 @@
           <!-- <p>{{ data.rating_amt }}</p> -->
           <p>Delivery Cost: {{ data.delivery_cost }}</p>
           <p>Delivery Time: {{ data.delivery_time }}</p>
-        </div>
 
         {% endfor %}
 <a href="/">Home</a> <br>

@@ -11,7 +11,7 @@ from django.utils.decorators import method_decorator
 
 from .doordash import doordash, final_list, parsed_data
 from .postmates import postmates, postmates_unparsed_list, postmates_data
-from .forms import SearchForm, RestaurantForm
+from .forms import SearchForm, RestaurantForm, FavoriteForm
 # Create your views here.
 
 # LOGIN
@@ -102,6 +102,11 @@ def data(request):
         'postmates': final_pm_data,
     })
 
+def favorites(request):
+    doordash = Restaurant.objects.all()
+    return render(request, 'favorites.html', {'doordash': doordash})
+
+
 ###################################################
 #CRUD ROUTES FOR RESTAURANT MODEL
 #CREATE
@@ -131,14 +136,6 @@ class RestaurantUpdate(UpdateView):
 class RestaurantDelete(DeleteView):
     model = Restaurant
     # success_url = '/cats'
-
-def favorites(request):
-    # Get all cats from the db
-    forms = FavoriteForm()
-    if request.method == 'POST':
-        data = Restaurant.objects.all()
-        print('Button clicked')
-    return render(request, 'favorites.html', {'data': data})
 
 
 #CRUD ROUTES FOR USER MODEL
