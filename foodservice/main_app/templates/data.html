@@ -1,6 +1,18 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
+<<<<<<< HEAD
+<div class="text-center">
+    <h1>THIS IS THE DATA PAGE!!!!!</h1>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+        {{ data }}
+</div>
+=======
 <h1>THIS IS THE DATA PAGE!!!!!</h1>
 <div class = "doordash-data">
     <h2>DOORDASH</h2>
@@ -32,4 +44,5 @@
         {% endfor %}
       </div>
   </div>
+>>>>>>> 1739d2a76453236b157d7b2e6d01931dbacba6de
 {% endblock %}
