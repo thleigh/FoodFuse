@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
+<<<<<<< HEAD
 <div class="text-center">
     <h1>THIS IS THE DATA PAGE!!!!!</h1>
     
@@ -11,4 +12,37 @@
     </form>
         {{ data }}
 </div>
+=======
+<h1>THIS IS THE DATA PAGE!!!!!</h1>
+<div class = "doordash-data">
+    <h2>DOORDASH</h2>
+    {% for doordash in doordash %}
+    <div>
+      <p>Restaurant: {{ doordash.restaurant_name }}</p>
+      <p>Delivery Cost: {{ doordash.delivery_cost }}</p>
+      <p>Delivery Time: {{ doordash.delivery_time }}</p>
+      <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit">Add a favorite</button>
+      </form>
+      <br>
+      <br>
+      {% endfor %}
+    </div>
+    <div class = "postmates-data">
+      <h2>POSTMATES</h2>
+      {% for postmates in postmates %}
+      <div>
+        <p>Restaurant: {{ postmates.restaurant_name }}</p>
+        <p>Delivery: {{ postmates.delivery_data }}</p>
+        <form action="" method="post">
+          {% csrf_token %}
+          <button type="submit">Add a favorite</button>
+        </form>
+        <br>
+        <br>
+        {% endfor %}
+      </div>
+  </div>
+>>>>>>> 1739d2a76453236b157d7b2e6d01931dbacba6de
 {% endblock %}
