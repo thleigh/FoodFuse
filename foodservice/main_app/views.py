@@ -137,6 +137,7 @@ def favorites(request):
     forms = FavoriteForm()
     if request.method == 'POST':
         data = Restaurant.objects.all()
+        print('Button clicked')
     return render(request, 'favorites.html', {'data': data})
 
 
