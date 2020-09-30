@@ -103,8 +103,17 @@ def data(request):
     })
 
 def favorites_index(request):
-    doordash = Restaurant.objects.all()
-    return render(request, 'favorites/favorites.html', {'doordash': doordash})
+    if request.method == "post":
+        model = Restaurant
+        fields = '__all__'
+        def form_valid(self, form):
+            self.object = form.save(commit=False)
+            print('!!!!! SELF.OBJECT:', self.object)
+            self.object.user = self.request.user
+            self.object.save()
+            return HttpResponseRedirect('/')
+        doordash = Restaurant.objects.all()
+        return render(request, 'favorites/favorites.html', {'doordash': doordash})
 
 def favorites_show(request, restaurant_id):
     doordash = Restaurant.objects.get(id=restaurant_id)
