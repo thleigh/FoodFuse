@@ -35,10 +35,10 @@
         <!-- Needs to wait for data to load before going to the next page -->
         <form action="" method="post">
             {% csrf_token %}
-            <!-- {{ form }} -->
-            <label for="location">Location: </label>
-            <input type="text" name="location"></input>
-            <button type="submit">Submit</button>
+            {{ form }}
+            <!-- <label for="location">Location: </label>
+            <input type="text" class="form-control-lg" name="location"></input> -->
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
     <br>
