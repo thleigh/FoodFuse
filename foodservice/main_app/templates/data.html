@@ -2,23 +2,55 @@
 
 {% block page_content %}
 <div class="container text-center">
-    <h1>THIS IS THE DATA PAGE!!!!!</h1>
-    <div class = "doordash-data">
-        <h2>DOORDASH</h2>
-        {% for doordash in doordash %}
+  <h1>THIS IS THE DATA PAGE!!!!!</h1>
+  <div id="doordash-data">
+    <h2>DOORDASH</h2>
+      {% for doordash in doordash %}
+      <div>
+        <p>Restaurant: {{ doordash.restaurant_name }}</p>
+        <p>Delivery Cost: {{ doordash.delivery_cost }}</p>
+        <p>Delivery Time: {{ doordash.delivery_time }}</p>
+        <form action="/favorites/" method="POST">
+          {% csrf_token %}
+          <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
+        </form>
+        <br>
+        <br>
+      </div> 
+      {% endfor %}
+  </div>
+    <div id="postmates-data">
+      <h2>POSTMATES</h2>
+      {% for postmates in postmates %}
         <div>
-          <p>Restaurant: {{ doordash.restaurant_name }}</p>
-          <p>Delivery Cost: {{ doordash.delivery_cost }}</p>
-          <p>Delivery Time: {{ doordash.delivery_time }}</p>
+          <p>Restaurant: {{ postmates.restaurant_name }}</p>
+          <p>Delivery: {{ postmates.delivery_data }}</p>
           <form action="/favorites/" method="POST">
             {% csrf_token %}
+            <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button>
             <input type="hidden" value= {{doordash.restaurant_name}}>
             <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
-          {% endfor %}
         </div>
+      {% endfor %}
+    </div>
+    <div id="ubereats-data">
+      <h2>UberEats</h2>
+      {% for ubereats in ubereats %}
+        <div>
+          <p>Restaurant: {{ ubereats.restaurant_name }}</p>
+          <!-- <p>Delivery: {{ ubereats.delivery_data }}</p> -->
+          <form action="/favorites/" method="POST">
+            {% csrf_token %}
+            <button type="submit">Add {{ ubereats.restaurant_name }} to favorites</button>
+          </form>
+          <br>
+          <br>
+        </div>
+      {% endfor %}
+    </div>
         <div class = "postmates-data">
           <h2>POSTMATES</h2>
           {% for postmates in postmates %}
