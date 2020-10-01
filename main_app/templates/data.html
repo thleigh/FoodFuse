@@ -27,7 +27,7 @@
           <p>Delivery: {{ postmates.delivery_data }}</p>
           <form action="/favorites/" method="POST">
             {% csrf_token %}
-            <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button>
+            <!-- <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button> -->
             <input type="hidden" value= {{doordash.restaurant_name}}>
             <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
           </form>

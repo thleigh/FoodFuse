@@ -103,22 +103,17 @@ def data(request):
     final_dd_data = []
     final_pm_data = []
     final_ue_data = []
-    # print(doordash_unparsed_list)
     for dd_data in doordash_unparsed_list:
-        if "Currently Closed" in dd_data:
-            pass
-        else:
-            doordash_data(dd_data)
+        doordash_data(dd_data)
         final_dd_data.append(doordash_data.results)
     for pm_data in postmates_unparsed_list:
-        print(postmates_unparsed_list)
         postmates_data(pm_data)
         final_pm_data.append(postmates_data.results)
-    print(final_pm_data)
+    print(postmates_unparsed_list)
     for ue_data in ubereats_unparsed_list:
-        print(ubereats_unparsed_list)
         ubereats_data(ue_data)
         final_ue_data.append(ubereats_data.results)
+
     forms = RestaurantForm()
 
     return render(request, 'data.html', {

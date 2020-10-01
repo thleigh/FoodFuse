@@ -40,20 +40,22 @@ else:
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 APPEND_SLASH=False
+DEBUG = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY'] or 'Secret'
+
+SECRET_KEY = os.getenv('SECRET_KEY') or 'Secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', False) == True
 
 ALLOWED_HOSTS = [
-    # 'localhost',
-    # '*',
-    'foodfuse.herokuapp.com',
+    'localhost',
+    '*',
+    # 'foodfuse.herokuapp.com',
 ]
 
 # APPEND_SLASH = False
@@ -103,7 +105,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'foodservice.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -114,8 +115,8 @@ DATABASES = {
     }
 }
 
-#production
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# production
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
