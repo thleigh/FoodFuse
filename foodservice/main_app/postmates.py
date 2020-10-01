@@ -67,19 +67,19 @@ async def postmates(data):
         if "Available Later" in parsed_text:
             pass
             
-        for x in parsed_text:
-            temp = x[1].split('·')
-            x[1] = temp[0]
-            x.append(temp[1])
+        # for x in parsed_text:
+        #     temp = x[1].split('·')
+        #     x[1] = temp[0]
+        #     x.append(temp[1])
         
         postmates_unparsed_list.append(parsed_text)
 
-        for item in postmates_unparsed_list: 
-            item.split('·')
-            if item == '':
-                postmates_unparsed_list.remove(item)
-            if item == 'Available Later':
-                pass
+        # for item in postmates_unparsed_list: 
+        #     item.split('·')
+        #     if item == '':
+        #         postmates_unparsed_list.remove(item)
+        #     if item == 'Available Later':
+        #         pass
     return postmates_unparsed_list
 
 def add_this_arg(func):
