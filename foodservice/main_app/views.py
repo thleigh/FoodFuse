@@ -11,7 +11,7 @@ from django.utils.decorators import method_decorator
 from asgiref.sync import sync_to_async
 
 # from .scraper import scraper_function, 
-from .doordash import doordash, doordash_unparsed_list, parsed_data
+from .doordash import doordash, doordash_unparsed_list, doordash_data
 from .postmates import postmates, postmates_unparsed_list, postmates_data
 import asyncio, time
 from .forms import SearchForm, RestaurantForm, FavoriteForm
@@ -98,16 +98,17 @@ async def scraper_function(request):
 def data(request):
     final_dd_data = []
     final_pm_data = []
+    # print(doordash_unparsed_list)
+
     for dd_data in doordash_unparsed_list:
-        parsed_data(dd_data)
-        if "Currently Closed" in doordash_unparsed_list:
-            pass
-        else:
-            final_dd_data.append(parsed_data.results)
+        doordash_data(dd_data)
+        final_dd_data.append(doordash_data.results)
+
     postmates_list = [x for x in postmates_unparsed_list if x]
     for pm_data in postmates_list:
         postmates_data(pm_data)
         final_pm_data.append(postmates_data.results)
+        
     forms = RestaurantForm()
 
     return render(request, 'data.html', {
