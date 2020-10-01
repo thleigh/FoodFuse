@@ -4,7 +4,7 @@ import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
 import asyncio
 from asgiref.sync import sync_to_async
-
+import os
 # Allows the chrome_driver to open without a physical browser
 chrome_options = Options()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
