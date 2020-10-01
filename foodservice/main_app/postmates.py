@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
 from .chrome_driver import chrome_location
-import asyncio
+import asyncio, re
 from asgiref.sync import sync_to_async
 
 # Allows the chrome_driver to open without a physical browser
@@ -52,33 +52,29 @@ async def postmates(data):
             parsed_text.remove('')
         if "ONLY ON POSTMATES" in parsed_text:
             parsed_text.remove("ONLY ON POSTMATES")
-            # " ".join(parsed_text)
         if "$3 OFF $15" in parsed_text:
             parsed_text.remove("$3 OFF $15")
         if "MINIMUM $15" in parsed_text:
             parsed_text.remove("MINIMUM $15")
         if "INFATUATION APPROVED" in parsed_text:
             parsed_text.remove("INFATUATION APPROVED")
-            # " ".join(parsed_text)
         if "POPULAR" in parsed_text:
             parsed_text.remove("POPULAR")
-            # " ".join(parsed_text)
         if "OCEAN FRIENDLY" in parsed_text:
             parsed_text.remove("OCEAN FRIENDLY")
-            # " ".join(parsed_text)
         if "NEW" in parsed_text:
             parsed_text.remove("NEW")
-            # " ".join(parsed_text)
         if "Available Later" in parsed_text:
             pass
-        if '·' in parsed_text:
-            parsed_text.remove('')
-
-        # joined_text = " ".join(parsed_text)
+        
         postmates_unparsed_list.append(parsed_text)
 
         for item in postmates_unparsed_list: 
             if item == '':
+                postmates_unparsed_list.remove(item)
+            if item == '·':
+                postmates_unparsed_list.remove(item)
+            if item == 'Available Later':
                 postmates_unparsed_list.remove(item)
     return postmates_unparsed_list
 
@@ -98,9 +94,9 @@ def postmates_data(this, data):
 
     this.results = {
         'restaurant_name': restaurant_name,
+        'delivery_data': delivery_data,
         # 'pricing': pricing,
         # 'categories': categories,
-        'delivery_data': delivery_data,
         # 'rating': rating,
         # 'rating_amt': rating_amt,
         # 'delivery_cost': delivery_cost,

@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
-# from main_app.views import location
 from .chrome_driver import chrome_location
 import asyncio
 from asgiref.sync import sync_to_async
@@ -50,8 +49,8 @@ async def doordash(data):
         parsed_text = text.split('\n')
         if "Currently Closed" in parsed_text:
             pass
-
-        doordash_unparsed_list.append(parsed_text)
+        else:
+            doordash_unparsed_list.append(parsed_text)
     return doordash_unparsed_list
 
 def add_this_arg(func):
@@ -66,10 +65,10 @@ def doordash_data(this, data):
     categories = data[2]
     delivery_time = data[3]
     if "Newly Added" in data: 
-        rating = data[4]
+        # rating = data[4]
         delivery_cost = data[5]
     else:
-        rating = " ".join(data[4:5])
+        # rating = " ".join(data[4:5])
         delivery_cost = data[6]
         
     this.results = {
@@ -77,8 +76,7 @@ def doordash_data(this, data):
         'pricing': pricing,
         'categories': categories,
         'delivery_time': delivery_time,
-        'rating': rating,
-        # 'rating_amt': rating_amt,
+        # 'rating': rating,
         'delivery_cost': delivery_cost,
     }
     return data

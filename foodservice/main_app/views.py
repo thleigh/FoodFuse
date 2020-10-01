@@ -13,6 +13,7 @@ from asgiref.sync import sync_to_async
 # from .scraper import scraper_function, 
 from .doordash import doordash, doordash_unparsed_list, doordash_data
 from .postmates import postmates, postmates_unparsed_list, postmates_data
+from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data
 import asyncio, time
 from .forms import SearchForm, RestaurantForm, FavoriteForm
 
@@ -91,29 +92,35 @@ async def scraper_function(request):
     # print(location)
     task1 = asyncio.ensure_future(doordash(location))
     task2 = asyncio.ensure_future(postmates(location))
+    task3 = asyncio.ensure_future(ubereats(location))
     await asyncio.wait([
-        task1, task2
+        task1, task2, task3
     ])
 
 def data(request):
     final_dd_data = []
     final_pm_data = []
+    final_ue_data = []
     # print(doordash_unparsed_list)
-
     for dd_data in doordash_unparsed_list:
-        doordash_data(dd_data)
+        if "Currently Closed" in dd_data:
+            pass
+        else:
+            doordash_data(dd_data)
         final_dd_data.append(doordash_data.results)
-
-    postmates_list = [x for x in postmates_unparsed_list if x]
-    for pm_data in postmates_list:
+    for pm_data in postmates_unpared_list:
         postmates_data(pm_data)
         final_pm_data.append(postmates_data.results)
-        
+    print(final_pm_data)
+    for ue_data in ubereats_unparsed_list:
+        ubereats_data(ue_data)
+        final_ue_data.append(ubereats_data.results)
     forms = RestaurantForm()
 
     return render(request, 'data.html', {
         'doordash': final_dd_data, 
         'postmates': final_pm_data,
+        'ubereats': final_ue_data,
     })
 
 def favorites_index(request):
