@@ -12,6 +12,8 @@ dj-database-url = "*"
 psycopg2 = "*"
 whitenoise = "*"
 selenium = "*"
+requests = "*"
+
 
 [requires]
 python_version = '3.8.5'
