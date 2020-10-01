@@ -11,6 +11,7 @@ django-cors-headers = "*"
 dj-database-url = "*"
 psycopg2 = "*"
 whitenoise = "*"
+selenium = "*"
 
 [requires]
-python_version = '3.8'
+python_version = '3.8.5'
