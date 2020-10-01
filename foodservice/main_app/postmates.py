@@ -10,14 +10,10 @@ from asgiref.sync import sync_to_async
 options = Options()
 options.add_argument('--disable-extensions')
 options.add_argument('--window-size=1920,1080')
-# options.add_argument("--proxy-server='direct://'")
 options.add_argument('--proxy-byprass-list=*')
 options.add_argument('--start-maximized')
 options.add_argument('--disable-gpu')
-# options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--no-sandbox')
-# options.add_argument('--ignore-certificate-errors')
-
 options.set_headless(True)
 
 # locates the chrome_driver app in the local system
@@ -25,7 +21,7 @@ driver = webdriver.Chrome(chrome_location, chrome_options=options)
 # , chrome_options=options
 
 postmates_unparsed_list = []
-# @sync_to_async
+
 async def postmates(data):
     # Goes to Doordash Website
     driver.get('https://postmates.com')
@@ -48,7 +44,6 @@ async def postmates(data):
     print('Going to PostMates Restaurant page')
 
     restaurant_data = driver.find_elements_by_class_name('e12wrbia0')
-    # print(restaurant_data)
 
     for names in restaurant_data:
         text = names.text
