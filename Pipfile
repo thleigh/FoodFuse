@@ -15,6 +15,7 @@ selenium = "*"
 requests = "*"
 bs4 = "*"
 asgiref = "*"
+main_app.chrome_driver = "*"
 
 [requires]
 python_version = '3.8.5'
