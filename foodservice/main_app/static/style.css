@@ -1,13 +1,12 @@
 body {
     background-color: #F0ECEB;
     font-family: 'Montserrat', sans-serif;
-    overflow-y: scroll;
 }
 
-.dark-mode {
+/* .dark-mode {
     background-color: black;
     color: white;
-}
+} */
 
 #carouselExampleControls {
     opacity: 0.8;
@@ -30,4 +29,9 @@ img {
 #ubereats-data {
     background-color: lightblue;
     color: lightblue;
+}
+
+.navbar-brand:hover {
+    background-color:#CCCCCC;
+    opacity: 0.5;
 }

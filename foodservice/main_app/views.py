@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from asgiref.sync import sync_to_async
+from django.template import RequestContext
 
 # from .scraper import scraper_function, 
 from .doordash import doordash, doordash_unparsed_list, doordash_data
@@ -123,12 +124,17 @@ def data(request):
         'ubereats': final_ue_data,
     })
 
-def favorites_index(request):
-    if request.method == "POST":
-        print("posting on favs page") ### this works
-        # name = request.POST['name']
-        # print(name)
-    return render(request, 'Favorites/favorites.html')
+def favorites_index(request, self):
+    def get_faves(self, pk):
+        favorites = Restaurant.objects.get(pk=pk)
+        return favorites 
+
+        if request.method == "POST":
+            print("posting on favs page") ### this works
+            # # postmates = request.POST[postmates.restaurant_name]
+            favorites = self.get_faves(pk=request.id)
+            # print(postmates)
+        return render(request, 'Favorites/favorites.html')
     
     # if request.method == "post":
     #     print("*****POST")
@@ -187,3 +193,8 @@ class UsersCreate(CreateView):
 class UsersDelete(DeleteView):
     model = Users
     success_url = '/'
+
+# # ####404 error page ???
+# def error_404(request):
+#         data = {}
+#         return render(request,'404.html', data)

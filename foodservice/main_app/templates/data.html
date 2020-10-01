@@ -28,6 +28,8 @@
           <form action="/favorites/" method="POST">
             {% csrf_token %}
             <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button>
+            <input type="hidden" value= {{doordash.restaurant_name}}>
+            <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
@@ -49,5 +51,26 @@
         </div>
       {% endfor %}
     </div>
+        <div class = "postmates-data">
+          <h2>POSTMATES</h2>
+          {% for postmates in postmates %}
+          <div>
+            <p>Restaurant: {{ postmates.restaurant_name }}</p>
+            <p>Delivery: {{ postmates.delivery_data }}</p>
+            <!-- <form action="" method="post"> -->
+            <form action="/favorites/" method="POST">
+                {% csrf_token %}
+                
+                <!-- <input type="hidden" value="{{ doordash.location }}"> -->
+                    <!-- <input type="hidden" value="{{ doordash.delivery_cost }}">
+                    <input type="hidden" value="{{ doordash.delivery_time }}">
+                    <input type="hidden" value="{{ doordash.rating }}"> -->
+                <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button>
+            </form>
+            <br>
+            <br>
+            <!-- {% endfor %} -->
+          </div>
+      </div>
 </div>
 {% endblock %}
