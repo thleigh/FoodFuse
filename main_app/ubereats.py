@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
-from .chrome_driver import chrome_location
 import asyncio
 from asgiref.sync import sync_to_async
 
