@@ -13,7 +13,7 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.set_headless(True)
 chrome_options.binary_location = GOOGLE_CHROME_BIN
-driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+driver = webdriver.PhantomJS()
 
 # locates the chrome_driver app in the local system
 # driver = webdriver.Chrome(chrome_location, chrome_options=options)
