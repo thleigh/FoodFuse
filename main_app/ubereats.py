@@ -13,7 +13,7 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.set_headless(True)
 chrome_options.binary_location = GOOGLE_CHROME_BIN
-driver = webdriver.PhantomJS()
+driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 #, chrome_options=options
 
 ubereats_unparsed_list = []
