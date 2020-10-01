@@ -116,10 +116,15 @@ def data(request):
         'postmates': final_pm_data,
     })
 
-def favorites_index(request):
+def favorites_index(request, self):
+    def get_faves(self, pk):
+        favorites = Restaurant.objects.filter(pk=pk)
+        return favorites 
+
     if request.method == "POST":
         print("posting on favs page") ### this works
         # # postmates = request.POST[postmates.restaurant_name]
+        favorites = self.get_faves(pk=request.user.id)
         # print(postmates)
     return render(request, 'Favorites/favorites.html')
     
