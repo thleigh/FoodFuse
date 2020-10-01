@@ -2,18 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
-from .chrome_driver import chrome_location, CHROMEDRIVER_PATH, GOOGLE_CHROME_BIN
+from .chrome_driver import chrome_location
 import asyncio
 from asgiref.sync import sync_to_async
 
 # Allows the chrome_driver to open without a physical browser
 chrome_options = Options()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-chrome_options.set_headless(True)
-chrome_options.binary_location = GOOGLE_CHROME_BIN
-driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+chrome_options.add_argument('--headless')
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 #, chrome_options=options
 
 ubereats_unparsed_list = []
