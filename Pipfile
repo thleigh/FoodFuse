@@ -13,7 +13,8 @@ psycopg2 = "*"
 whitenoise = "*"
 selenium = "*"
 requests = "*"
-
+bs4 = "*"
+asgiref = "*"
 
 [requires]
 python_version = '3.8.5'
