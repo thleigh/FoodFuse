@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from asgiref.sync import sync_to_async
 
+# from .scraper import scraper_function, 
 from .doordash import doordash, doordash_unparsed_list, parsed_data
 from .postmates import postmates, postmates_unparsed_list, postmates_data
 import asyncio, time
@@ -67,7 +68,7 @@ def profile(request, username):
 def about(request):
     return render(request, 'about.html')
 
-async def index(request):
+def index(request):
     # Checks if the request is a POST 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -76,23 +77,23 @@ async def index(request):
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
-            task1 = asyncio.ensure_future(doordash(location))
-            task2 = asyncio.ensure_future(postmates(location))
-            await asyncio.wait([
-                task1, task2
-            ])
+            request.session['location'] = location
+            asyncio.run(scraper_function(request))
             return HttpResponseRedirect('/data/')
-            # Calls the doordash function and postmates funcion while passing in the location entered
-            # loop = asyncio.get_event_loop()
-            # loop.close()
-            
     form = SearchForm()
     return render(request, 'index.html', 
         {
         'form': form, 
         })
-    # elif form.is_valid() == True:
-    #     return redirect('data.html')
+
+async def scraper_function(request):
+    location = request.session.get('location')
+    # print(location)
+    task1 = asyncio.ensure_future(doordash(location))
+    task2 = asyncio.ensure_future(postmates(location))
+    await asyncio.wait([
+        task1, task2
+    ])
 
 def data(request):
     final_dd_data = []
@@ -108,6 +109,7 @@ def data(request):
         postmates_data(pm_data)
         final_pm_data.append(postmates_data.results)
     forms = RestaurantForm()
+
     return render(request, 'data.html', {
         'doordash': final_dd_data, 
         'postmates': final_pm_data,
