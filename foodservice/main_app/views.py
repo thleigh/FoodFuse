@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from .models import Restaurant, Users
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound, HttpResponseServerError
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from asgiref.sync import sync_to_async
 from django.template import RequestContext
+from django.shortcuts import render
 
 # from .scraper import scraper_function, 
 from .doordash import doordash, doordash_unparsed_list, doordash_data
@@ -109,11 +110,13 @@ def data(request):
         else:
             doordash_data(dd_data)
         final_dd_data.append(doordash_data.results)
-    for pm_data in postmates_unpared_list:
+    for pm_data in postmates_unparsed_list:
+        print(postmates_unparsed_list)
         postmates_data(pm_data)
         final_pm_data.append(postmates_data.results)
     print(final_pm_data)
     for ue_data in ubereats_unparsed_list:
+        print(ubereats_unparsed_list)
         ubereats_data(ue_data)
         final_ue_data.append(ubereats_data.results)
     forms = RestaurantForm()
@@ -198,3 +201,9 @@ class UsersDelete(DeleteView):
 # def error_404(request):
 #         data = {}
 #         return render(request,'404.html', data)
+
+# def error_404_view(request, exception):
+#     return render(request, 'main_app/404.html')
+
+# def error_500_view(request, exception):
+#     return render(request, 'main_app/500.html')
