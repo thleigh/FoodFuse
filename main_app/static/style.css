@@ -1,5 +1,6 @@
 body {
     background-color: #F0ECEB;
+    color: black;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -38,4 +39,26 @@ img {
 
 .container {
     font: black
+}
+
+#doordash-data {
+    float: left;
+    width: 33%; 
+
+}
+
+#postmates-data {
+    float: left; 
+    width: 33%;
+
+}
+
+#ubereats-data {
+    float: left; 
+    width: 33%;
+}
+
+#data-page {
+    width: 100%;
+    overflow-x: scroll;
 }

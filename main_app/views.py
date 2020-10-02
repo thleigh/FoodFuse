@@ -115,6 +115,12 @@ def data(request):
         #     item.append(temp[1])
         #     if temp[2] == True:
         #         item.append(temp[2])
+        
+    for item in postmates_fixed_list:
+        temp = item[1].split(" · ")
+        item[1] = temp[0]
+        item.append(temp[1])
+        
     for pm_data in postmates_fixed_list:
         postmates_data(pm_data)
         final_pm_data.append(postmates_data.results)
