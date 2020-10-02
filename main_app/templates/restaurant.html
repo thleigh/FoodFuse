@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+<div class="container">
+    <h1 class="text-center">Restaurant</h1>
+    <div>
+        <div>
+            <h5>Postmates:</h5>
+            <h2>{{ pm.restaurant_name }}</h2>
+            <p>{{ pm.delivery_data }} · {{ pm.delivery_time }}</p>
+            <p>{{ pm.address }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
