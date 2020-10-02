@@ -6,17 +6,20 @@
   <head>
     <title>FoodFuse</title>
   </head>
+  <div class="loader">
+    <img src="/media/giphy.gif" alt="loading...">
+  </div>
   <div style="vertical-align: middle;" class="locationFormInner slogan">
     <h1>FoodFuse</h1>
     <h2>Your all-in-one food delivery source.</h2>
   </div>
   <div class="locationForm">
-    <form action="" method="post" class="locationFormInner">
+    <form action="" method="post" class="locationFormInner" id="myform">
       {% csrf_token %}
       {{ form }}
       <!-- <label for="location">Enter your city or zipcode: </label> -->
       <!-- <input type="text" class="locationInput" name="location"></input> -->
-      <button type="submit" class="btn btn-primary locationBtn">Submit</button>
+      <button type="submit" class="btn btn-primary locationBtn" onclick="javascript:NeedRatingList()">Submit</button>
     </form>
   </div>
   <body data-spy="scroll">
@@ -60,7 +63,18 @@
           <br>
           <!-- Needs to wait for data to load before going to the next page -->
       </div>
+      <script type="text/javascript">
+        window.addEventListener("load", function() {
+          const loader = document.querySelector(".loader");
+          loader.className += " hidden"; // class "loader hidden"
+        })
 
+        $(document).ready(function(){
+          $("#myform").on("submit", function(){
+            $("#pageloader").fadeIn();
+          });//submit
+        });//document ready
+      </script>
   </body>
   </html>
   {% endblock %}

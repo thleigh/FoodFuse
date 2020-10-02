@@ -119,7 +119,7 @@ def postmatesRestaurant(data):
     time.sleep(3)
     print('on Postmates restaurant page!')
 
-    results = driver.find_element_by_class_name('eifi54g6')
+    results = driver.find_element_by_class_name('sc-eitiE0')
 
     text = results.text
     parsed_text = text.split('\n')
