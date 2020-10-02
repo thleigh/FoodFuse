@@ -2,11 +2,19 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
-from .chrome_driver import chrome_location
-import asyncio, re
+import asyncio
 from asgiref.sync import sync_to_async
-
+import os
 # Allows the chrome_driver to open without a physical browser
+# chrome_options = Options()
+# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# chrome_options.add_argument('--disable-gpu')
+# chrome_options.add_argument('--no-sandbox')
+# chrome_options.add_argument('--disable-dev-shm-usage')
+# chrome_options.add_argument('--headless')
+# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+from .chrome_driver import chrome_location
 options = Options()
 options.add_argument('--disable-extensions')
 options.add_argument('--window-size=1920,1080')
@@ -18,7 +26,7 @@ options.set_headless(True)
 
 # locates the chrome_driver app in the local system
 driver = webdriver.Chrome(chrome_location, chrome_options=options)
-# , chrome_options=options
+#, chrome_options=options
 
 postmates_unparsed_list = []
 
@@ -66,16 +74,21 @@ async def postmates(data):
             parsed_text.remove("NEW")
         if "Available Later" in parsed_text:
             pass
+        if '' in parsed_text:
+            pass
+
+        # for x in parsed_text:
+        #     temp = x[1].split('·')
+        #     x[1] = temp[0]
+        #     x.append(temp[1])
         
         postmates_unparsed_list.append(parsed_text)
 
         for item in postmates_unparsed_list: 
+            # item.split('·')
             if item == '':
                 postmates_unparsed_list.remove(item)
-            if item == '·':
-                postmates_unparsed_list.remove(item)
-            if item == 'Available Later':
-                postmates_unparsed_list.remove(item)
+
     return postmates_unparsed_list
 
 def add_this_arg(func):
@@ -85,16 +98,16 @@ def add_this_arg(func):
 
 @add_this_arg
 def postmates_data(this, data):
-    restaurant_name = data[0]
-    delivery_data = data[1]
+    # restaurant_name = data[0]
+    # delivery_data = data[1]
     # delivery_time = data[i][2]
     # categories = data[i][2]
     # delivery_cost = data[i][3]
     # rating = data[i][4]
 
     this.results = {
-        'restaurant_name': restaurant_name,
-        'delivery_data': delivery_data,
+        # 'restaurant_name': restaurant_name,
+        # 'delivery_data': delivery_data,
         # 'pricing': pricing,
         # 'categories': categories,
         # 'rating': rating,

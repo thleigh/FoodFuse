@@ -4,6 +4,7 @@ from main_app import views as main_app_views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404
+import django
 
 urlpatterns = [
     path('', views.index, name='index'),
