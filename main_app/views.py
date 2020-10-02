@@ -109,7 +109,7 @@ def data(request):
 
     postmates_fixed_list = list(filter(None, postmates_unparsed_list))
     for item in postmates_fixed_list:
-        temp = item[1].split(' · ')
+        temp = item[1].split(" · ")
         item[1] = temp[0]
         item.append(temp[1])
     for pm_data in postmates_fixed_list:
