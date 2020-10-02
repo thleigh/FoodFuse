@@ -6,17 +6,33 @@
   <head>
     <title>FoodFuse</title>
   </head>
+  <div style="vertical-align: middle;" class="locationFormInner slogan">
+    <h1>FoodFuse</h1>
+    <h2>Your all-in-one food delivery source.</h2>
+  </div>
+  <div class="locationForm">
+    <form action="" method="post" class="locationFormInner">
+      {% csrf_token %}
+      {{ form }}
+      <!-- <label for="location">Enter your city or zipcode: </label> -->
+      <!-- <input type="text" class="locationInput" name="location"></input> -->
+      <button type="submit" class="btn btn-primary locationBtn">Submit</button>
+    </form>
+  </div>
   <body data-spy="scroll">
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="margin:0px; padding:0px;">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="" style="height: 50vh; width: 100vw" src="https://www.apptunix.com/blog/wp-content/uploads/sites/3/2020/04/online-food-delivery-industry.jpg" alt="First slide">
+              <!-- https://www.apptunix.com/blog/wp-content/uploads/sites/3/2020/04/online-food-delivery-industry.jpg -->
+              <img class="" style="height: 80vh; width: 100vw" src="/media/food1.png" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="" style="height: 50vh; width: 100vw" src="https://technofaq.org/wp-content/uploads/2019/10/whereyatcom_521663620.jpg" alt="Second slide">
+              <!-- https://technofaq.org/wp-content/uploads/2019/10/whereyatcom_521663620.jpg -->
+              <img class="" style="height: 80vh; width: 100vw" src="/media/food2.png" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="" style="height: 50vh; width: 100vw" src="https://article.images.consumerreports.org/f_auto/prod/content/dam/CRO-Images-2020/Health/05May/CR-Health-InlineHero-Food-Delivery-Testx-V3-0520" alt="Third slide">
+              <!-- https://article.images.consumerreports.org/f_auto/prod/content/dam/CRO-Images-2020/Health/05May/CR-Health-InlineHero-Food-Delivery-Testx-V3-0520 -->
+              <img class="" style="height: 80vh; width: 100vw" src="https://content.fortune.com/wp-content/uploads/2016/10/muncherywork-lunch-1.jpg" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -35,22 +51,11 @@
           <br>
           <br>
           <br>
-          <div style="vertical-align: middle;">
-            <h1>FoodFuse</h1>
-            <h2>Your all-in-one food delivery source.</h2>
-          </div>
           <br>
           <br>
         
         </div>
           <!-- Needs to wait for data to load before going to the next page -->
-          <form action="" method="post">
-              {% csrf_token %}
-              {{ form }}
-              <!-- <label for="location">Location: </label>
-              <input type="text" class="form-control-lg" name="location"></input> -->
-              <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
       </div>
 
   </body>

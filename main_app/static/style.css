@@ -33,7 +33,7 @@ img {
 }
 
 .navbar-brand:hover {
-    background-color:#CCCCCC;
+    font: #CCCCCC;
     opacity: 0.5;
 }
 
@@ -50,7 +50,6 @@ img {
 #postmates-data {
     float: left; 
     width: 33%;
-
 }
 
 #ubereats-data {
@@ -61,4 +60,34 @@ img {
 #data-page {
     width: 100%;
     overflow-x: scroll;
+}
+
+.locationForm {
+    width: 300px;
+    text-align: center;
+    z-index: 1;
+}
+
+.locationFormInner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 18% auto 50% auto;
+    text-align: center;
+    z-index: 1;
+
+}
+
+.slogan {
+    margin-top: 10%;
+}
+
+.locationBtn {
+    position: relative;
+    text-align: center;
+    margin-top: -10px;
+}
+
+.dataTop {
+    height: 300px;
 }
