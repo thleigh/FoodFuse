@@ -2,27 +2,36 @@
 
 {% block page_content %}
 <div class="container text-center" id="data-page">
-  <h1>THIS IS THE DATA PAGE!!!!!</h1>
-  <div id="doordash-data">
-    <h2>DOORDASH</h2>
+  <div class="dataTop">
+    <div>
+      <form action="" method="post" class="searchFormInner">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary searchBtn">Submit</button>
+      </form>
+    </div>
+  </div>
+    <h3>Restaurants near you:</h3>
+    <div id="doordash-data">
+      <h2>DOORDASH</h2>
       {% for doordash in doordash %}
-      <div>
+      <div class="databox">
         <p>Restaurant: {{ doordash.restaurant_name }}</p>
         <p>Delivery Data: {{ doordash.delivery_cost }} · {{ doordash.delivery_time }}</p>
         <!-- <p>Delivery Time: {{ doordash.delivery_time }}</p> -->
         <form action="/favorites/" method="POST">
           {% csrf_token %}
-          <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
+          <button type="submit" class="btn btn-primary">Add {{ doordash.restaurant_name }} to favorites</button>
         </form>
         <br>
         <br>
       </div> 
       {% endfor %}
-  </div>
+    </div>
     <div id="postmates-data">
       <h2>POSTMATES</h2>
       {% for postmates in postmates %}
-        <div>
+        <div class="databox">
           <p>Restaurant: {{ postmates.restaurant_name }}</p>
           <p>Delivery Data: {{ postmates.delivery_data }}</p>
           <!-- <p>Delivery Time: {{ postmates.delivery_time }}</p> -->
@@ -30,7 +39,7 @@
             {% csrf_token %}
             <!-- <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button> -->
             <input type="hidden" value= {{postmates.restaurant_name}}>
-            <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button>
+            <button type="submit" class="btn btn-primary">Add {{ postmates.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
@@ -40,12 +49,12 @@
     <div id="ubereats-data">
       <h2>UberEats</h2>
       {% for ubereats in ubereats %}
-        <div>
+        <div class="databox">
           <p>Restaurant: {{ ubereats.restaurant_name }}</p>
-          <!-- <p>Delivery: {{ ubereats.delivery_data }}</p> -->
+          <p>Delivery Data: {{ ubereats.delivery_data }}</p>
           <form action="/favorites/" method="POST">
             {% csrf_token %}
-            <button type="submit">Add {{ ubereats.restaurant_name }} to favorites</button>
+            <button type="submit" class="btn btn-primary">Add {{ ubereats.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>

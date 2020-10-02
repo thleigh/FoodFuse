@@ -45,20 +45,18 @@ async def ubereats(data):
     address_link.click()
     await asyncio.sleep(0.5)
     # Input's the location into the form
-    address_link.send_keys('Santa Monica')
+    address_link.send_keys(data)
     await asyncio.sleep(0.5)
     # Clicks the submit button
     address_button.click()
     await asyncio.sleep(3)
     print('Goint to UberEats restaurant page')
 
-    restaurant_data = driver.find_elements_by_class_name('fi')
+    restaurant_data = driver.find_elements_by_class_name('hy')
 
-    for i in range(len(restaurant_data[11:])):
-        each_restaurant = restaurant_data[11:][i]
+    for i in range(len(restaurant_data[:])):
+        each_restaurant = restaurant_data[:][i]
         text = each_restaurant.text
-        # print(text)
-        # re.sub(' • $| • ', ' HI', text)
         parsed_text = text.split('\n')
         ubereats_unparsed_list.append(parsed_text)
 
@@ -73,13 +71,13 @@ def add_this_arg(func):
 @add_this_arg
 def ubereats_data(this, data):
     restaurant_name = data[0]
-    # delivery_data = data[1]
+    delivery_data = data[1]
     # delivery_time = data[3:]
     # delivery_cost = data[3]
 
     this.results = {
         'restaurant_name': restaurant_name,
-        # 'delivery_time': delivery_time,
+        'delivery_data': delivery_data,
     }
     
     return data
