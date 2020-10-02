@@ -24,12 +24,13 @@
       {% for postmates in postmates %}
         <div>
           <p>Restaurant: {{ postmates.restaurant_name }}</p>
-          <p>Delivery: {{ postmates.delivery_data }}</p>
+          <p>Delivery Cost: {{ postmates.delivery_cost }}</p>
+          <p>Delivery Time: {{ postmates.delivery_time }}</p>
           <form action="/favorites/" method="POST">
             {% csrf_token %}
             <!-- <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button> -->
-            <input type="hidden" value= {{doordash.restaurant_name}}>
-            <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
+            <input type="hidden" value= {{postmates.restaurant_name}}>
+            <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
