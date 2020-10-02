@@ -92,3 +92,9 @@ def doordash_data(this, data):
         'delivery_cost': delivery_cost,
     }
     return data
+
+def doordashRestaurant(data):
+    restaurant_link = driver.find_element_by_xpath('//*[@id="FieldWrapper-8"]')
+    restaurant_link.send_keys(data)
+    
+    return data

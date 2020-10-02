@@ -32,13 +32,22 @@ else:
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":
     DEBUG = False
-    STATIC_URL = 'https://foodfuse.herokuapp.com/'
+    # STATIC_URL = 'https://foodfuse.herokuapp.com/'
 else:
     DEBUG = True
     STATIC_URL = '/static/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+STATICFILES_DIRS = (
+  os.path.join(SITE_ROOT, 'static/'),
+)
+
 APPEND_SLASH=False
 DEBUG = True
 
@@ -118,7 +127,7 @@ DATABASES = {
 }
 
 # production
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
