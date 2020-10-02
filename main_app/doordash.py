@@ -2,15 +2,27 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
-from .chrome_driver import chrome_location
 import asyncio
 from asgiref.sync import sync_to_async
+import os
 
 # Allows the chrome_driver to open without a physical browser
+# chrome_options = Options()
+# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# chrome_options.add_argument('--disable-gpu')
+# chrome_options.add_argument('--no-sandbox')
+# chrome_options.add_argument('--disable-dev-shm-usage')
+# chrome_options.add_argument('--headless')
+# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+from .chrome_driver import chrome_location
 options = Options()
+options.add_argument('--disable-extensions')
+options.add_argument('--window-size=1920,1080')
+options.add_argument('--proxy-byprass-list=*')
+options.add_argument('--start-maximized')
 options.add_argument('--disable-gpu')
 options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
 options.set_headless(True)
 
 # locates the chrome_driver app in the local system
@@ -27,7 +39,7 @@ async def doordash(data):
 
     # Finds the Address form and the Submit button by their XPATH
     address_link = driver.find_element_by_xpath('//input[starts-with(@id,"FieldWrapper")]')
-    address_button = driver.find_element_by_class_name('sc-ewMkZo')
+    address_button = driver.find_element_by_class_name('sc-eCXBzT')
 
     # Clicks the address form
     address_link.click()

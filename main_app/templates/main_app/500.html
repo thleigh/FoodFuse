@@ -1,0 +1,12 @@
+{% load static %}
+
+{% extends "layout.html" %}
+
+{% block page_content %}
+
+<div class="container">
+    <h1>Oh no! Page not found.</h1>
+    <img src="{% static 'media/404page.gif' %}"/>
+</div>
+
+{% endblock %}

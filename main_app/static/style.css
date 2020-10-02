@@ -18,20 +18,24 @@ img {
 
 #postmates-data {
     background-color: aliceblue;
-    color: aliceblue;
+    font: black;
 }
 
 #doordash-data {
     background-color: white;
-    color: white;
+    font: black;
 }
 
 #ubereats-data {
     background-color: lightblue;
-    color: lightblue;
+    font: black;
 }
 
 .navbar-brand:hover {
     background-color:#CCCCCC;
     opacity: 0.5;
+}
+
+.container {
+    font: black
 }

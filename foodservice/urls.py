@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url, handler404, handler500
+from main_app.views import index
 # from django.conf import settings
 # from django.conf.urls.static import static
 
@@ -22,4 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls')),
     path('about/', include('main_app.urls')),
+    # url(r'^$', index, name='index')
 ] 
+
+# handler404 = 'main_app.views.error_404_view'
+# handler500 = 'main_app.views.error_500_view'
