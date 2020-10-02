@@ -98,16 +98,16 @@ def add_this_arg(func):
 
 @add_this_arg
 def postmates_data(this, data):
-    # restaurant_name = data[0]
-    # delivery_data = data[1]
+    restaurant_name = data[0]
+    delivery_data = data[1]
     # delivery_time = data[i][2]
     # categories = data[i][2]
     # delivery_cost = data[i][3]
     # rating = data[i][4]
 
     this.results = {
-        # 'restaurant_name': restaurant_name,
-        # 'delivery_data': delivery_data,
+        'restaurant_name': restaurant_name,
+        'delivery_data': delivery_data,
         # 'pricing': pricing,
         # 'categories': categories,
         # 'rating': rating,
