@@ -15,7 +15,7 @@ from django.shortcuts import render
 # from .scraper import scraper_function, 
 from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant
 from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific
-from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data
+from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data, ubereats_restaurant_data, ubereatsRestaurant
 import asyncio, time
 from .forms import SearchForm, RestaurantForm, FavoriteForm
 
@@ -138,8 +138,8 @@ def data(request):
 def restaurant(request):
     restaurant = request.session.get('restaurant')
     postmatesRestaurant(restaurant)
+    print(ubereatsRestaurant(restaurant))
     print(doordashRestaurant(restaurant))
-    postmates_restaurant_data
     for pm_restaurant in postmates_restaurant_data:
         print(postmates_data_specific(pm_restaurant))
         postmates_data_specific.results
