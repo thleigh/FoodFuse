@@ -75,7 +75,7 @@ img {
     margin: 18% auto 50% auto;
     text-align: center;
     z-index: 1;
-
+    font-family: 'Montserrat', sans-serif;
 }
 
 .slogan {
@@ -90,4 +90,16 @@ img {
 
 .dataTop {
     height: 300px;
+}
+
+.foodservices {
+    display:inline-block;
+    margin:0;
+    /* min-width:33%;
+    height:auto; */
+    padding: 10px;
+}
+
+.titleFoodServices {
+    font-family: 'Montserrat', sans-serif;
 }
