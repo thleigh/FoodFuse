@@ -92,3 +92,23 @@ def doordash_data(this, data):
         'delivery_cost': delivery_cost,
     }
     return data
+
+doordash_restaurant_data = []
+def doordashRestaurant(data):
+    restaurant_link = driver.find_element_by_xpath('//*[@id="FieldWrapper-7"]')
+    restaurant_link.send_keys(data)
+    # time.sleep(3)
+    # restaurant_link_inner = driver.find_element_by_class_name('sc-htoDjs')
+    # restaurant_link_inner.click()
+    time.sleep(3)
+    print('on restaurant page!')
+
+    # results = driver.find_element_by_class_name('sc-eitiEO')
+
+    # text = results.text
+    # parsed_text = text.split('\n')
+
+    # doordash_restaurant_data.append(parsed_text)
+
+    return data
+

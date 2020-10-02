@@ -72,17 +72,32 @@ img {
     position: absolute;
     left: 0;
     right: 0;
-    margin: 18% auto 50% auto;
+    margin: 260px auto 50% auto;
     text-align: center;
     z-index: 1;
     font-family: 'Montserrat', sans-serif;
 }
 
 .slogan {
-    margin-top: 10%;
+    margin-top: 130px;
 }
 
 .locationBtn {
+    position: relative;
+    text-align: center;
+    margin-top: -10px;
+}
+
+.searchFormInner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 140px auto 50% auto;
+    text-align: center;
+    z-index: 1;
+}
+
+.searchBtn {
     position: relative;
     text-align: center;
     margin-top: -10px;

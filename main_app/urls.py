@@ -16,6 +16,7 @@ urlpatterns = [
     path('favorites/', views.favorites_index, name='favorites'),
     path('favorites/<int:restaurant_id>', views.favorites_show, name='favorites_show'),
     path('data/', views.data, name='data'),
+    path('restaurant/', views.restaurant, name='restaurant'),
     # path('scraper/', views.scraper_function, name='scraper'),
     # path('restaurants/create/', views.RestaurantCreate.as_view(), name='restaurant_create'),
     # path('restaurants/<int:pk>/update/', views.RestaurantUpdate.as_view(), name='restaurant_update'),

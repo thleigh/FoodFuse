@@ -13,8 +13,8 @@ from django.template import RequestContext
 from django.shortcuts import render
 
 # from .scraper import scraper_function, 
-from .doordash import doordash, doordash_unparsed_list, doordash_data
-from .postmates import postmates, postmates_unparsed_list, postmates_data
+from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant
+from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific
 from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data
 import asyncio, time
 from .forms import SearchForm, RestaurantForm, FavoriteForm
@@ -124,14 +124,27 @@ def data(request):
         if form.is_valid():
             # Gets the data in a clean format
             restaurant = form.cleaned_data['restaurant']
-            print('hi')
+            request.session['restaurant'] = restaurant
+            return HttpResponseRedirect('/restaurant/')
 
     form = RestaurantForm()
     return render(request, 'data.html', {
         'doordash': final_dd_data, 
         'postmates': final_pm_data,
         'ubereats': final_ue_data,
-        'forms': form,
+        'form': form,
+    })
+
+def restaurant(request):
+    restaurant = request.session.get('restaurant')
+    postmatesRestaurant(restaurant)
+    print(doordashRestaurant(restaurant))
+    postmates_restaurant_data
+    for pm_restaurant in postmates_restaurant_data:
+        print(postmates_data_specific(pm_restaurant))
+        postmates_data_specific.results
+    return render(request, 'restaurant.html', {
+        'pm': postmates_data_specific.results,
     })
 
 def favorites_index(request, self):
