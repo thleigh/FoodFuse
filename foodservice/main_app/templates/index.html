@@ -30,42 +30,28 @@
       </div>
       
       <div class="text-center" id="main" style="margin:0px; padding:0px;">
-      <div class="mid" style="background-color: #EAEAEA;">
-        <br>
-        <br>
-        <br>
-        <br>
-        <h1>FoodFuse</h1>
-        <br>
-        <h2>Your all-in-one food delivery source.</h2>
-        <br>
-        <br>
-        <hr />
+        <div class="mid" style="background-color: #EAEAEA; height: 35%">
+          <br>
+          <br>
+          <br>
+          <br>
+          <div style="vertical-align: middle;">
+            <h1>FoodFuse</h1>
+            <h2>Your all-in-one food delivery source.</h2>
+          </div>
+          <br>
+          <br>
+        
+        </div>
+          <!-- Needs to wait for data to load before going to the next page -->
+          <form action="" method="post">
+              {% csrf_token %}
+              {{ form }}
+              <!-- <label for="location">Location: </label>
+              <input type="text" class="form-control-lg" name="location"></input> -->
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
       </div>
-        <!-- Needs to wait for data to load before going to the next page -->
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <!-- <label for="location">Location: </label>
-            <input type="text" class="form-control-lg" name="location"></input> -->
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
   </body>
   </html>
