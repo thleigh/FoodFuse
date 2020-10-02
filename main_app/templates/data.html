@@ -8,8 +8,8 @@
       {% for doordash in doordash %}
       <div>
         <p>Restaurant: {{ doordash.restaurant_name }}</p>
-        <p>Delivery Cost: {{ doordash.delivery_cost }}</p>
-        <p>Delivery Time: {{ doordash.delivery_time }}</p>
+        <p>Delivery Data: {{ doordash.delivery_cost }} · {{ doordash.delivery_time }}</p>
+        <!-- <p>Delivery Time: {{ doordash.delivery_time }}</p> -->
         <form action="/favorites/" method="POST">
           {% csrf_token %}
           <button type="submit">Add {{ doordash.restaurant_name }} to favorites</button>
@@ -24,8 +24,8 @@
       {% for postmates in postmates %}
         <div>
           <p>Restaurant: {{ postmates.restaurant_name }}</p>
-          <p>Delivery Cost: {{ postmates.delivery_cost }}</p>
-          <p>Delivery Time: {{ postmates.delivery_time }}</p>
+          <p>Delivery Data: {{ postmates.delivery_data }}</p>
+          <!-- <p>Delivery Time: {{ postmates.delivery_time }}</p> -->
           <form action="/favorites/" method="POST">
             {% csrf_token %}
             <!-- <button type="submit">Add {{ postmates.restaurant_name }} to favorites</button> -->

@@ -108,14 +108,16 @@ def data(request):
         final_dd_data.append(doordash_data.results)
 
     postmates_fixed_list = list(filter(None, postmates_unparsed_list))
-    for item in postmates_fixed_list:
-        temp = item[1].split(' · ')
-        item[1] = temp[0]
-        item.append(temp[1])
+    # for item in postmates_fixed_list:
+        # if len(item) == 2:
+        #     temp = item[1].split(' · ')
+        #     item[1] = temp[0]
+        #     item.append(temp[1])
+        #     if temp[2] == True:
+        #         item.append(temp[2])
     for pm_data in postmates_fixed_list:
         postmates_data(pm_data)
         final_pm_data.append(postmates_data.results)
-    print(postmates_fixed_list)
 
     for ue_data in ubereats_unparsed_list:
         ubereats_data(ue_data)
