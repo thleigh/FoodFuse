@@ -13,7 +13,7 @@ from django.template import RequestContext
 from django.shortcuts import render
 
 # from .scraper import scraper_function, 
-from .doordash import doordash, doordash_unparsed_list, doordash_data
+from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant
 from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific
 from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data
 import asyncio, time
@@ -124,7 +124,6 @@ def data(request):
         if form.is_valid():
             # Gets the data in a clean format
             restaurant = form.cleaned_data['restaurant']
-            print(restaurant)
             request.session['restaurant'] = restaurant
             return HttpResponseRedirect('/restaurant/')
 
@@ -139,6 +138,7 @@ def data(request):
 def restaurant(request):
     restaurant = request.session.get('restaurant')
     postmatesRestaurant(restaurant)
+    print(doordashRestaurant(restaurant))
     postmates_restaurant_data
     for pm_restaurant in postmates_restaurant_data:
         print(postmates_data_specific(pm_restaurant))

@@ -52,7 +52,7 @@ async def ubereats(data):
     await asyncio.sleep(3)
     print('Goint to UberEats restaurant page')
 
-    restaurant_data = driver.find_elements_by_class_name('hy')
+    restaurant_data = driver.find_elements_by_class_name('g7')
 
     for i in range(len(restaurant_data[:])):
         each_restaurant = restaurant_data[:][i]

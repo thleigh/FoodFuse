@@ -117,7 +117,7 @@ def postmatesRestaurant(data):
     restaurant_link_inner = driver.find_element_by_class_name('css-70qvj9')
     restaurant_link_inner.click()
     time.sleep(3)
-    print('on Mcdonalds page!')
+    print('on Postmates restaurant page!')
 
     results = driver.find_element_by_class_name('eifi54g6')
 
