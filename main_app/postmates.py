@@ -72,10 +72,12 @@ async def postmates(data):
             parsed_text.remove("OCEAN FRIENDLY")
         if "NEW" in parsed_text:
             parsed_text.remove("NEW")
-        if "Available Later" in parsed_text:
-            pass
-        if '' in parsed_text:
-            pass
+        if 'Available Later' in parsed_text:
+            parsed_text.remove('Available Later')
+        if 'Too Busy' in parsed_text:
+            parsed_text.remove('Too Busy')
+        if 'Alcohol' in parsed_text:
+            parsed_text.remove('Alcohol')
 
         # for x in parsed_text:
         #     temp = x[1].split('·')
@@ -99,16 +101,16 @@ def add_this_arg(func):
 @add_this_arg
 def postmates_data(this, data):
     restaurant_name = data[0]
-    delivery_cost = data[1]
-    delivery_time = data[2]
+    delivery_data = data[1]
+    # delivery_time = data[2]
     # categories = data[i][2]
     # delivery_cost = data[i][3]
     # rating = data[i][4]
 
     this.results = {
         'restaurant_name': restaurant_name,
-        'delivery_cost': delivery_cost,
-        'delivery_time': delivery_time,
+        'delivery_data': delivery_data,
+        # 'delivery_time': delivery_time,
         # 'pricing': pricing,
         # 'categories': categories,
         # 'rating': rating,
