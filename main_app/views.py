@@ -34,7 +34,7 @@ def login_view(request):
                 if user.is_active:
                     login(request, user) # log the user in by creating a session
                     # return HttpResponseRedirect('/')
-                    return HttpResponseRedirect('/about/user/'+u+'/')
+                    return HttpResponseRedirect('/user/'+u+'/')
                 else:
                     print('The account has been disabled.')
         else:
@@ -53,7 +53,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return HttpResponseRedirect('/user/'+str(user))
+            return HttpResponseRedirect('/user/'+str(user)+'/')
         else:
             return HttpResponse('<h1>Try Again</h1>')
     else:

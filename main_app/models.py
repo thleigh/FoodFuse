@@ -8,8 +8,7 @@ from django.contrib.auth.models import User
 class Restaurant(models.Model):
     location = models.CharField(max_length=100)
     restaurant = models.CharField(max_length=100)
-    delivery_fee = models.CharField(max_length=100)
-    delivery_time = models.CharField(max_length=50)
+    delivery_data = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

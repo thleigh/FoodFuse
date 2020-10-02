@@ -17,7 +17,7 @@
             <a class="navbar-brand px-4" style="font-family: 'Montserrat', sans-serif;" href="/"><i class="fa fa-fw fa-home"></i>Home</a>
             <a class="navbar-brand px-4" style="font-family: 'Montserrat', sans-serif;" href="/about/"><i class="fa fa-info-circle"></i>About Us</a>
             {% if user.is_authenticated %}
-            <a class="navbar-brand px-4" style="font-family: 'Montserrat', sans-serif;" href="{% url 'profile' user.username %}"><i class="fa fa-id-card-o"></i>Profile</a> 
+            <a class="navbar-brand px-4" style="font-family: 'Montserrat', sans-serif;" href="/user/{{user.username}}/"><i class="fa fa-id-card-o"></i>Profile</a> 
             <a class="navbar-brand px-4" style="font-family: 'Montserrat', sans-serif;" href="/logout/"><i class="fa fa-sign-out"></i>Logout</a>
             {% else %}
             <a class="navbar-brand px-4 loginBtn" style="font-family: 'Montserrat', sans-serif;" href="/login/"><i class="fa fa-fw fa-user"></i>Login</a>
