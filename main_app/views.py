@@ -11,6 +11,9 @@ from django.utils.decorators import method_decorator
 from asgiref.sync import sync_to_async
 from django.template import RequestContext
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.contrib.auth.models import User
 
 # from .scraper import scraper_function, 
 from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant
@@ -147,18 +150,30 @@ def restaurant(request):
         'pm': postmates_data_specific.results,
     })
 
-def favorites_index(request, self):
-    def get_faves(self, pk):
-        favorites = Restaurant.objects.get(pk=pk)
-        return favorites 
+@csrf_exempt
+def add_favorite(request):
+    if request.method == "POST":
+        data = json.load(request)
+        print("REQUEST OBJECT:", data)
+        print("PRINTING DATA:",data)
+        data["delivery_data"] = data["delivery_cost"] + " " + data["delivery_time"]
+        user = User.objects.get(id=data['id'])
+        restaurant = dict(
+            user=user,
+            location=data['location'],
+            restaurant=data['restaurant'],
+            delivery_data=['delivery_data']
+        )
+        new_restaurant = Restaurant.objects.create(**restaurant)
 
-        if request.method == "POST":
-            print("posting on favs page") ### this works
-            # # postmates = request.POST[postmates.restaurant_name]
-            favorites = self.get_faves(pk=request.id)
-            # print(postmates)
-        return render(request, 'Favorites/favorites.html')
-    
+@csrf_exempt
+def favorites_show(request):
+    # print("querying restaurant:")
+    restaurants = Restaurant.objects.all()
+    print("restaurants:",restaurants)
+    restaurants = [restaurant for restaurant in restaurants]
+    return render(request, 'Favorites/favorites.html', {'restaurants': restaurants})
+
     # if request.method == "post":
     #     print("*****POST")
         # model = Restaurant
@@ -173,9 +188,6 @@ def favorites_index(request, self):
         # return render(request, 'favorites/favorites.html')
         # return HttpResponseRedirect('/favorites/')
 
-def favorites_show(request, restaurant_id):
-    doordash = Restaurant.objects.get(id=restaurant_id)
-    return render(request, 'favorites/show.html', {'doordash': doordash})
 
 ###################################################
 #CRUD ROUTES FOR RESTAURANT MODEL

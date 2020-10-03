@@ -6,13 +6,11 @@ from django.contrib.auth.models import User
 ## CREATE, READ, UPDATE, DELETE
 
 class Restaurant(models.Model):
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, null=True, blank=True)
     restaurant = models.CharField(max_length=100)
     delivery_data = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
 
 class Users(models.Model):
     username = models.CharField(max_length=100)

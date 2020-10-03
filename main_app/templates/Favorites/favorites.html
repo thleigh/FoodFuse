@@ -4,20 +4,15 @@
 
 <h1>Favorites page</h1>
 <p>favorites page is obviously working. data from selenium is supposed to appear here...</p>
-<!-- {% for data in data %}
-  <a href="{% url 'favorites_show' restaurant.id %}">
+{% for data in restaurants %}
+  
     <div class="card-content">
-      <p>Restaurant: {{ data.restaurant_name }}</p>
-      <p>Expensive?: {{ data.pricing }}</p>
-      <p>Tags: {{ data.categories }}</p>
-      <p>Rating: {{ data.rating }}</p> -->
-      <!-- <p>{{ data.rating_amt }}</p> -->
-      <!-- <p>Delivery Cost: {{ data.delivery_cost }}</p>
-      <p>Delivery Time: {{ data.delivery_time }}</p>
+      <p>{{ data.restaurant }}</p>
+      <p> {{  data.location }}</p>
+      <p>Tags: {{ data.delivery_data }}</p>
     </div>
-  </a>
 
-        {% endfor %} -->
+        {% endfor %}
 <a href="/">Home</a> <br>
 
 {% endblock %}
