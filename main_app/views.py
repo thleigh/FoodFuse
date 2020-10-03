@@ -162,7 +162,7 @@ def add_favorite(request):
             user=user,
             location=data['location'],
             restaurant=data['restaurant'],
-            delivery_data=['delivery_data']
+            delivery_data=data['delivery_data']
         )
         new_restaurant = Restaurant.objects.create(**restaurant)
 
@@ -171,7 +171,8 @@ def favorites_show(request):
     # print("querying restaurant:")
     restaurants = Restaurant.objects.all()
     print("restaurants:",restaurants)
-    restaurants = [restaurant for restaurant in restaurants]
+    restaurants = [restaurant.__dict__ for restaurant in restaurants]
+    print(restaurants)
     return render(request, 'Favorites/favorites.html', {'restaurants': restaurants})
 
     # if request.method == "post":
