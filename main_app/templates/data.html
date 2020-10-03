@@ -36,8 +36,9 @@
         <div class="databox">
           <p>Restaurant: {{ postmates.restaurant_name }}</p>
           <p>Delivery Data: {{ postmates.delivery_data }}</p>
+          <!-- <p>Delivery Data: {{ postmates.delivery_cost }} · {{ postmates.delivery_time }}</p> -->
           <!-- <p>Delivery Time: {{ postmates.delivery_time }}</p> -->
-          <form action="/favorites/" method="POST">
+          <form id="{{postmates.restaurant_name}}{{postmates.delivery_cost}}{{postmates.delivery_time}}" action="/favorites/" method="POST">
             {% csrf_token %}
             <input type="hidden" id="{{postmates.restaurant_name}}{{postmates.delivery_cost}}{{postmates.delivery_time}}1" value="{{postmates.restaurant_name}}" name="restaurant">
             <input type="hidden" value="{{postmates.delivery_cost}}" name="delivery_cost">
@@ -54,8 +55,9 @@
       {% for ubereats in ubereats %}
         <div class="databox">
           <p>Restaurant: {{ ubereats.restaurant_name }}</p>
-          <p>Delivery Data: {{ ubereats.delivery_data }}</p>
-          <form action="/favorites/" method="POST">
+          <!-- <p>Delivery Data: {{ ubereats.delivery_data }}</p> -->
+          <p>Delivery Data: {{ ubereats.delivery_cost }} · {{ ubereats.delivery_time }}</p>
+          <form id="{{ubereats.restaurant_name}}{{ubereats.delivery_cost}}{{ubereats.delivery_time}}" action="/favorites/" method="POST">
             {% csrf_token %}
             <input type="hidden" id="{{ubereats.restaurant_name}}{{ubereats.delivery_cost}}{{ubereats.delivery_time}}1" value="{{ubereats.restaurant_name}}" name="restaurant">
             <input type="hidden" value="{{ubereats.delivery_cost}}" name="delivery_cost">
