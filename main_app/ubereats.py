@@ -39,7 +39,7 @@ async def ubereats(data):
 
     # # Finds the Address form and the Submit button by their XPATH
     address_link = driver.find_element_by_xpath('//*[@id="location-typeahead-home-input"]')
-    address_button = driver.find_element_by_class_name('cv')
+    address_button = driver.find_element_by_xpath('//*[@id="wrapper"]/main/div[1]/div[2]/div/button')
 
     # Clicks the address form
     address_link.click()
@@ -52,7 +52,7 @@ async def ubereats(data):
     await asyncio.sleep(3)
     print('Goint to UberEats restaurant page')
 
-    restaurant_data = driver.find_elements_by_class_name('af')
+    restaurant_data = driver.find_elements_by_class_name('g3')
 
     for i in range(len(restaurant_data[:])):
         each_restaurant = restaurant_data[:][i]
@@ -71,13 +71,14 @@ def add_this_arg(func):
 @add_this_arg
 def ubereats_data(this, data):
     restaurant_name = data[0]
-    delivery_data = data[1]
-    # delivery_time = data[3:]
+    delivery_data = data[2]
+    delivery_time = data[5]
     # delivery_cost = data[3]
 
     this.results = {
         'restaurant_name': restaurant_name,
         'delivery_data': delivery_data,
+        'delivery_time': delivery_time
     }
     
     return data
