@@ -20,7 +20,7 @@
         <p>Delivery Data: {{ doordash.delivery_cost }} · {{ doordash.delivery_time }}</p>
         <form id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" action="/favorites/" method="POST">
           {% csrf_token %}
-          <input type="hidden" id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}1" value="{{doordash.restaurant_name}}" name="restaurant">
+          <input type="hidden" id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" value="{{doordash.restaurant_name}}" name="restaurant">
           <input type="hidden" value="{{doordash.delivery_cost}}" name="delivery_cost">
           <input type="hidden" value="{{doordash.delivery_time}}" name="delivery_time">
           <button type="button" value="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" class="btn btn-primary doordash-favorites">Add {{ doordash.restaurant_name }} to favorites</button>
@@ -38,12 +38,11 @@
           <p>Delivery Data: {{ postmates.delivery_data }}</p>
           <!-- <p>Delivery Data: {{ postmates.delivery_cost }} · {{ postmates.delivery_time }}</p> -->
           <!-- <p>Delivery Time: {{ postmates.delivery_time }}</p> -->
-          <form id="{{postmates.restaurant_name}}{{postmates.delivery_cost}}{{postmates.delivery_time}}" action="/favorites/" method="POST">
+          <form id="{{postmates.restaurant_name}}{{postmates.delivery_data}}" action="/favorites/" method="POST">
             {% csrf_token %}
-            <input type="hidden" id="{{postmates.restaurant_name}}{{postmates.delivery_cost}}{{postmates.delivery_time}}1" value="{{postmates.restaurant_name}}" name="restaurant">
-            <input type="hidden" value="{{postmates.delivery_cost}}" name="delivery_cost">
-            <input type="hidden" value="{{postmates.delivery_time}}" name="delivery_time">
-            <button type="button" value="{{postmates.restaurant_name}}{{postmates.delivery_cost}}{{postmates.delivery_time}}" class="btn btn-primary postmates-favorites">Add {{ postmates.restaurant_name }} to favorites</button>
+            <input type="hidden" id="{{postmates.restaurant_name}}{{postmates.delivery_data}}" value="{{postmates.restaurant_name}}" name="restaurant">
+            <input type="hidden" value="{{postmates.delivery_data}}" name="delivery_data">
+            <button type="button" value="{{postmates.restaurant_name}}{{postmates.delivery_data}}" class="btn btn-primary postmates-favorites">Add {{ postmates.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
@@ -55,14 +54,12 @@
       {% for ubereats in ubereats %}
         <div class="databox">
           <p>Restaurant: {{ ubereats.restaurant_name }}</p>
-          <!-- <p>Delivery Data: {{ ubereats.delivery_data }}</p> -->
-          <p>Delivery Data: {{ ubereats.delivery_cost }} · {{ ubereats.delivery_time }}</p>
-          <form id="{{ubereats.restaurant_name}}{{ubereats.delivery_cost}}{{ubereats.delivery_time}}" action="/favorites/" method="POST">
+          <p>Delivery Data: {{ ubereats.delivery_data }}</p>
+          <form id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" action="/favorites/" method="POST">
             {% csrf_token %}
-            <input type="hidden" id="{{ubereats.restaurant_name}}{{ubereats.delivery_cost}}{{ubereats.delivery_time}}1" value="{{ubereats.restaurant_name}}" name="restaurant">
-            <input type="hidden" value="{{ubereats.delivery_cost}}" name="delivery_cost">
-            <input type="hidden" value="{{ubereats.delivery_time}}" name="delivery_time">
-            <button type="button" value="{{ubereats.restaurant_name}}{{ubereats.delivery_cost}}{{ubereats.delivery_time}}" class="btn btn-primary ubereats-favorites">Add {{ ubereats.restaurant_name }} to favorites</button>
+            <input type="hidden" id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" value="{{ubereats.restaurant_name}}" name="restaurant">
+            <input type="hidden" value="{{ubereats.delivery_data}}" name="delivery_data">
+            <button type="button" value="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" class="btn btn-primary ubereats-favorites">Add {{ ubereats.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
@@ -99,6 +96,7 @@
       }
       data = json
     }
+    // just to assign a user to a favorite
     data.id = 1
     if (!data.location){
       data.location = null

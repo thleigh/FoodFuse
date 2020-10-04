@@ -156,7 +156,8 @@ def add_favorite(request):
         data = json.load(request)
         print("REQUEST OBJECT:", data)
         print("PRINTING DATA:",data)
-        data["delivery_data"] = data["delivery_cost"] + " " + data["delivery_time"]
+        if "delivery_data" not in data:
+            data["delivery_data"] = data["delivery_cost"] + " " + data["delivery_time"]
         user = User.objects.get(id=data['id'])
         restaurant = dict(
             user=user,
@@ -165,6 +166,7 @@ def add_favorite(request):
             delivery_data=data['delivery_data']
         )
         new_restaurant = Restaurant.objects.create(**restaurant) ####CREATE - creating an instance in the restaurant model
+        return HttpResponseRedirect('/favorites.html')
 
 @csrf_exempt
 def favorites_show(request):
