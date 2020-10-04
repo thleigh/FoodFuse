@@ -26,7 +26,7 @@ options.add_argument('--no-sandbox')
 options.set_headless(True)
 
 # locates the chrome_driver app in the local system
-driver = webdriver.Chrome(chrome_location, chrome_options=options)
+driver = webdriver.Chrome(chrome_location)
 #, chrome_options=options
 
 doordash_unparsed_list = []
@@ -95,11 +95,11 @@ def doordash_data(this, data):
 
 doordash_restaurant_data = []
 def doordashRestaurant(data):
-    restaurant_link = driver.find_element_by_xpath('//*[@id="FieldWrapper-7"]')
+    restaurant_link = driver.find_element_by_xpath('//*[@id="FieldWrapper-8"]')
     restaurant_link.send_keys(data)
-    # time.sleep(3)
-    # restaurant_link_inner = driver.find_element_by_class_name('sc-htoDjs')
-    # restaurant_link_inner.click()
+    time.sleep(3)
+    restaurant_link_inner = driver.find_element_by_class_name('//*[@id="search-dropdown-results"]/a[1]')
+    restaurant_link_inner.click()
     time.sleep(3)
     print('on restaurant page!')
 
@@ -112,3 +112,18 @@ def doordashRestaurant(data):
 
     return data
 
+
+# @add_this_arg
+# def postmates_data_specific(this, data):
+#     restaurant_name = data[3]
+#     delivery_data = data[0]
+#     delivery_time = data[5]
+#     address = data[6]
+
+#     this.results = {
+#         'restaurant_name': restaurant_name,
+#         'delivery_data': delivery_data,
+#         'delivery_time': delivery_time,
+#         'address': address,
+#     }
+#     return data

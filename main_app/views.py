@@ -118,7 +118,7 @@ def data(request):
     for ue_data in ubereats_unparsed_list:
         ubereats_data(ue_data)
         final_ue_data.append(ubereats_data.results)
-    # print(ubereats_unparsed_list)
+    print(ubereats_unparsed_list)
 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -142,9 +142,9 @@ def restaurant(request):
     restaurant = request.session.get('restaurant')
     postmatesRestaurant(restaurant)
     # print(ubereatsRestaurant(restaurant))
-    # print(doordashRestaurant(restaurant))
+    print(doordashRestaurant(restaurant))
     for pm_restaurant in postmates_restaurant_data:
-        print(postmates_data_specific(pm_restaurant))
+        postmates_data_specific(pm_restaurant)
         postmates_data_specific.results
     return render(request, 'restaurant.html', {
         'pm': postmates_data_specific.results,
