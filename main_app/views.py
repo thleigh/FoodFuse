@@ -16,7 +16,7 @@ import json
 from django.contrib.auth.models import User
 
 # from .scraper import scraper_function, 
-from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant
+from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant, doordash_data_specific
 from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific
 from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data, ubereats_restaurant_data, ubereatsRestaurant
 import asyncio, time
@@ -118,7 +118,7 @@ def data(request):
     for ue_data in ubereats_unparsed_list:
         ubereats_data(ue_data)
         final_ue_data.append(ubereats_data.results)
-    print(ubereats_unparsed_list)
+    # print(ubereats_unparsed_list)
 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -141,13 +141,17 @@ def data(request):
 def restaurant(request):
     restaurant = request.session.get('restaurant')
     postmatesRestaurant(restaurant)
-    # print(ubereatsRestaurant(restaurant))
-    print(doordashRestaurant(restaurant))
+    doordashRestaurant(restaurant)
+    print(postmates_restaurant_data)
     for pm_restaurant in postmates_restaurant_data:
         postmates_data_specific(pm_restaurant)
         postmates_data_specific.results
+    for dd_restaurant in doordash_restaurant_data:
+        doordash_data_specific(dd_restaurant)
+        doordash_data_specific.results
     return render(request, 'restaurant.html', {
         'pm': postmates_data_specific.results,
+        'dd': doordash_data_specific.results,
     })
 
 @csrf_exempt
