@@ -70,8 +70,8 @@ def add_this_arg(func):
 
 @add_this_arg
 def ubereats_data(this, data):
-    restaurant_name = data[0]
-    delivery_data = data[1]
+    # restaurant_name = data[0]
+    # delivery_data = data[1]
     # delivery_time = data[3:]
     # delivery_cost = data[3]
 
