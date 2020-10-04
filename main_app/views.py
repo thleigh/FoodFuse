@@ -190,14 +190,14 @@ def favorites_show(request):
 
 ## UPDATE VIEW ##
 
-class UpdateFavorite(UpdateView):
-    model = Restaurant
-    fields = ['location', 'restaurant', 'delivery_data', 'user_id']
+# class UpdateFavorite(UpdateView):
+#     model = Restaurant
+#     fields = ['location', 'restaurant', 'delivery_data', 'user_id']
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-        return HttpResponseRedirect('/favorites/')
+#     def form_valid(self, form):
+#         self.object = form.save(commit=False)
+#         self.object.save()
+#         return HttpResponseRedirect('/favorites/')
 
 
 # # ####404 error page ???
