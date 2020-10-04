@@ -1,11 +1,15 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <html>
   <head>
     <title>FoodFuse</title>
   </head>
+  <div id="pageloader">
+    <img src="/media/load1.gif" alt="processing..." />
+ </div>
   <div class="loader">
     <img src="/media/giphy.gif" alt="loading...">
   </div>
@@ -17,24 +21,19 @@
     <form action="" method="post" class="locationFormInner" id="myform">
       {% csrf_token %}
       {{ form }}
-      <!-- <label for="location">Enter your city or zipcode: </label> -->
-      <!-- <input type="text" class="locationInput" name="location"></input> -->
-      <button type="submit" class="btn btn-primary locationBtn" onclick="javascript:NeedRatingList()">Submit</button>
+      <button type="submit" class="btn btn-primary locationBtn">Submit</button>
     </form>
   </div>
   <body data-spy="scroll">
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="margin:0px; padding:0px;">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <!-- https://www.apptunix.com/blog/wp-content/uploads/sites/3/2020/04/online-food-delivery-industry.jpg -->
               <img class="" style="height: 80vh; width: 100%" src="/media/food1.png" alt="First slide">
             </div>
             <div class="carousel-item">
-              <!-- https://technofaq.org/wp-content/uploads/2019/10/whereyatcom_521663620.jpg -->
               <img class="" style="height: 80vh; width: 100%" src="/media/food2.png" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <!-- https://article.images.consumerreports.org/f_auto/prod/content/dam/CRO-Images-2020/Health/05May/CR-Health-InlineHero-Food-Delivery-Testx-V3-0520 -->
               <img class="" style="height: 80vh; width: 100%" src="https://content.fortune.com/wp-content/uploads/2016/10/muncherywork-lunch-1.jpg" alt="Third slide">
             </div>
           </div>
@@ -61,17 +60,18 @@
          
           <!-- Needs to wait for data to load before going to the next page -->
       </div>
-      <script type="text/javascript">
+      <script>
         window.addEventListener("load", function() {
           const loader = document.querySelector(".loader");
           loader.className += " hidden"; // class "loader hidden"
         })
-
+        
         $(document).ready(function(){
           $("#myform").on("submit", function(){
             $("#pageloader").fadeIn();
           });//submit
         });//document ready
+
       </script>
   </body>
   </html>
