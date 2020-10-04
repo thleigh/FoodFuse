@@ -3,16 +3,43 @@
 {% block page_content %}
 
 <h1>Favorites page</h1>
-<p>favorites page is obviously working. data from selenium is supposed to appear here...</p>
 {% for data in restaurants %}
-  
     <div class="card-content">
       <p>{{ data.restaurant }}</p>
-      <p> {{ data.location }}</p>
+      <!-- <p> {{ data.location }}</p> -->
       <p>{{ data.delivery_data }}</p>
     </div>
-
-        {% endfor %}
+    <button class="restaurant-delete-button" value="{{ data.id }}">Delete favorite</button>
+    {% endfor %}
 <a href="/">Home</a> <br>
 
+{% endblock %}
+{% block script %} 
+
+<!-- jQuery CDN -->
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous">
+</script>
+
+<!-- ajax call for delete view , remove_favorites -->
+<script>
+$(".restaurant-delete-button").on("click", function(evt){
+  const value = evt.target.value
+  const data = {id: Number(value), user_id: 1}
+  // get button value
+  $.ajax({ 
+    url: "/remove_favorite/",
+    method: "POST",
+    dataType: "json",
+    data: JSON.stringify(data),
+  }).done(function(data){
+    console.log(`restaurant deleted:${data}`)
+    window.location.replace("/favorites/")
+  })
+
+})
+
+</script>
 {% endblock %}

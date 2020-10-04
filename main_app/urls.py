@@ -14,6 +14,7 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('user/<username>/', views.profile, name='profile'),
     path('add_favorite/', views.add_favorite, name='add_favorite'),
+    path('remove_favorite/', views.remove_favorite, name='remove_favorite'),
     path('favorites/',views.favorites_show, name='favorites'),
     # path('favorites/<int:restaurant_id>', views.favorites_show, name='favorites_show'),
     path('data/', views.data, name='data'),

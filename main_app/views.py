@@ -168,6 +168,16 @@ def add_favorite(request):
         new_restaurant = Restaurant.objects.create(**restaurant) ####CREATE - creating an instance in the restaurant model
         return JsonResponse(True, status=200, safe=False)
 
+##delete route
+@csrf_exempt
+def remove_favorite(request):
+    if request.method == "POST":
+        data = json.load(request)
+        user_id = data["user_id"]
+        id=data["id"]
+        Restaurant.objects.filter(id=id, user=user_id).delete()
+        return JsonResponse(True, status=200, safe=False)
+
 @csrf_exempt
 def favorites_show(request):
     # print("querying restaurant:")
