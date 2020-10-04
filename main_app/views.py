@@ -150,6 +150,7 @@ def restaurant(request):
         'pm': postmates_data_specific.results,
     })
 
+## CREATE VIEW ##
 @csrf_exempt
 def add_favorite(request):
     if request.method == "POST":
@@ -168,7 +169,7 @@ def add_favorite(request):
         new_restaurant = Restaurant.objects.create(**restaurant) ####CREATE - creating an instance in the restaurant model
         return JsonResponse(True, status=200, safe=False)
 
-##delete route
+## DELETE VIEW ##
 @csrf_exempt
 def remove_favorite(request):
     if request.method == "POST":
@@ -187,60 +188,17 @@ def favorites_show(request):
     # print(restaurants)
     return render(request, 'Favorites/favorites.html', {'restaurants': restaurants})
 
-    # if request.method == "post":
-    #     print("*****POST")
-        # model = Restaurant
-        # fields = '__all__'
-        # def form_valid(self, form):
-        #     self.object = form.save(commit=False)
-        #     print('!!!!! SELF.OBJECT:', self.object)
-        #     self.object.user = self.request.user
-        #     self.object.save()
-        #     return HttpResponseRedirect('/')
-        # doordash = Restaurant.objects.all()
-        # return render(request, 'favorites/favorites.html')
-        # return HttpResponseRedirect('/favorites/')
+## UPDATE VIEW ##
 
+class UpdateFavorite(UpdateView):
+    model = Restaurant
+    fields = ['location', 'restaurant', 'delivery_data', 'user_id']
 
-# ###################################################
-# #CRUD ROUTES FOR RESTAURANT MODEL
-# #CREATE
-# class RestaurantCreate(CreateView):
-#     model = Restaurant
-#     fields = '__all__'
-#     # success_url = '/restaurants/'
-#     def form_valid(self, form):
-#         self.object = form.save(commit=False)
-#         print('!!!!! SELF.OBJECT:', self.object)
-#         self.object.user = self.request.user
-#         self.object.save()
-#         return HttpResponseRedirect('/')
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/favorites/')
 
-# #UPDATE
-# class RestaurantUpdate(UpdateView):
-#     model = Restaurant
-#     fields = '__all__'
-#     # success_url = '/restaurants/'
-
-#     def form_valid(self, form): # this will allow us to catch the pk to redirect to the show page
-#         self.object = form.save(commit=False) # don't post to the db until we say so
-#         self.object.save()
-#         # return HttpResponseRedirect('/cats/'+str(self.object.pk))
-
-# #DELETE
-# class RestaurantDelete(DeleteView):
-#     model = Restaurant
-#     success_url = '/favorites'
-
-
-# #CRUD ROUTES FOR USER MODEL
-# class UsersCreate(CreateView):
-#     model = Users
-#     success_url = '/'
-
-# class UsersDelete(DeleteView):
-#     model = Users
-#     success_url = '/'
 
 # # ####404 error page ???
 # def error_404(request):
