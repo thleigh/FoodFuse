@@ -9,14 +9,6 @@
   <h2 class="account-heading"> {{ username }}</h2>
   <p class="text-secondary"></p>
 
-  <!-- <form>
-    <div class="form-group text-center">
-      <label for="exampleFormControlFile1">Choose profile picture</label>
-      <input type="file" class="form-control-file" id="exampleFormControlFile1">
-      <input type="submit" class="form-control-file" id="exampleFormControlFile1">
-    </div>
-  </form> -->
-  
     <form method="POST">
       <div class="form-group text-center">
         {% csrf_token %}
@@ -25,10 +17,6 @@
       </div>
     </form>
 
-  <!-- <div class="custom-file">
-    <input type="file" class="custom-file-input" id="customFile">
-    <label class="custom-file-label" for="customFile">Choose file</label>
-  </div> -->
   <a href="/">Home</a> <br>
   <a href="/favorites">Favorites</a> <br>
   <br>
