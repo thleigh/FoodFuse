@@ -134,7 +134,7 @@ def postmates_data_specific(this, data):
     restaurant_name = data[3]
     delivery_data = data[0]
     delivery_time = data[5]
-    address = data[6]
+    address = data[8]
 
     this.results = {
         'restaurant_name': restaurant_name,

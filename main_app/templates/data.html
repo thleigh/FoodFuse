@@ -54,12 +54,12 @@
       {% for ubereats in ubereats %}
         <div class="databox">
           <p>Restaurant: {{ ubereats.restaurant_name }}</p>
-          <p>Delivery Data: {{ ubereats.delivery_data }} · {{ ubereats.delivery_time }}</p>
+          <p>Delivery Data: {{ ubereats.delivery_data }}</p>
           <form id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" action="/favorites/" method="POST">
             {% csrf_token %}
-            <input type="hidden" id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}{{ubereats.delivery_time}}" value="{{ubereats.restaurant_name}}" name="restaurant">
-            <input type="hidden" value="{{ubereats.delivery_data}}{{ubereats.delivery_time}}" name="delivery_data">
-            <button type="button" value="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}{{ubereats.delivery_time}}" class="btn btn-primary ubereats-favorites">Add {{ ubereats.restaurant_name }} to favorites</button>
+            <input type="hidden" id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" value="{{ubereats.restaurant_name}}" name="restaurant">
+            <input type="hidden" value="{{ubereats.delivery_data}}" name="delivery_data">
+            <button type="button" value="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" class="btn btn-primary ubereats-favorites">Add {{ ubereats.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
