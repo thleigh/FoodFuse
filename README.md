@@ -92,5 +92,42 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 ## Code Snippets
 ---
 
+Adding doordash to favorites page based on button click
+
+```
+// ajax call for doordash
+  $(".doordash-favorites").on("click", function(evt){
+    evt.preventDefault()
+    const value = evt.target.value
+    const formElements = $("#doordash-data form") 
+    let data = null
+    for (element of formElements){
+      if (element.id === value)
+        data = $(element).serializeArray()
+    }
+    if (data){
+      let json = {}
+      for (object of data){
+        json[object.name] = object.value
+      }
+      data = json
+    }
+    // just to assign a user to a favorite
+    data.id = 1
+    if (!data.location){
+      data.location = null
+    }
+
+    $.ajax({
+      url: "/add_favorite/",
+      method: "POST",
+      dataType: "json",
+      data: JSON.stringify(data)
+    }).done(function(data){
+      window.location.replace("/favorites/")
+    })
+  })
+```
+
 ## Conclusion
 ---
