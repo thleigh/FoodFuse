@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from .models import Restaurant, Users
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound, HttpResponseServerError
+from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound, HttpResponseServerError, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
@@ -118,7 +118,7 @@ def data(request):
     for ue_data in ubereats_unparsed_list:
         ubereats_data(ue_data)
         final_ue_data.append(ubereats_data.results)
-    print(ubereats_unparsed_list)
+    # print(ubereats_unparsed_list)
 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -141,8 +141,8 @@ def data(request):
 def restaurant(request):
     restaurant = request.session.get('restaurant')
     postmatesRestaurant(restaurant)
-    print(ubereatsRestaurant(restaurant))
-    print(doordashRestaurant(restaurant))
+    # print(ubereatsRestaurant(restaurant))
+    # print(doordashRestaurant(restaurant))
     for pm_restaurant in postmates_restaurant_data:
         print(postmates_data_specific(pm_restaurant))
         postmates_data_specific.results
@@ -154,8 +154,8 @@ def restaurant(request):
 def add_favorite(request):
     if request.method == "POST":
         data = json.load(request)
-        print("REQUEST OBJECT:", data)
-        print("PRINTING DATA:",data)
+        # print("REQUEST OBJECT:", data)
+        # print("PRINTING DATA:",data)
         if "delivery_data" not in data:
             data["delivery_data"] = data["delivery_cost"] + " " + data["delivery_time"]
         user = User.objects.get(id=data['id'])
@@ -166,15 +166,15 @@ def add_favorite(request):
             delivery_data=data['delivery_data']
         )
         new_restaurant = Restaurant.objects.create(**restaurant) ####CREATE - creating an instance in the restaurant model
-        return HttpResponseRedirect('/favorites.html')
+        return JsonResponse(True, status=200, safe=False)
 
 @csrf_exempt
 def favorites_show(request):
     # print("querying restaurant:")
     restaurants = Restaurant.objects.all()
-    print("restaurants:",restaurants)
+    # print("restaurants:",restaurants)
     restaurants = [restaurant.__dict__ for restaurant in restaurants]
-    print(restaurants)
+    # print(restaurants)
     return render(request, 'Favorites/favorites.html', {'restaurants': restaurants})
 
     # if request.method == "post":
