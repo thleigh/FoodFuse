@@ -114,12 +114,12 @@ def postmatesRestaurant(data):
     restaurant_link = driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div/div[1]/div/div/div[1]/div/input')
     restaurant_link.send_keys(data)
     time.sleep(3)
-    restaurant_link_inner = driver.find_element_by_class_name('css-70qvj9')
+    restaurant_link_inner = driver.find_element_by_class_name('css-1d3pcta')
     restaurant_link_inner.click()
     time.sleep(3)
-    print('on Postmates restaurant page!')
+    print('on Postmates page!')
 
-    results = driver.find_element_by_class_name('sc-eitiE0')
+    results = driver.find_element_by_class_name('css-mwpx6b')
 
     text = results.text
     parsed_text = text.split('\n')
