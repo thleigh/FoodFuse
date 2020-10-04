@@ -18,7 +18,7 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 
 ## Deployed Site
 ---
-* [FoodFuse]()
+* ### [FoodFuse]()
 
 ## User Stories / Features
 ---
@@ -32,6 +32,8 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 ---
 * [Django](https://www.djangoproject.com/)
 * [Python](https://www.python.org/)
+* [jQuery](https://jquery.com/)
+* [Ajax](https://api.jquery.com/category/ajax/)
 * [Selenium](https://www.selenium.dev/)
 * [Bootstrap](https://getbootstrap.com/)
 
@@ -46,18 +48,17 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 
 ## Models
 ---
-### User Model
+### Restaurant Model
 
 | Column name   | Data Type     |  
 | ------------- | ------------- | 
 | id            |               |                                             
 | location      | CharField     |                    
 | restaurant    | CharField     |      
-| delivery_fee  | CharField     | 
-| delivery_time | CharField     | 
-| rating        | CharField     | 
+| delivery_data  | CharField     | 
+| user_id | CharField     | 
 
-### Restaurant Model
+### User Model
 
 | Column name   | Data Type     |  
 | ------------- | ------------- | 
