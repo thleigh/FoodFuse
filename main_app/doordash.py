@@ -117,14 +117,14 @@ def doordashRestaurant(data):
 @add_this_arg
 def doordash_data_specific(this, data):
     restaurant_name = data[0]
-    delivery_data = data[11:12]
-    delivery_time = data[14:15]
-    address = data[9]
+    delivery_data = data[11]
+    delivery_time = data[13]
+    # address = data[9]
 
     this.results = {
         'restaurant_name': restaurant_name,
         'delivery_data': delivery_data,
         'delivery_time': delivery_time,
-        'address': address,
+        # 'address': address,
     }
     return data
