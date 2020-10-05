@@ -92,9 +92,28 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 ## Code Snippets
 ---
 
-Adding doordash to favorites page based on button click
+Adding doordash to favorites page through a button click. Implemented Ajax and jQuery and provided a unique identifier for food service data on the HTML portion. Then in views.py, the data was created and pushed to the backend. Below is an example of the doordash data, but it's the same process for UberEats and Postmates.
 
+```HTML
+<div id="doordash-data">
+      <h2>DOORDASH</h2>
+      {% for doordash in doordash %}
+      <div class="databox">
+        <p>Restaurant: {{ doordash.restaurant_name }}</p>
+        <p>Delivery Data: {{ doordash.delivery_cost }} Â· {{ doordash.delivery_time }}</p>
+        <form id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" action="/favorites/" method="POST">
+          {% csrf_token %}
+          <input type="hidden" id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" value="{{doordash.restaurant_name}}" name="restaurant">
+          <input type="hidden" value="{{doordash.delivery_cost}}" name="delivery_cost">
+          <input type="hidden" value="{{doordash.delivery_time}}" name="delivery_time">
+          <button type="button" value="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" class="btn btn-primary doordash-favorites">Add {{ doordash.restaurant_name }} to favorites</button>
+        </form>
+    </div> 
+    {% endfor %}
+</div>
 ```
+
+```Javascript
 // ajax call for doordash
   $(".doordash-favorites").on("click", function(evt){
     evt.preventDefault()
@@ -127,6 +146,27 @@ Adding doordash to favorites page based on button click
       window.location.replace("/favorites/")
     })
   })
+```
+
+```Python
+## CREATE VIEW ##
+@csrf_exempt
+def add_favorite(request):
+    if request.method == "POST":
+        data = json.load(request)
+        # print("REQUEST OBJECT:", data)
+        # print("PRINTING DATA:",data)
+        if "delivery_data" not in data:
+            data["delivery_data"] = data["delivery_cost"] + " " + data["delivery_time"]
+        user = User.objects.get(id=data['id'])
+        restaurant = dict(
+            user=user,
+            location=data['location'],
+            restaurant=data['restaurant'],
+            delivery_data=data['delivery_data']
+        )
+        new_restaurant = Restaurant.objects.create(**restaurant)
+        return JsonResponse(True, status=200, safe=False)
 ```
 
 ## Conclusion

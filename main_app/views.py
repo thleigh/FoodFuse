@@ -170,7 +170,7 @@ def add_favorite(request):
             restaurant=data['restaurant'],
             delivery_data=data['delivery_data']
         )
-        new_restaurant = Restaurant.objects.create(**restaurant) ####CREATE - creating an instance in the restaurant model
+        new_restaurant = Restaurant.objects.create(**restaurant)
         return JsonResponse(True, status=200, safe=False)
 
 ## DELETE VIEW ##
@@ -193,15 +193,14 @@ def favorites_show(request):
     return render(request, 'Favorites/favorites.html', {'restaurants': restaurants})
 
 ## UPDATE VIEW ##
+class UpdateFavorite(UpdateView):
+    model = Restaurant
+    fields = ['location', 'restaurant', 'delivery_data', 'user_id']
 
-# class UpdateFavorite(UpdateView):
-#     model = Restaurant
-#     fields = ['location', 'restaurant', 'delivery_data', 'user_id']
-
-#     def form_valid(self, form):
-#         self.object = form.save(commit=False)
-#         self.object.save()
-#         return HttpResponseRedirect('/favorites/')
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/favorites/')
 
 
 # # ####404 error page ???
