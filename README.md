@@ -8,8 +8,15 @@ FoodFuse searches and sorts through the 4 major food delivery apps Doordash, Ube
 
 Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. üòÅüî∑
 
-<!-- example images
-![Imgur Image](https://i.imgur.com/pb3hvSv.jpg) -->
+#### Image Previews
+---
+
+#### Homepage
+![Imgur](https://i.imgur.com/4wh21ba.jpg)
+
+#### Data Page - after typing in location
+![Imgur](https://i.imgur.com/PRUotld.jpg)
+
 
 ## Team
 ---
@@ -18,7 +25,7 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ü
 
 ## Deployed Site
 ---
-* [FoodFuse]()
+* ### [FoodFuse]()
 
 ## User Stories / Features
 ---
@@ -32,6 +39,8 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ü
 ---
 * [Django](https://www.djangoproject.com/)
 * [Python](https://www.python.org/)
+* [jQuery](https://jquery.com/)
+* [Ajax](https://api.jquery.com/category/ajax/)
 * [Selenium](https://www.selenium.dev/)
 * [Bootstrap](https://getbootstrap.com/)
 
@@ -46,18 +55,17 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ü
 
 ## Models
 ---
-### User Model
+### Restaurant Model
 
 | Column name   | Data Type     |  
 | ------------- | ------------- | 
 | id            |               |                                             
 | location      | CharField     |                    
 | restaurant    | CharField     |      
-| delivery_fee  | CharField     | 
-| delivery_time | CharField     | 
-| rating        | CharField     | 
+| delivery_data  | CharField     | 
+| user_id | CharField     | 
 
-### Restaurant Model
+### User Model
 
 | Column name   | Data Type     |  
 | ------------- | ------------- | 
@@ -90,6 +98,83 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ü
 
 ## Code Snippets
 ---
+
+Adding doordash to favorites page through a button click. Implemented Ajax and jQuery and provided a unique identifier for food service data on the HTML portion. Then in views.py, the data was created and pushed to the backend. Below is an example of the doordash data, but it's the same process for UberEats and Postmates.
+
+```HTML
+<div id="doordash-data">
+      <h2>DOORDASH</h2>
+      {% for doordash in doordash %}
+      <div class="databox">
+        <p>Restaurant: {{ doordash.restaurant_name }}</p>
+        <p>Delivery Data: {{ doordash.delivery_cost }} ¬∑ {{ doordash.delivery_time }}</p>
+        <form id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" action="/favorites/" method="POST">
+          {% csrf_token %}
+          <input type="hidden" id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" value="{{doordash.restaurant_name}}" name="restaurant">
+          <input type="hidden" value="{{doordash.delivery_cost}}" name="delivery_cost">
+          <input type="hidden" value="{{doordash.delivery_time}}" name="delivery_time">
+          <button type="button" value="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" class="btn btn-primary doordash-favorites">Add {{ doordash.restaurant_name }} to favorites</button>
+        </form>
+    </div> 
+    {% endfor %}
+</div>
+```
+
+```Javascript
+// ajax call for doordash
+  $(".doordash-favorites").on("click", function(evt){
+    evt.preventDefault()
+    const value = evt.target.value
+    const formElements = $("#doordash-data form") 
+    let data = null
+    for (element of formElements){
+      if (element.id === value)
+        data = $(element).serializeArray()
+    }
+    if (data){
+      let json = {}
+      for (object of data){
+        json[object.name] = object.value
+      }
+      data = json
+    }
+    // just to assign a user to a favorite
+    data.id = 1
+    if (!data.location){
+      data.location = null
+    }
+
+    $.ajax({
+      url: "/add_favorite/",
+      method: "POST",
+      dataType: "json",
+      data: JSON.stringify(data)
+    }).done(function(data){
+      window.location.replace("/favorites/")
+    })
+  })
+```
+
+```Python
+## CREATE VIEW ##
+@csrf_exempt
+def add_favorite(request):
+    if request.method == "POST":
+        data = json.load(request)
+        # print("REQUEST OBJECT:", data)
+        # print("PRINTING DATA:",data)
+        if "delivery_data" not in data:
+            data["delivery_data"] = data["delivery_cost"] + " " + data["delivery_time"]
+        user = User.objects.get(id=data['id'])
+        restaurant = dict(
+            user=user,
+            location=data['location'],
+            restaurant=data['restaurant'],
+            delivery_data=data['delivery_data']
+        )
+        new_restaurant = Restaurant.objects.create(**restaurant)
+        return JsonResponse(True, status=200, safe=False)
+```
 
 ## Conclusion
 ---
