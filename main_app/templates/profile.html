@@ -4,21 +4,14 @@
 
 <div class="container text-center">
   <br>
-  <h1>Profile Page</h1>
-  <img class="img-thumbnail" src="{{ user.profile.image.url }}" width="30%">
+  <h1 class="font-family">Profile Page</h1>
+  <img src="https://i.imgur.com/eqIKSty.jpg" width="30%">
   <h2 class="account-heading"> {{ username }}</h2>
   <p class="text-secondary"></p>
 
-    <form method="POST">
-      <div class="form-group text-center">
-        {% csrf_token %}
-        <label for="exampleFormControlFile1">Example file input</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-      </div>
-    </form>
 
-  <a href="/">Home</a> <br>
-  <a href="/favorites/">Favorites</a> <br>
+  <h3><a href="/">Home</a></h3> <br>
+  <h3><a href="/favorites">Favorites</a></h3> <br>
   <br>
   <br>
   <br>
