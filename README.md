@@ -80,19 +80,22 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 We spent the first three days setting up our idea, ERD, wireframe, and general layout. ERD/wireframe is linked above. 
 
 ### 1 - Data Parsing/Setting Up Views
-
+For the views, we wanted to keep this portion simple. Working with views was pretty straight forward and consisted of setting up our pages, urls, and what we wanted for our contents of each page.
 
 ### 2 - Storing Data in Database / CRUD
+This part took about 70% of our time to do because it was dependent on the data being pulled from Selenium. It seemed like the data on the food service sites was constantly changing, so we had to make sure that we were able to pull data from the sites daily. We also implemented any error handling for cases like this. For the Restaurants model, we included the CRUD route. The Create and Delete routes are working perfectly on the backend, however, one thing we need to implement is the update route. We were having so many issues with model creation and we were able to post and delete on the backend using Ajax and jQuery, but the update view was complicated to understand. 
 
 ### 3 - UX/UI Design / CSS
+We utilized Bootstrap 4 and CSS for our layout and effects. Also included Pantone Color of the Year, just because.
 
 ### 4 - Add Finishing Touches
-We spent our time sprucing up the layout and making our app look less plain
+We spent our time sprucing up the layout and making our app look less plain. We also added in Bootstrap carousel to the About Us page and added in the fade effect to the existing carousel on the Index page. 
 
 ## Code Snippets
 ---
+### Model, CRUD, and posting to the backend
 
-Adding doordash to favorites page through a button click. Implemented Ajax and jQuery and provided a unique identifier for food service data on the HTML portion. Then in views.py, the data was created and pushed to the backend. Below is an example of the doordash data, but it's the same process for UberEats and Postmates.
+Adding doordash to favorites page through a button click. Implemented Ajax and jQuery and provided a unique identifier for food service data on the HTML portion. Then in views.py, the data was created and pushed to the backend. Below is an example of the doordash data, and it's the same process for UberEats and Postmates.
 
 ```HTML
 <div id="doordash-data">
