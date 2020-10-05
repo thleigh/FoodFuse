@@ -24,12 +24,12 @@ import os
 # #, chrome_options=options
 
 # For production
-op = webdriver.ChromeOptions()
-op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-op.add_argument("--headless")
-op.add_argument("--no-sandbox")
-op.add_argument("--disable-dev-sh-usage")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=op)
+chrome_options = Options()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
 
