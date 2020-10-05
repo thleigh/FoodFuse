@@ -16,9 +16,9 @@ import json
 from django.contrib.auth.models import User
 
 # from .scraper import scraper_function, 
-from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant, doordash_data_specific, doordash_url, doordash_main_url
-from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific, postmates_url, postmates_main_url
-from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data, ubereats_restaurant_data, ubereatsRestaurant, ubereats_data_specific, ubereats_url, ubereats_main_url
+from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant, doordash_data_specific, doordash_url, doordash_main_url, dd_quit
+from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific, postmates_url, postmates_main_url, pm_quit
+from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data, ubereats_restaurant_data, ubereatsRestaurant, ubereats_data_specific, ubereats_url, ubereats_main_url, ue_quit
 import asyncio, time
 from .forms import SearchForm, RestaurantForm, FavoriteForm
 
@@ -76,16 +76,24 @@ def about(request):
 
 def index(request):
     # Checks if the request is a POST 
-    if request.method == "POST":
+    if request.method == "POST" and 'reset' in request.POST:
+        dd_quit()
+        ue_quit()
+        pm_quit()
+        print('quit')
         # Will populate our form with what the user submits
-        form = SearchForm(request.POST)
         # If what the user inputs works
+    else:
+        form = SearchForm(request.POST)
         if form.is_valid():
             # Gets the data in a clean format
             location = form.cleaned_data['location']
+            # passes the location data to the next view
             request.session['location'] = location
+            # Runs the functions asynchronously
             asyncio.run(scraper_function(request))
             return HttpResponseRedirect('/data/')
+
     form = SearchForm()
     return render(request, 'index.html', 
         {
@@ -93,8 +101,8 @@ def index(request):
         })
 
 async def scraper_function(request):
+    # accepts the location from the index view
     location = request.session.get('location')
-    # print(location)
     task1 = asyncio.ensure_future(doordash(location))
     task2 = asyncio.ensure_future(postmates(location))
     task3 = asyncio.ensure_future(ubereats(location))
@@ -102,7 +110,9 @@ async def scraper_function(request):
         task1, task2, task3
     ])
 
+# The view to get the general site data and urls
 def data(request):
+    # accepts the location from the index view
     location = request.session.get('location')
     final_dd_data = []
     final_pm_data = []
@@ -148,6 +158,7 @@ def data(request):
         'pmurl': pmurl,
     })
 
+# View to get the specific Restaurant search
 def restaurant(request):
     restaurant = request.session.get('restaurant')
     postmatesRestaurant(restaurant)
@@ -158,10 +169,8 @@ def restaurant(request):
     print(ubereats_restaurant_data)
     for pm_restaurant in postmates_restaurant_data:
         postmates_data_specific(pm_restaurant)
-        # postmates_data_specific.results
     for dd_restaurant in doordash_restaurant_data:
         doordash_data_specific(dd_restaurant)
-        # doordash_data_specific.results
     for ue_restaurant in ubereats_restaurant_data:
         ubereats_data_specific(ue_restaurant)
     for pm_url in postmates_url:

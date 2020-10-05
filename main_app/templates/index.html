@@ -14,10 +14,16 @@
     <h2>Your all-in-one food delivery source.</h2>
   </div>
   <div class="locationForm">
-    <form action="" method="post" class="locationFormInner" id="myform">
+    <p class="locationFormInner locationLabel">Please enter a city or zipcode:</p>
+    <form action="" method="post" class="locationFormInner locationFormMain" id="myform">
       {% csrf_token %}
       {{ form }}
       <button type="submit" class="btn btn-primary locationBtn" >Submit</button>
+    </form>
+    <form action="/" method="post" class="locationFormInner resetForm">
+      {% csrf_token %}
+      <input type="hidden" value="reset" name="reset" />
+      <button type="submit" name="reset" class="btn btn-primary locationBtn" >Reset Search</button>
     </form>
   </div>
   <body data-spy="scroll">
@@ -70,18 +76,7 @@
         //   const loader = document.querySelector(".loader");
         //   loader.className += " hidden"; // class "loader hidden"
         // })
-
-        // $(document).ready(function(){
-        //   $("#myform").on("submit", function(){
-        //     $("#loading").fadeIn();
-        //   });//submit
-        // });//document ready
         
-        $document = $("document");
-          $(document).on({
-              ajaxStart: function() { $document.addClass("loading"); },
-              ajaxStop: function() { $document.removeClass("loading"); }    
-          });
       </script>
   </body>
   </html>

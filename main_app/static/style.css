@@ -91,10 +91,23 @@ img {
     position: absolute;
     left: 0;
     right: 0;
-    margin: 260px auto 50% auto;
+    margin: 285px auto 50% auto;
     text-align: center;
     z-index: 1;
     font-family: 'Montserrat', sans-serif;
+}
+
+.locationFormMain {
+    right: 150px;
+}
+
+.locationLabel {
+    top: 35px;
+}
+
+.resetForm {
+    margin-top: 295px;
+    margin-right: -250px;
 }
 
 .food-button {

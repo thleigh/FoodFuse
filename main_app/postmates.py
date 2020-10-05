@@ -8,6 +8,8 @@ import asyncio
 from asgiref.sync import sync_to_async
 import os
 
+############# POSTMATES SELENIUM CODE (comments describing each step can be found on doordash.py) #############
+
 # For Development
 from .chrome_driver import chrome_location
 options = Options()
@@ -19,7 +21,6 @@ options.add_argument('--disable-gpu')
 options.add_argument('--no-sandbox')
 options.set_headless(True)
 
-# locates the chrome_driver app in the local system
 driver = webdriver.Chrome(chrome_location, chrome_options=options)
 #, chrome_options=options
 
@@ -32,29 +33,21 @@ driver = webdriver.Chrome(chrome_location, chrome_options=options)
 # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
-# List to store inital data
 postmates_unparsed_list = []
-# List to store the site's url of the first search
 postmates_main_url = []
 async def postmates(data):
-    # Goes to Doordash Website
-    # Tests to see if these elements exist, if not, close the webdriver.
     try: 
         driver.get('https://postmates.com')
         await asyncio.sleep(5)
         print('on the PostMates Page!')
 
-        # Finds the Address form and the Submit button by their XPATH
         address_link = driver.find_element_by_xpath('//*[@id="js-global-container"]/div/div[1]/div/div/div/div[1]/div/div[1]/div[2]/div[1]/div[1]/input')
         address_button = driver.find_element_by_xpath('//*[@id="js-global-container"]/div/div[1]/div/div/div/div[1]/div/div[2]')
 
-        # # Clicks the address form
         address_link.click()
         await asyncio.sleep(0.5)
-        # Input's the location into the form
         address_link.send_keys(data)
         await asyncio.sleep(0.5)
-        # Clicks the submit button
         address_button.click()
         await asyncio.sleep(3)
         print('Going to PostMates Restaurant page')
@@ -93,20 +86,14 @@ async def postmates(data):
             parsed_text.remove('Too Busy')
         if 'Alcohol' in parsed_text:
             parsed_text.remove('Alcohol')
-
-        # for x in parsed_text:
-        #     temp = x[1].split('·')
-        #     x[1] = temp[0]
-        #     x.append(temp[1])
         
         postmates_unparsed_list.append(parsed_text)
 
+        # iterates through the unparsed_list and finds and removes where there is an empty array
         for item in postmates_unparsed_list: 
-            # item.split('·')
             if item == '':
                 postmates_unparsed_list.remove(item)
 
-    # gets the url of the current page and appends it to the main_url list
     currentUrl = driver.current_url
     postmates_main_url.append(currentUrl)
 
@@ -145,7 +132,7 @@ def postmatesRestaurant(data):
 
     try: 
         results = driver.find_element_by_class_name('css-mwpx6b')
-    except TimeoutException:
+    except:
         print ("Restaurant Data Not Found on doordash")
         driver.close()
 
@@ -165,13 +152,15 @@ def postmates_data_specific(this, data):
     restaurant_name = data[3]
     delivery_data = data[0]
     delivery_time = data[6]
-    # address = data[8]
 
     this.results = {
         'restaurant_name': restaurant_name,
         'delivery_data': delivery_data,
         'delivery_time': delivery_time,
-        # 'address': address,
     }
-    driver.quit()
+    driver.close()
     return data
+
+def pm_quit():
+    driver.quit()
+    print('pm driver quit')
