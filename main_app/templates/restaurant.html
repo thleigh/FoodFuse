@@ -2,19 +2,26 @@
 
 {% block page_content %}
 <div class="container">
-    <h1 class="text-center">Restaurant</h1>
+    <h1 class="text-left">Restaurant</h1>
     <div>
+        <h2>{{ pm.restaurant_name }}</h2>
         <div>
-            <h5>Postmates:</h5>
-            <h2>{{ pm.restaurant_name }}</h2>
-            <p>{{ pm.delivery_data }} · {{ pm.delivery_time }}</p>
-            <p>{{ pm.address }}</p>
+            <h3>Postmates:</h3>
+            <p>Delivery Fee: {{ pm.delivery_data }}</p>
+            <p>Delivery Time: {{ pm.delivery_time }}</p>
+            <!-- <p>{{ pm.address }}</p> -->
         </div>
         <div>
-            <h5>Postmates:</h5>
-            <h2>{{ dd.restaurant_name }}</h2>
-            <p>{{ dd.delivery_data }} · {{ dd.delivery_time }}</p>
-            <p>{{ dd.address }}</p>
+            <h3>Doordash:</h3>
+            <p>Delivery Fee: {{ dd.delivery_data }} DELIVERY</p>
+            <p>Delivery Time: {{ dd.delivery_time }} MIN</p>
+            <!-- <p>{{ dd.address }}</p> -->
+        </div>
+        <div>
+            <h3>Uber Eats:</h3>
+            <p>Delivery Fee: {{ ue.delivery_data }} DELIVERY</p>
+            <p>Delivery Time: {{ ue.delivery_time }} MIN</p>
+            <!-- <p>{{ dd.address }}</p> -->
         </div>
     </div>
 </div>

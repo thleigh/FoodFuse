@@ -38,8 +38,8 @@ async def ubereats(data):
     print('on the UberEats Page!')
 
     # # Finds the Address form and the Submit button by their XPATH
-    address_link = driver.find_element_by_xpath('//*[@id="location-typeahead-home-input"]')
-    address_button = driver.find_element_by_xpath('//*[@id="wrapper"]/main/div[1]/div[2]/div/button')
+    address_link = driver.find_element_by_name('searchTerm')
+    address_button = driver.find_element_by_class_name('dg')
 
     # Clicks the address form
     address_link.click()
@@ -49,13 +49,14 @@ async def ubereats(data):
     await asyncio.sleep(0.5)
     # Clicks the submit button
     address_button.click()
-    await asyncio.sleep(3)
+    await asyncio.sleep(5)
     print('Goint to UberEats restaurant page')
 
     restaurant_data = driver.find_elements_by_class_name('g3')
 
     for i in range(len(restaurant_data[:])):
         each_restaurant = restaurant_data[:][i]
+        # print(each_restaurant.get_attribute('href'))
         text = each_restaurant.text
         parsed_text = text.split('\n')
         ubereats_unparsed_list.append(parsed_text)
@@ -70,30 +71,32 @@ def add_this_arg(func):
 
 @add_this_arg
 def ubereats_data(this, data):
-    restaurant_name = data[0]
-    delivery_data = data[2]
-    delivery_time = data[5]
-    # delivery_cost = data[3]
+    if len(data) > 0:
+        restaurant_name = data[0]
+        delivery_data = f'{data[2]} · {data[5]}'
+    else: 
+        restaurant_name = 'No Data Found, Please Try again.'
 
     this.results = {
         'restaurant_name': restaurant_name,
         'delivery_data': delivery_data,
-        'delivery_time': delivery_time
     }
     
     return data
 
 ubereats_restaurant_data = []
 def ubereatsRestaurant(data):
-    restaurant_link = driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div/div[1]/div/div/div[1]/div/input')
+    time.sleep(3)
+    restaurant_link = driver.find_element_by_class_name('d4')
+    restaurant_link.click()
     restaurant_link.send_keys(data)
     time.sleep(3)
-    restaurant_link_inner = driver.find_element_by_class_name('css-70qvj9')
+    restaurant_link_inner = driver.find_element_by_xpath('//*[@id="search-suggestions-typeahead-item-0"]')
     restaurant_link_inner.click()
     time.sleep(3)
     print('on ubereats restaurant page!')
 
-    results = driver.find_element_by_class_name('eifi54g6')
+    results = driver.find_element_by_xpath('//*[@id="wrapper"]/main/div[2]/div/div/div[2]/div/div[2]/div[1]')
 
     text = results.text
     parsed_text = text.split('\n')
@@ -103,17 +106,16 @@ def ubereatsRestaurant(data):
     return data
 
 
-# @add_this_arg
-# def ubereats_data_specific(this, data):
-#     restaurant_name = data[3]
-#     delivery_data = data[0]
-#     delivery_time = data[5]
-#     address = data[6]
+@add_this_arg
+def ubereats_data_specific(this, data):
+    if len(data) > 0:
+        delivery_data = data[7][:5]
+        delivery_time = data[1]
+    else:
+        delivery_data = 'No Data Found, Please Try Again.'
 
-#     this.results = {
-#         'restaurant_name': restaurant_name,
-#         'delivery_data': delivery_data,
-#         'delivery_time': delivery_time,
-#         'address': address,
-#     }
-#     return data
+    this.results = {
+        'delivery_data': delivery_data,
+        'delivery_time': delivery_time,
+    }
+    return data
