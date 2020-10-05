@@ -165,3 +165,7 @@ img {
   position: absolute;
   top: 50%;
 }
+
+.font-family {
+    font-family: 'Montserrat', sans-serif;
+}
