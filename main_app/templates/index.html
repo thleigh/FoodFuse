@@ -1,23 +1,14 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous">
-</script>
 <!DOCTYPE html>
 <html>
   <head>
     <title>FoodFuse</title>
   </head>
-  <div id="pageloader">
-    <img src="/media/load1.gif" alt="processing..." />
- </div>
-  <div class="loader">
+  <!-- <div class="loader">
     <img src="/media/giphy.gif" alt="loading...">
-  </div>
+  </div> -->
   <div style="vertical-align: middle;" class="locationFormInner slogan">
     <h1>FoodFuse</h1>
     <h2>Your all-in-one food delivery source.</h2>
@@ -26,7 +17,7 @@
     <form action="" method="post" class="locationFormInner" id="myform">
       {% csrf_token %}
       {{ form }}
-      <button type="submit" class="btn btn-primary locationBtn">Submit</button>
+      <button type="submit" class="btn btn-primary locationBtn" >Submit</button>
     </form>
   </div>
   <body data-spy="scroll">
@@ -65,18 +56,32 @@
          
           <!-- Needs to wait for data to load before going to the next page -->
       </div>
+      <!-- <div id="loading">
+        <p><img src="/media/load1.gif" alt="processing..." />Getting data from Doordash, Postmates, and Uber Eats...</p>
+      </div> -->
+      <div class="modal"><!-- Place at bottom of page --></div>
+      <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous">
+      </script>
       <script>
-        window.addEventListener("load", function() {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden"; // class "loader hidden"
-        })
-        
-        $(document).ready(function(){
-          $("#myform").on("submit", function(){
-            $("#pageloader").fadeIn();
-          });//submit
-        });//document ready
+        // window.addEventListener("load", function() {
+        //   const loader = document.querySelector(".loader");
+        //   loader.className += " hidden"; // class "loader hidden"
+        // })
 
+        // $(document).ready(function(){
+        //   $("#myform").on("submit", function(){
+        //     $("#loading").fadeIn();
+        //   });//submit
+        // });//document ready
+        
+        $document = $("document");
+          $(document).on({
+              ajaxStart: function() { $document.addClass("loading"); },
+              ajaxStop: function() { $document.removeClass("loading"); }    
+          });
       </script>
   </body>
   </html>

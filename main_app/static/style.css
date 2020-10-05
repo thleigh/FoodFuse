@@ -150,7 +150,7 @@ img {
 #pageloader
 {
   background: rgba( 255, 255, 255, 0.8 );
-  display: none;
+  /* display: none; */
   height: 100%;
   position: fixed;
   width: 100%;
@@ -164,4 +164,29 @@ img {
   margin-top: -32px;
   position: absolute;
   top: 50%;
+}
+
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading .modal {
+    overflow: hidden;   
+}
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
 }

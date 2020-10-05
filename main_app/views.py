@@ -136,6 +136,7 @@ def data(request):
         'postmates': final_pm_data,
         'ubereats': final_ue_data,
         'form': form,
+        'location': location
     })
 
 def restaurant(request):
