@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 import socket
 import psycopg2
 import dj_database_url
@@ -43,10 +44,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_URL = '/static/'
 
-# SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-# STATICFILES_DIRS = (
-#   os.path.join(SITE_ROOT, 'static/'),
-# )
+# export PYTHONPATH = '.'
+
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+STATICFILES_DIRS = (
+  os.path.join(SITE_ROOT, 'static/'),
+)
 
 APPEND_SLASH=False
 DEBUG = True
@@ -78,8 +81,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-]
+    ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
