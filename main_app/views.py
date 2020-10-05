@@ -18,7 +18,7 @@ from django.contrib.auth.models import User
 # from .scraper import scraper_function, 
 from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant, doordash_data_specific
 from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific
-from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data, ubereats_restaurant_data, ubereatsRestaurant
+from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data, ubereats_restaurant_data, ubereatsRestaurant, ubereats_data_specific
 import asyncio, time
 from .forms import SearchForm, RestaurantForm, FavoriteForm
 
@@ -142,16 +142,22 @@ def restaurant(request):
     restaurant = request.session.get('restaurant')
     postmatesRestaurant(restaurant)
     doordashRestaurant(restaurant)
+    ubereatsRestaurant(restaurant)
     print(postmates_restaurant_data)
+    print(doordash_restaurant_data)
+    print(ubereats_restaurant_data)
     for pm_restaurant in postmates_restaurant_data:
         postmates_data_specific(pm_restaurant)
-        postmates_data_specific.results
+        # postmates_data_specific.results
     for dd_restaurant in doordash_restaurant_data:
         doordash_data_specific(dd_restaurant)
-        doordash_data_specific.results
+        # doordash_data_specific.results
+    for ue_restaurant in ubereats_restaurant_data:
+        ubereats_data_specific(ue_restaurant)
     return render(request, 'restaurant.html', {
         'pm': postmates_data_specific.results,
         'dd': doordash_data_specific.results,
+        'ue': ubereats_data_specific.results,
     })
 
 ## CREATE VIEW ##

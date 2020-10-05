@@ -111,7 +111,7 @@ def postmates_data(this, data):
 
 postmates_restaurant_data = []
 def postmatesRestaurant(data):
-    restaurant_link = driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div/div[1]/div/div/div[1]/div/input')
+    restaurant_link = driver.find_element_by_class_name('css-nzssee')
     restaurant_link.send_keys(data)
     time.sleep(3)
     restaurant_link_inner = driver.find_element_by_class_name('css-1d3pcta')
@@ -134,12 +134,12 @@ def postmates_data_specific(this, data):
     restaurant_name = data[3]
     delivery_data = data[0]
     delivery_time = data[5]
-    address = data[8]
+    # address = data[8]
 
     this.results = {
         'restaurant_name': restaurant_name,
         'delivery_data': delivery_data,
         'delivery_time': delivery_time,
-        'address': address,
+        # 'address': address,
     }
     return data
