@@ -54,6 +54,16 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 
 ## Installation
 ---
+In order to run our app locally, you will need to fork and clone this repo.
+
+Once a local repo is made, run ```npm i``` in the project file's terminal.
+
+You will need the chromedriver version that is compatible with your version of Google Chrome. This can be found [here](https://chromedriver.chromium.org/). 
+ - put it somewhere that you know the path to.
+
+ Next, you will need to create a ```chrome_driver.py``` file and add that to your ```.gitignore```. 
+
+ Inside of ```chrome_driver.py```, create a variable called ```chrome_location``` and set that equal to the path of the chromedriver.
 
 ## Models
 ---
@@ -171,5 +181,52 @@ def add_favorite(request):
         return JsonResponse(True, status=200, safe=False)
 ```
 
+### Selenium execution
+This was our bread and butter. In our index function, we asynchronously ran our scraper_function that called all 3 of the selenium bots while passing in data that was submitted by the user. 
+
+```python
+## INDEX VIEW ##
+def index(request):
+    # Checks if the request is a POST 
+    if request.method == "POST" and 'reset' in request.POST:
+        dd_quit()
+        ue_quit()
+        pm_quit()
+        print('quit')
+        # Will populate our form with what the user submits
+        # If what the user inputs works
+    else:
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            # Gets the data in a clean format
+            location = form.cleaned_data['location']
+            # passes the location data to the next view
+            request.session['location'] = location
+            # Runs the functions asynchronously
+            asyncio.run(scraper_function(request))
+            return HttpResponseRedirect('/data/')
+
+    form = SearchForm()
+    return render(request, 'index.html', 
+        {
+        'form': form, 
+        })
+
+async def scraper_function(request):
+    # accepts the location from the index view
+    location = request.session.get('location')
+    task1 = asyncio.ensure_future(doordash(location))
+    task2 = asyncio.ensure_future(postmates(location))
+    task3 = asyncio.ensure_future(ubereats(location))
+    await asyncio.wait([
+        task1, task2, task3
+    ])
+```
+
 ## Conclusion
 ---
+In conclusion, working with Django and Selenium was very challenging. They were both technologies we had to learn and use for the first time while creating this app but ultimately
+provided a good foundation for flexible coding. Through this process we had to learn fast and utilize the documents and resources that were provided online. Google, stackoverflow, and Youtube definitely became our bestfriends during this process. Anything can be learned or solved through the power of search. 
+
+Looking back, Selenium would probably not be the best thing to use for an app. Big companies change the way they display their data almost every day making it very difficult
+to consistently post data without having to stay on your feet. 
