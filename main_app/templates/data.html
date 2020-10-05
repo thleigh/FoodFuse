@@ -25,7 +25,7 @@
             <input type="hidden" id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" value="{{doordash.restaurant_name}}" name="restaurant">
             <input type="hidden" value="{{doordash.delivery_cost}}" name="delivery_cost">
             <input type="hidden" value="{{doordash.delivery_time}}" name="delivery_time">
-            <button type="button" value="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" class="btn btn-dark doordash-favorites">Add {{ doordash.restaurant_name }} to favorites</button>
+            <button type="button" value="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" class="food-button doordash-favorites">Add {{ doordash.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
@@ -44,7 +44,7 @@
               {% csrf_token %}
               <input type="hidden" id="{{postmates.restaurant_name}}{{postmates.delivery_data}}" value="{{postmates.restaurant_name}}" name="restaurant">
               <input type="hidden" value="{{postmates.delivery_data}}" name="delivery_data">
-              <button type="button" value="{{postmates.restaurant_name}}{{postmates.delivery_data}}" class="btn btn-dark postmates-favorites">Add {{ postmates.restaurant_name }} to favorites</button>
+              <button type="button" value="{{postmates.restaurant_name}}{{postmates.delivery_data}}" class="food-button postmates-favorites">Add {{ postmates.restaurant_name }} to favorites</button>
             </form>
             <br>
             <br>
@@ -61,7 +61,7 @@
               {% csrf_token %}
               <input type="hidden" id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" value="{{ubereats.restaurant_name}}" name="restaurant">
               <input type="hidden" value="{{ubereats.delivery_data}}" name="delivery_data">
-              <button type="button" value="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" class="btn btn-dark ubereats-favorites">Add {{ ubereats.restaurant_name }} to favorites</button>
+              <button type="button" value="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" class="food-button ubereats-favorites">Add {{ ubereats.restaurant_name }} to favorites</button>
             </form>
             <br>
             <br>
