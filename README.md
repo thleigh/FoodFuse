@@ -6,16 +6,15 @@ We all know the frustration of trying to find which app delivers our favorite re
 
 FoodFuse searches and sorts through the 4 major food delivery apps Doordash, Uber Eats, Postmates, and Grubhub by the user's location and returns the data. FoodFuse will provide the users with a comparison of the delivery fee's and delivery times between each service so that the user can make an educated choice on which app to use.
 
-Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. 😁🔷
+Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. 🔷
 
 #### Image Previews
 ---
-
 #### Homepage
 ![Imgur](https://i.imgur.com/4wh21ba.jpg)
 
 #### Data Page - after typing in location
-![Imgur](https://i.imgur.com/PRUotld.jpg)
+![Imgur](https://i.imgur.com/dtfnbFA.jpg)
 
 
 ## Team
@@ -75,26 +74,20 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. �
 | location      | CharField     | 
 | restaurants   | CharField - ManyToMany | 
 
-## Routes
----
-<!-- | Routes        | Route Methods Used    | Notes                                             | 
-| ------------- | ----------------------| ----------------------------------                | 
-| auth.js       | GET, POST             | controls signup/login and auth of user            |
-| comments.js   | POST                  | create comment data on details page               |
-| favorites.js  | GET, POST, PUT, DELETE| favorite, delete a recipe, update recipe's title  |
-| user.js       | GET, PUT, DELETE      | account info page, user can update their email    | -->
-
 ## Sprints
 ---
 ### 0 - Planning
+We spent the first three days setting up our idea, ERD, wireframe, and general layout. ERD/wireframe is linked above. 
 
 ### 1 - Data Parsing/Setting Up Views
+
 
 ### 2 - Storing Data in Database / CRUD
 
 ### 3 - UX/UI Design / CSS
 
 ### 4 - Add Finishing Touches
+We spent our time sprucing up the layout and making our app look less plain
 
 ## Code Snippets
 ---
