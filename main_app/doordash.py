@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
@@ -62,14 +61,14 @@ async def doordash(data):
         address_button.click()
         await asyncio.sleep(5)
         print('Going to Doordash Restaurant page')
-    except TimeoutException:
+    except:
         print ("First Link and Button Not Found on doordash")
         driver.close()
 
     # Finds the DIV containing all of the restaurant data
     try:
         restaurant_data = driver.find_elements_by_class_name('sc-boCWhm')
-    except TimeoutException:
+    except:
         print ("Data Not Found on doordash")
         driver.close()
 
@@ -130,14 +129,14 @@ def doordashRestaurant(data):
         restaurant_link_inner.click()
         time.sleep(3)
         print('on restaurant page!')
-    except TimeoutException:
+    except:
         print ("Restaurant Link and Button Not Found on doordash")
         driver.close()
 
     try:
         # Gets the data on the specific restaurant page
         results = driver.find_element_by_class_name('sc-eitiEO')
-    except TimeoutException:
+    except:
         print ("Restaurant Data Not Found on doordash")
         driver.close()
 
@@ -155,16 +154,19 @@ def doordashRestaurant(data):
 
 @add_this_arg
 def doordash_data_specific(this, data):
-    restaurant_name = data[0]
-    delivery_data = data[10]
-    delivery_time = data[12]
-    # address = data[9]
+    if len(data) > 0:
+        restaurant_name = data[0]
+        delivery_data = data[9]
+        delivery_time = data[11:12]
+    else: 
+        restaurant_name = 'No Data found, Please Try Again.'
+        delivery_data = 'No Data found, Please Try Again.'
+        delivery_time = 'No Data found, Please Try Again.'    
 
     this.results = {
         'restaurant_name': restaurant_name,
         'delivery_data': delivery_data,
         'delivery_time': delivery_time,
-        # 'address': address,
     }
     driver.close()
     return data

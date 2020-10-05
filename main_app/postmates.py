@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
@@ -51,13 +50,13 @@ async def postmates(data):
         address_button.click()
         await asyncio.sleep(3)
         print('Going to PostMates Restaurant page')
-    except TimeoutException:
+    except:
         print ("First Link and Button Not Found on postmates")
         driver.close()
 
     try:
         restaurant_data = driver.find_elements_by_class_name('e12wrbia0')
-    except TimeoutException:
+    except:
         print ("Data Not Found on doordash")
         driver.close()
 
@@ -126,7 +125,7 @@ def postmatesRestaurant(data):
         restaurant_link_inner.click()
         time.sleep(3)
         print('on Postmates page!')
-    except TimeoutException:
+    except:
         print ("Restaurant Link and Button Not Found on doordash")
         driver.close()
 
@@ -135,11 +134,14 @@ def postmatesRestaurant(data):
     except:
         print ("Restaurant Data Not Found on doordash")
         driver.close()
+    try: 
+        text = results.text
+        parsed_text = text.split('\n')
 
-    text = results.text
-    parsed_text = text.split('\n')
-
-    postmates_restaurant_data.append(parsed_text)
+        postmates_restaurant_data.append(parsed_text)
+    except:
+        print ("Restaurant Data Not Found on doordash")
+        driver.close()
 
     currentUrl = driver.current_url
     postmates_url.append(currentUrl)
@@ -149,9 +151,15 @@ def postmatesRestaurant(data):
 
 @add_this_arg
 def postmates_data_specific(this, data):
-    restaurant_name = data[3]
-    delivery_data = data[0]
-    delivery_time = data[6]
+    if len(data) > 5:
+        restaurant_name = data[3]
+        delivery_data = data[0]
+        delivery_time = data[5]
+    else: 
+        restaurant_name = 'No Data found, Please Try Again.'
+        delivery_data = 'No Data found, Please Try Again.'
+        delivery_time = 'No Data found, Please Try Again.'
+
 
     this.results = {
         'restaurant_name': restaurant_name,

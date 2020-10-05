@@ -51,13 +51,13 @@ async def ubereats(data):
         address_button.click()
         await asyncio.sleep(5)
         print('Goint to UberEats restaurant page')
-    except TimeoutException:
+    except:
         print ("First Link and Button Not Found on Ubereats")
         driver.close()
 
     try:
         restaurant_data = driver.find_elements_by_class_name('g3')
-    except TimeoutException:
+    except:
         print ("Initial Data Not Found on Ubereats")
         driver.close()
 
@@ -85,6 +85,8 @@ def ubereats_data(this, data):
         delivery_data = f'{data[2]} · {data[5]}'
     else: 
         restaurant_name = 'No Data Found, Please Try again.'
+        delivery_data = 'No Data Found, Please Try again.'
+
 
     this.results = {
         'restaurant_name': restaurant_name,
@@ -106,12 +108,12 @@ def ubereatsRestaurant(data):
         restaurant_link_inner.click()
         time.sleep(3)
         print('on ubereats restaurant page!')
-    except TimeoutException:
+    except:
         print ("Restaurant Link and Button Not Found on Ubereats")
         driver.close()
     try:
         results = driver.find_element_by_xpath('//*[@id="wrapper"]/main/div[2]/div/div/div[2]/div/div[2]/div[1]')
-    except TimeoutException:
+    except:
         print ("Restaurant Not Found on Ubereats")
         driver.close()
 
@@ -133,6 +135,7 @@ def ubereats_data_specific(this, data):
         delivery_time = data[1]
     else:
         delivery_data = 'No Data Found, Please Try Again.'
+        deliver_time = 'No Data found, Please Try Again.'
 
     this.results = {
         'delivery_data': delivery_data,
