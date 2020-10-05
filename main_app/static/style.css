@@ -194,3 +194,9 @@ img {
       background-color: black;
       color: white
   }
+
+.profile-img:hover {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+
+}
