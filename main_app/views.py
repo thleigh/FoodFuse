@@ -110,7 +110,6 @@ def data(request):
     for dd_data in doordash_unparsed_list:
         doordash_data(dd_data)
         final_dd_data.append(doordash_data.results)
-
     postmates_fixed_list = list(filter(None, postmates_unparsed_list))
     for pm_data in postmates_fixed_list:
         postmates_data(pm_data)
