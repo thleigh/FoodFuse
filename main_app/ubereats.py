@@ -7,15 +7,6 @@ from bs4 import BeautifulSoup
 import asyncio
 from asgiref.sync import sync_to_async
 import os
-# # Allows the chrome_driver to open without a physical browser
-# chrome_options = Options()
-# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-# chrome_options.add_argument('--disable-gpu')
-# chrome_options.add_argument('--no-sandbox')
-# chrome_options.add_argument('--disable-dev-shm-usage')
-# chrome_options.add_argument('--headless')
-# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-# #, chrome_options=options
 
 from .chrome_driver import chrome_location
 options = Options()
@@ -31,16 +22,19 @@ options.set_headless(True)
 driver = webdriver.Chrome(chrome_location, chrome_options=options)
 #, chrome_options=options
 
+# List to store inital data
 ubereats_unparsed_list = []
-
+# List to store the site's url of the first search
+ubereats_main_url = []
 async def ubereats(data):
     # Goes to Doordash Website
-    driver.get('https://www.ubereats.com/')
-    await asyncio.sleep(5)
-    print('on the UberEats Page!')
-
-    # # Finds the Address form and the Submit button by their XPATH
+    # Tests to see if these elements exist, if not, close the webdriver.    
     try:
+        driver.get('https://www.ubereats.com/')
+        await asyncio.sleep(5)
+        print('on the UberEats Page!')
+
+        # Finds the Address form and the Submit button by their XPATH
         address_link = driver.find_element_by_name('searchTerm')
         address_button = driver.find_element_by_class_name('dg')
         # Clicks the address form
@@ -65,10 +59,13 @@ async def ubereats(data):
 
     for i in range(len(restaurant_data[:])):
         each_restaurant = restaurant_data[:][i]
-        # print(each_restaurant.get_attribute('href'))
         text = each_restaurant.text
         parsed_text = text.split('\n')
         ubereats_unparsed_list.append(parsed_text)
+
+    # gets the url of the current page and appends it to the main_url list
+    currentUrl = driver.current_url
+    ubereats_main_url.append(currentUrl)
 
     return ubereats_unparsed_list
 
@@ -94,6 +91,7 @@ def ubereats_data(this, data):
     return data
 
 ubereats_restaurant_data = []
+ubereats_url = []
 def ubereatsRestaurant(data):
     time.sleep(3)
     try: 
@@ -118,6 +116,9 @@ def ubereatsRestaurant(data):
     parsed_text = text.split('\n')
 
     ubereats_restaurant_data.append(parsed_text)
+
+    currentUrl = driver.current_url
+    ubereats_url.append(currentUrl)
 
     return data
 

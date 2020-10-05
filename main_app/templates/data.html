@@ -13,7 +13,7 @@
   </div>
     <h3>Restaurants near {{ location }}:</h3>
     <div id="doordash-data">
-      <h2>DoorDash</h2>
+      <h2><a href="{{ ddurl }}" target="_blank">DoorDash</a></h2>
       {% for doordash in doordash %}
       <div class="databox">
         <p>Restaurant: {{ doordash.restaurant_name }}</p>
@@ -31,7 +31,7 @@
       {% endfor %}
     </div>
     <div id="postmates-data">
-      <h2>Postmates</h2>
+      <h2><a href="{{ pmurl }}" target="_blank">Postmates: </a></h2>
       {% for postmates in postmates %}
         <div class="databox">
           <p>Restaurant: {{ postmates.restaurant_name }}</p>
@@ -50,7 +50,7 @@
       {% endfor %}
     </div>
     <div id="ubereats-data">
-      <h2>Uber Eats</h2>
+      <h2><a href="{{ ueurl }}" target="_blank">Uber Eats</a></h2>
       {% for ubereats in ubereats %}
         <div class="databox">
           <p>Restaurant: {{ ubereats.restaurant_name }}</p>

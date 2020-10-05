@@ -8,15 +8,6 @@ import asyncio
 from asgiref.sync import sync_to_async
 import os
 
-# Allows the chrome_driver to open without a physical browser
-# chrome_options = Options()
-# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-# chrome_options.add_argument('--disable-gpu')
-# chrome_options.add_argument('--no-sandbox')
-# chrome_options.add_argument('--disable-dev-shm-usage')
-# chrome_options.add_argument('--headless')
-# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
 from .chrome_driver import chrome_location
 options = Options()
 options.add_argument('--disable-extensions')
@@ -31,10 +22,13 @@ options.set_headless(True)
 driver = webdriver.Chrome(chrome_location, chrome_options=options)
 #, chrome_options=options
 
+# List to store inital data
 doordash_unparsed_list = []
-
+# List to store the site's url of the first search
+doordash_main_url = []
 async def doordash(data):
     # Goes to Doordash Website
+    # Tests to see if these elements exist, if not, close the webdriver.
     try: 
         driver.get('https://www.doordash.com/en-US')
         await asyncio.sleep(5)
@@ -73,6 +67,11 @@ async def doordash(data):
             pass
         else:
             doordash_unparsed_list.append(parsed_text)
+
+    # gets the url of the current page and appends it to the main_url list
+    currentUrl = driver.current_url
+    doordash_main_url.append(currentUrl)
+
     return doordash_unparsed_list
 
 def add_this_arg(func):
@@ -104,13 +103,13 @@ def doordash_data(this, data):
     return data
 
 doordash_restaurant_data = []
+doordash_url = []
 def doordashRestaurant(data):
     try:
         restaurant_link = driver.find_element_by_class_name('sc-ewMkZo')
         restaurant_link.send_keys(data)
         time.sleep(3)
         restaurant_link_inner = driver.find_element_by_class_name('sc-fjmCvl')
-        # //*[@id="search-dropdown-results"]/a[1]
         restaurant_link_inner.click()
         time.sleep(3)
         print('on restaurant page!')
@@ -128,6 +127,9 @@ def doordashRestaurant(data):
     parsed_text = text.split('\n')
 
     doordash_restaurant_data.append(parsed_text)
+
+    currentUrl = driver.current_url
+    doordash_url.append(currentUrl)
 
     return data
 
