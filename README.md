@@ -18,8 +18,7 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 ![Imgur](https://i.imgur.com/4wh21ba.jpg)
 
 #### Data Page - after typing in location
-![Imgur](https://i.imgur.com/dtfnbFA.jpg)
-
+![Imgur](https://i.imgur.com/UH0ll9u.jpg)
 
 ## Team
 ---
@@ -42,6 +41,10 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 * [Ajax](https://api.jquery.com/category/ajax/)
 * [Selenium](https://www.selenium.dev/)
 * [Bootstrap](https://getbootstrap.com/)
+
+## Other Resources
+---
+* [Linear Gradients](https://www.eggradients.com/)
 
 ## ERD
 ---
