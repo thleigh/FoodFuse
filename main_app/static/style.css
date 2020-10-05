@@ -150,7 +150,7 @@ img {
 #pageloader
 {
   background: rgba( 255, 255, 255, 0.8 );
-  display: none;
+  /* display: none; */
   height: 100%;
   position: fixed;
   width: 100%;
@@ -198,5 +198,4 @@ img {
 .profile-img:hover {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
-
 }

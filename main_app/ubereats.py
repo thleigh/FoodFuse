@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
 import asyncio
@@ -38,21 +40,28 @@ async def ubereats(data):
     print('on the UberEats Page!')
 
     # # Finds the Address form and the Submit button by their XPATH
-    address_link = driver.find_element_by_name('searchTerm')
-    address_button = driver.find_element_by_class_name('dg')
+    try:
+        address_link = driver.find_element_by_name('searchTerm')
+        address_button = driver.find_element_by_class_name('dg')
+        # Clicks the address form
+        address_link.click()
+        await asyncio.sleep(0.5)
+        # Input's the location into the form
+        address_link.send_keys(data)
+        await asyncio.sleep(0.5)
+        # Clicks the submit button
+        address_button.click()
+        await asyncio.sleep(5)
+        print('Goint to UberEats restaurant page')
+    except TimeoutException:
+        print ("First Link and Button Not Found on Ubereats")
+        driver.close()
 
-    # Clicks the address form
-    address_link.click()
-    await asyncio.sleep(0.5)
-    # Input's the location into the form
-    address_link.send_keys(data)
-    await asyncio.sleep(0.5)
-    # Clicks the submit button
-    address_button.click()
-    await asyncio.sleep(5)
-    print('Goint to UberEats restaurant page')
-
-    restaurant_data = driver.find_elements_by_class_name('g3')
+    try:
+        restaurant_data = driver.find_elements_by_class_name('g3')
+    except TimeoutException:
+        print ("Initial Data Not Found on Ubereats")
+        driver.close()
 
     for i in range(len(restaurant_data[:])):
         each_restaurant = restaurant_data[:][i]
@@ -87,16 +96,23 @@ def ubereats_data(this, data):
 ubereats_restaurant_data = []
 def ubereatsRestaurant(data):
     time.sleep(3)
-    restaurant_link = driver.find_element_by_class_name('d4')
-    restaurant_link.click()
-    restaurant_link.send_keys(data)
-    time.sleep(3)
-    restaurant_link_inner = driver.find_element_by_xpath('//*[@id="search-suggestions-typeahead-item-0"]')
-    restaurant_link_inner.click()
-    time.sleep(3)
-    print('on ubereats restaurant page!')
-
-    results = driver.find_element_by_xpath('//*[@id="wrapper"]/main/div[2]/div/div/div[2]/div/div[2]/div[1]')
+    try: 
+        restaurant_link = driver.find_element_by_class_name('d4')
+        restaurant_link.click()
+        restaurant_link.send_keys(data)
+        time.sleep(3)
+        restaurant_link_inner = driver.find_element_by_xpath('//*[@id="search-suggestions-typeahead-item-0"]')
+        restaurant_link_inner.click()
+        time.sleep(3)
+        print('on ubereats restaurant page!')
+    except TimeoutException:
+        print ("Restaurant Link and Button Not Found on Ubereats")
+        driver.close()
+    try:
+        results = driver.find_element_by_xpath('//*[@id="wrapper"]/main/div[2]/div/div/div[2]/div/div[2]/div[1]')
+    except TimeoutException:
+        print ("Restaurant Not Found on Ubereats")
+        driver.close()
 
     text = results.text
     parsed_text = text.split('\n')
@@ -108,8 +124,8 @@ def ubereatsRestaurant(data):
 
 @add_this_arg
 def ubereats_data_specific(this, data):
-    if len(data) > 0:
-        delivery_data = data[7][:5]
+    if len(data) > 2:
+        delivery_data = data[6]
         delivery_time = data[1]
     else:
         delivery_data = 'No Data Found, Please Try Again.'
@@ -118,4 +134,5 @@ def ubereats_data_specific(this, data):
         'delivery_data': delivery_data,
         'delivery_time': delivery_time,
     }
+    driver.quit()
     return data

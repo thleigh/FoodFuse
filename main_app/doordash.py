@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
 import datetime, re, requests, io, time, random, string
 from bs4 import BeautifulSoup
 import asyncio
@@ -33,28 +35,36 @@ doordash_unparsed_list = []
 
 async def doordash(data):
     # Goes to Doordash Website
-    driver.get('https://www.doordash.com/en-US')
-    await asyncio.sleep(5)
-    print('on the Doordash Home Page!')
+    try: 
+        driver.get('https://www.doordash.com/en-US')
+        await asyncio.sleep(5)
+        print('on the Doordash Home Page!')
 
-    # Finds the Address form and the Submit button by their XPATH
-    address_link = driver.find_element_by_xpath('//input[starts-with(@id,"FieldWrapper")]')
-    address_button = driver.find_element_by_class_name('sc-eCXBzT')
+        # Finds the Address form and the Submit button by their XPATH
+        address_link = driver.find_element_by_xpath('//input[starts-with(@id,"FieldWrapper")]')
+        address_button = driver.find_element_by_class_name('sc-eCXBzT')
 
-    # Clicks the address form
-    address_link.click()
-    await asyncio.sleep(0.5)
-    # Input's the location into the form
-    address_link.send_keys(data)
-    await asyncio.sleep(0.5)
-    # Clicks the submit button
-    address_button.click()
-    await asyncio.sleep(5)
-    print('Going to Doordash Restaurant page')
+        # Clicks the address form
+        address_link.click()
+        await asyncio.sleep(0.5)
+        # Input's the location into the form
+        address_link.send_keys(data)
+        await asyncio.sleep(0.5)
+        # Clicks the submit button
+        address_button.click()
+        await asyncio.sleep(5)
+        print('Going to Doordash Restaurant page')
+    except TimeoutException:
+        print ("First Link and Button Not Found on doordash")
+        driver.close()
 
     # Finds the DIV containing all of the restaurant data
-    restaurant_data = driver.find_elements_by_class_name('sc-boCWhm')
-    # print(restaurant_data)
+    try:
+        restaurant_data = driver.find_elements_by_class_name('sc-boCWhm')
+        # print(restaurant_data)
+    except TimeoutException:
+        print ("Data Not Found on doordash")
+        driver.close()
 
     for names in restaurant_data:
         text = names.text
@@ -95,16 +105,24 @@ def doordash_data(this, data):
 
 doordash_restaurant_data = []
 def doordashRestaurant(data):
-    restaurant_link = driver.find_element_by_class_name('sc-ewMkZo')
-    restaurant_link.send_keys(data)
-    time.sleep(3)
-    restaurant_link_inner = driver.find_element_by_class_name('sc-fjmCvl')
-    # //*[@id="search-dropdown-results"]/a[1]
-    restaurant_link_inner.click()
-    time.sleep(3)
-    print('on restaurant page!')
+    try:
+        restaurant_link = driver.find_element_by_class_name('sc-ewMkZo')
+        restaurant_link.send_keys(data)
+        time.sleep(3)
+        restaurant_link_inner = driver.find_element_by_class_name('sc-fjmCvl')
+        # //*[@id="search-dropdown-results"]/a[1]
+        restaurant_link_inner.click()
+        time.sleep(3)
+        print('on restaurant page!')
+    except TimeoutException:
+        print ("Restaurant Link and Button Not Found on doordash")
+        driver.close()
 
-    results = driver.find_element_by_class_name('sc-eitiEO')
+    try:
+        results = driver.find_element_by_class_name('sc-eitiEO')
+    except TimeoutException:
+        print ("Restaurant Data Not Found on doordash")
+        driver.close()
 
     text = results.text
     parsed_text = text.split('\n')
@@ -117,8 +135,8 @@ def doordashRestaurant(data):
 @add_this_arg
 def doordash_data_specific(this, data):
     restaurant_name = data[0]
-    delivery_data = data[11]
-    delivery_time = data[13]
+    delivery_data = data[10]
+    delivery_time = data[12]
     # address = data[9]
 
     this.results = {
@@ -127,4 +145,5 @@ def doordash_data_specific(this, data):
         'delivery_time': delivery_time,
         # 'address': address,
     }
+    driver.quit()
     return data
