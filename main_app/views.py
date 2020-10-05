@@ -103,6 +103,7 @@ async def scraper_function(request):
     ])
 
 def data(request):
+    location = request.session.get('location')
     final_dd_data = []
     final_pm_data = []
     final_ue_data = []
@@ -136,7 +137,7 @@ def data(request):
         'postmates': final_pm_data,
         'ubereats': final_ue_data,
         'form': form,
-        'location': location
+        'location': location,
     })
 
 def restaurant(request):
