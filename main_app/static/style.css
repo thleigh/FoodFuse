@@ -211,3 +211,7 @@ img {
 .carousel-item-prev{
     display:block;
 }
+
+.about-info {
+    color: #696969;
+}
