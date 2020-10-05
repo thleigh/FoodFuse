@@ -67,15 +67,11 @@ Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. ðŸ
 | delivery_data  | CharField     | 
 | user_id | CharField     | 
 
-### User Model
+![Imgur](https://i.imgur.com/tAteTmo.jpg)
 
-| Column name   | Data Type     |  
-| ------------- | ------------- | 
-| id            |               |                                             
-| username      | CharField     |                    
-| password      | CharField     |      
-| location      | CharField     | 
-| restaurants   | CharField - ManyToMany | 
+### User Model - used Django's built in auth model
+
+![Imgur](https://i.imgur.com/l3C7jNj.jpg)
 
 ## Sprints
 ---
