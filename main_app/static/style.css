@@ -209,7 +209,7 @@ img {
 .uber-logo:hover {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
-    width: 200px;
+    width: 270px;
 }
 
 @keyframes shake {
