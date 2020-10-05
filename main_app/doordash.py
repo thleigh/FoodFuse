@@ -8,6 +8,9 @@ import asyncio
 from asgiref.sync import sync_to_async
 import os
 
+
+############# DOORDASH SELENIUM CODE #############
+
 # For development
 from .chrome_driver import chrome_location
 options = Options()
@@ -66,11 +69,11 @@ async def doordash(data):
     # Finds the DIV containing all of the restaurant data
     try:
         restaurant_data = driver.find_elements_by_class_name('sc-boCWhm')
-        # print(restaurant_data)
     except TimeoutException:
         print ("Data Not Found on doordash")
         driver.close()
 
+    # Iterates through the restaurant_data list and creates more detailed results
     for names in restaurant_data:
         text = names.text
         parsed_text = text.split('\n')
@@ -85,11 +88,13 @@ async def doordash(data):
 
     return doordash_unparsed_list
 
+# Function used to add 'this'
 def add_this_arg(func):
     def wrapped(*args, **kwargs):
         return func(wrapped, *args, **kwargs)
     return wrapped
 
+# Takes the unparsed_data list and assigns each index to a variable
 @add_this_arg
 def doordash_data(this, data):
     if len(data) > 5:
@@ -115,9 +120,12 @@ doordash_restaurant_data = []
 doordash_url = []
 def doordashRestaurant(data):
     try:
+        # Finds the input at the top of the page
         restaurant_link = driver.find_element_by_class_name('sc-ewMkZo')
+        # Inputs the restaurant data that the user submits
         restaurant_link.send_keys(data)
         time.sleep(3)
+        # Finds the popup hover once there is data inserted into the input and clicks that hover
         restaurant_link_inner = driver.find_element_by_class_name('sc-fjmCvl')
         restaurant_link_inner.click()
         time.sleep(3)
@@ -127,6 +135,7 @@ def doordashRestaurant(data):
         driver.close()
 
     try:
+        # Gets the data on the specific restaurant page
         results = driver.find_element_by_class_name('sc-eitiEO')
     except TimeoutException:
         print ("Restaurant Data Not Found on doordash")
@@ -137,6 +146,7 @@ def doordashRestaurant(data):
 
     doordash_restaurant_data.append(parsed_text)
 
+    # Gets the URL of the current Restaurant and appends that to the url list
     currentUrl = driver.current_url
     doordash_url.append(currentUrl)
 
@@ -156,5 +166,9 @@ def doordash_data_specific(this, data):
         'delivery_time': delivery_time,
         # 'address': address,
     }
-    driver.quit()
+    driver.close()
     return data
+
+def dd_quit():
+    driver.quit()
+    print('dd driver quit')

@@ -8,6 +8,8 @@ import asyncio
 from asgiref.sync import sync_to_async
 import os
 
+############# UBEREATS SELENIUM CODE (comments describing each step can be found on doordash.py) #############
+
 # For development
 from .chrome_driver import chrome_location
 options = Options()
@@ -32,28 +34,20 @@ driver = webdriver.Chrome(chrome_location, chrome_options=options)
 # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
-# List to store inital data
 ubereats_unparsed_list = []
-# List to store the site's url of the first search
 ubereats_main_url = []
 async def ubereats(data):
-    # Goes to Doordash Website
-    # Tests to see if these elements exist, if not, close the webdriver.    
     try:
         driver.get('https://www.ubereats.com/')
         await asyncio.sleep(5)
         print('on the UberEats Page!')
 
-        # Finds the Address form and the Submit button by their XPATH
         address_link = driver.find_element_by_name('searchTerm')
         address_button = driver.find_element_by_class_name('dg')
-        # Clicks the address form
         address_link.click()
         await asyncio.sleep(0.5)
-        # Input's the location into the form
         address_link.send_keys(data)
         await asyncio.sleep(0.5)
-        # Clicks the submit button
         address_button.click()
         await asyncio.sleep(5)
         print('Goint to UberEats restaurant page')
@@ -73,7 +67,6 @@ async def ubereats(data):
         parsed_text = text.split('\n')
         ubereats_unparsed_list.append(parsed_text)
 
-    # gets the url of the current page and appends it to the main_url list
     currentUrl = driver.current_url
     ubereats_main_url.append(currentUrl)
 
@@ -87,7 +80,7 @@ def add_this_arg(func):
 
 @add_this_arg
 def ubereats_data(this, data):
-    if len(data) > 0:
+    if len(data) > 4:
         restaurant_name = data[0]
         delivery_data = f'{data[2]} · {data[5]}'
     else: 
@@ -145,5 +138,9 @@ def ubereats_data_specific(this, data):
         'delivery_data': delivery_data,
         'delivery_time': delivery_time,
     }
-    driver.quit()
+    driver.close()
     return data
+
+def ue_quit():
+    driver.quit()
+    print('ue driver quit')
