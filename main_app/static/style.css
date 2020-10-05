@@ -20,16 +20,22 @@ img {
 #postmates-data {
     background-color: aliceblue;
     font: black;
+    padding: 20px;
+    border: 1px solid black;
 }
 
 #doordash-data {
     background-color: white;
     font: black;
+    padding: 20px;
+    border: 1px solid black;
 }
 
 #ubereats-data {
     background-color: lightblue;
     font: black;
+    padding: 20px;
+    border: 1px solid black;
 }
 
 .navbar-brand:hover {
@@ -43,18 +49,21 @@ img {
 
 #doordash-data {
     float: left;
-    width: 33%; 
+    width: 33%;
+    /* padding: 15px; */
 
 }
 
 #postmates-data {
     float: left; 
     width: 33%;
+    /* padding: 15px; */
 }
 
 #ubereats-data {
     float: left; 
     width: 33%;
+    /* padding: 15px; */
 }
 
 #data-page {
