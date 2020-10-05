@@ -205,3 +205,9 @@ img {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev{
+    display:block;
+}
