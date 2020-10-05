@@ -7,14 +7,6 @@ from bs4 import BeautifulSoup
 import asyncio
 from asgiref.sync import sync_to_async
 import os
-# Allows the chrome_driver to open without a physical browser
-# chrome_options = Options()
-# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-# chrome_options.add_argument('--disable-gpu')
-# chrome_options.add_argument('--no-sandbox')
-# chrome_options.add_argument('--disable-dev-shm-usage')
-# chrome_options.add_argument('--headless')
-# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 from .chrome_driver import chrome_location
 options = Options()
@@ -30,10 +22,13 @@ options.set_headless(True)
 driver = webdriver.Chrome(chrome_location, chrome_options=options)
 #, chrome_options=options
 
+# List to store inital data
 postmates_unparsed_list = []
-
+# List to store the site's url of the first search
+postmates_main_url = []
 async def postmates(data):
     # Goes to Doordash Website
+    # Tests to see if these elements exist, if not, close the webdriver.
     try: 
         driver.get('https://postmates.com')
         await asyncio.sleep(5)
@@ -101,6 +96,10 @@ async def postmates(data):
             if item == '':
                 postmates_unparsed_list.remove(item)
 
+    # gets the url of the current page and appends it to the main_url list
+    currentUrl = driver.current_url
+    postmates_main_url.append(currentUrl)
+
     return postmates_unparsed_list
 
 def add_this_arg(func):
@@ -120,6 +119,7 @@ def postmates_data(this, data):
     return data
 
 postmates_restaurant_data = []
+postmates_url = []
 def postmatesRestaurant(data):
     try:
         restaurant_link = driver.find_element_by_class_name('css-nzssee')
@@ -143,6 +143,9 @@ def postmatesRestaurant(data):
     parsed_text = text.split('\n')
 
     postmates_restaurant_data.append(parsed_text)
+
+    currentUrl = driver.current_url
+    postmates_url.append(currentUrl)
 
     return data
 

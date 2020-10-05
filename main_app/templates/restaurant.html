@@ -6,19 +6,19 @@
     <div>
         <h2>{{ pm.restaurant_name }}</h2>
         <div>
-            <h3>Postmates:</h3>
+            <h3><a href="{{ pmurl }}" target="_blank">Postmates: </a></h3>
             <p>Delivery Fee: {{ pm.delivery_data }}</p>
             <p>Delivery Time: {{ pm.delivery_time }}</p>
             <!-- <p>{{ pm.address }}</p> -->
         </div>
         <div>
-            <h3>Doordash:</h3>
+            <h3><a href="{{ ddurl }}" target="_blank">Doordash: </a></h3>
             <p>Delivery Fee: {{ dd.delivery_data }} DELIVERY</p>
             <p>Delivery Time: {{ dd.delivery_time }} MIN</p>
             <!-- <p>{{ dd.address }}</p> -->
         </div>
         <div>
-            <h3>Uber Eats:</h3>
+            <h3><a href="{{ ueurl }}" target="_blank">Uber Eats: </a></h3>
             <p>Delivery Fee: {{ ue.delivery_data }} DELIVERY</p>
             <p>Delivery Time: {{ ue.delivery_time }} MIN</p>
             <!-- <p>{{ dd.address }}</p> -->

@@ -16,9 +16,9 @@ import json
 from django.contrib.auth.models import User
 
 # from .scraper import scraper_function, 
-from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant, doordash_data_specific
-from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific
-from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data, ubereats_restaurant_data, ubereatsRestaurant, ubereats_data_specific
+from .doordash import doordash, doordash_unparsed_list, doordash_data, doordash_restaurant_data, doordashRestaurant, doordash_data_specific, doordash_url, doordash_main_url
+from .postmates import postmates, postmates_unparsed_list, postmates_data, postmates_restaurant_data, postmatesRestaurant, postmates_data_specific, postmates_url, postmates_main_url
+from .ubereats import ubereats, ubereats_unparsed_list, ubereats_data, ubereats_restaurant_data, ubereatsRestaurant, ubereats_data_specific, ubereats_url, ubereats_main_url
 import asyncio, time
 from .forms import SearchForm, RestaurantForm, FavoriteForm
 
@@ -119,7 +119,13 @@ def data(request):
     for ue_data in ubereats_unparsed_list:
         ubereats_data(ue_data)
         final_ue_data.append(ubereats_data.results)
-    # print(ubereats_unparsed_list)
+
+    for ue_url in ubereats_main_url:
+        ueurl = ue_url
+    for dd_url in doordash_main_url:
+        ddurl = dd_url
+    for pm_url in postmates_main_url:
+        pmurl = pm_url
 
     if request.method == "POST":
         # Will populate our form with what the user submits
@@ -138,6 +144,9 @@ def data(request):
         'ubereats': final_ue_data,
         'form': form,
         'location': location,
+        'ueurl': ueurl,
+        'ddurl': ddurl,
+        'pmurl': pmurl,
     })
 
 def restaurant(request):
@@ -156,10 +165,19 @@ def restaurant(request):
         # doordash_data_specific.results
     for ue_restaurant in ubereats_restaurant_data:
         ubereats_data_specific(ue_restaurant)
+    for pm_url in postmates_url:
+        pmurl = pm_url
+    for ue_url in ubereats_url:
+        ueurl = ue_url
+    for dd_url in doordash_url:
+        ddurl = dd_url
     return render(request, 'restaurant.html', {
         'pm': postmates_data_specific.results,
         'dd': doordash_data_specific.results,
         'ue': ubereats_data_specific.results,
+        'ddurl': ddurl,
+        'ueurl': ueurl,
+        'pmurl': pmurl,
     })
 
 ## CREATE VIEW ##
