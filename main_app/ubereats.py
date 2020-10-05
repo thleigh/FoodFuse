@@ -8,19 +8,29 @@ import asyncio
 from asgiref.sync import sync_to_async
 import os
 
-from .chrome_driver import chrome_location
-options = Options()
-options.add_argument('--disable-extensions')
-options.add_argument('--window-size=1920,1080')
-options.add_argument('--proxy-byprass-list=*')
-options.add_argument('--start-maximized')
-options.add_argument('--disable-gpu')
-options.add_argument('--no-sandbox')
-options.set_headless(True)
+# For development
+# from .chrome_driver import chrome_location
+# options = Options()
+# options.add_argument('--disable-extensions')
+# options.add_argument('--window-size=1920,1080')
+# options.add_argument('--proxy-byprass-list=*')
+# options.add_argument('--start-maximized')
+# options.add_argument('--disable-gpu')
+# options.add_argument('--no-sandbox')
+# options.set_headless(True)
 
-# locates the chrome_driver app in the local system
-driver = webdriver.Chrome(chrome_location, chrome_options=options)
-#, chrome_options=options
+# # locates the chrome_driver app in the local system
+# driver = webdriver.Chrome(chrome_location, chrome_options=options)
+# #, chrome_options=options
+
+# For production
+op = webdriver.ChromeOptions()
+op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+op.add_argument("--headless")
+op.add_argument("--no-sandbox")
+op.add_argument("--disable-dev-sh-usage")
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=op)
+
 
 # List to store inital data
 ubereats_unparsed_list = []
