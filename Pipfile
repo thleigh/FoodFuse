@@ -16,7 +16,6 @@ requests = "*"
 bs4 = "*"
 asgiref = "*"
 Pillow = "*"
-crispy-forms = "*"
 
 [requires]
 python_version = '3.8'
