@@ -7,67 +7,68 @@
       <form action="" method="post" class="searchFormInner">
         {% csrf_token %}
         {{ form }}
-        <button type="submit" class="btn btn-primary searchBtn">Submit</button>
+        <button type="submit" class="btn btn-dark searchBtn">Submit</button>
       </form>
     </div>
   </div>
+  <h3>Restaurants near {{ location }}:</h3>
   <div class="food-service-data">
-    <h3>Restaurants near {{ location }}:</h3>
-    <div id="doordash-data">
-      <h2><a href="{{ ddurl }}" target="_blank">DoorDash</a></h2>
-      {% for doordash in doordash %}
-      <div class="databox">
-        <p>Restaurant: {{ doordash.restaurant_name }}</p>
-        <p>Delivery Data: {{ doordash.delivery_cost }} · {{ doordash.delivery_time }}</p>
-        <form id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" action="/favorites/" method="POST">
-          {% csrf_token %}
-          <input type="hidden" id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" value="{{doordash.restaurant_name}}" name="restaurant">
-          <input type="hidden" value="{{doordash.delivery_cost}}" name="delivery_cost">
-          <input type="hidden" value="{{doordash.delivery_time}}" name="delivery_time">
-          <button type="button" value="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" class="btn btn-primary doordash-favorites">Add {{ doordash.restaurant_name }} to favorites</button>
-        </form>
-        <br>
-        <br>
-      </div> 
-      {% endfor %}
-    </div>
-    <div id="postmates-data">
-      <h2><a href="{{ pmurl }}" target="_blank">Postmates: </a></h2>
-      {% for postmates in postmates %}
+    <div class="gradient">
+      <div id="doordash-data">
+        <h2><a class="link-data" href="{{ ddurl }}" target="_blank">DoorDash</a></h2>
+        {% for doordash in doordash %}
         <div class="databox">
-          <p>Restaurant: {{ postmates.restaurant_name }}</p>
-          <p>Delivery Data: {{ postmates.delivery_data }}</p>
-          <!-- <p>Delivery Data: {{ postmates.delivery_cost }} · {{ postmates.delivery_time }}</p> -->
-          <!-- <p>Delivery Time: {{ postmates.delivery_time }}</p> -->
-          <form id="{{postmates.restaurant_name}}{{postmates.delivery_data}}" action="/favorites/" method="POST">
+          <p>Restaurant: {{ doordash.restaurant_name }}</p>
+          <p>Delivery Data: {{ doordash.delivery_cost }} · {{ doordash.delivery_time }}</p>
+          <form id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" action="/favorites/" method="POST">
             {% csrf_token %}
-            <input type="hidden" id="{{postmates.restaurant_name}}{{postmates.delivery_data}}" value="{{postmates.restaurant_name}}" name="restaurant">
-            <input type="hidden" value="{{postmates.delivery_data}}" name="delivery_data">
-            <button type="button" value="{{postmates.restaurant_name}}{{postmates.delivery_data}}" class="btn btn-primary postmates-favorites">Add {{ postmates.restaurant_name }} to favorites</button>
+            <input type="hidden" id="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" value="{{doordash.restaurant_name}}" name="restaurant">
+            <input type="hidden" value="{{doordash.delivery_cost}}" name="delivery_cost">
+            <input type="hidden" value="{{doordash.delivery_time}}" name="delivery_time">
+            <button type="button" value="{{doordash.restaurant_name}}{{doordash.delivery_cost}}{{doordash.delivery_time}}" class="btn btn-dark doordash-favorites">Add {{ doordash.restaurant_name }} to favorites</button>
           </form>
           <br>
           <br>
-        </div>
-      {% endfor %}
+        </div> 
+        {% endfor %}
+      </div>
+      <div id="postmates-data">
+        <h2><a class="link-data" href="{{ pmurl }}" target="_blank">Postmates: </a></h2>
+        {% for postmates in postmates %}
+          <div class="databox">
+            <p>Restaurant: {{ postmates.restaurant_name }}</p>
+            <p>Delivery Data: {{ postmates.delivery_data }}</p>
+            <!-- <p>Delivery Data: {{ postmates.delivery_cost }} · {{ postmates.delivery_time }}</p> -->
+            <!-- <p>Delivery Time: {{ postmates.delivery_time }}</p> -->
+            <form id="{{postmates.restaurant_name}}{{postmates.delivery_data}}" action="/favorites/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" id="{{postmates.restaurant_name}}{{postmates.delivery_data}}" value="{{postmates.restaurant_name}}" name="restaurant">
+              <input type="hidden" value="{{postmates.delivery_data}}" name="delivery_data">
+              <button type="button" value="{{postmates.restaurant_name}}{{postmates.delivery_data}}" class="btn btn-dark postmates-favorites">Add {{ postmates.restaurant_name }} to favorites</button>
+            </form>
+            <br>
+            <br>
+          </div>
+        {% endfor %}
+      </div>
+      <div id="ubereats-data">
+        <h2><a class="link-data" href="{{ ueurl }}" target="_blank">Uber Eats</a></h2>
+        {% for ubereats in ubereats %}
+          <div class="databox">
+            <p>Restaurant: {{ ubereats.restaurant_name }}</p>
+            <p>Delivery Data: {{ ubereats.delivery_data }}</p>
+            <form id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" action="/favorites/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" value="{{ubereats.restaurant_name}}" name="restaurant">
+              <input type="hidden" value="{{ubereats.delivery_data}}" name="delivery_data">
+              <button type="button" value="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" class="btn btn-dark ubereats-favorites">Add {{ ubereats.restaurant_name }} to favorites</button>
+            </form>
+            <br>
+            <br>
+          </div>
+        {% endfor %}
+      </div>
     </div>
-    <div id="ubereats-data">
-      <h2><a href="{{ ueurl }}" target="_blank">Uber Eats</a></h2>
-      {% for ubereats in ubereats %}
-        <div class="databox">
-          <p>Restaurant: {{ ubereats.restaurant_name }}</p>
-          <p>Delivery Data: {{ ubereats.delivery_data }}</p>
-          <form id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" action="/favorites/" method="POST">
-            {% csrf_token %}
-            <input type="hidden" id="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" value="{{ubereats.restaurant_name}}" name="restaurant">
-            <input type="hidden" value="{{ubereats.delivery_data}}" name="delivery_data">
-            <button type="button" value="{{ubereats.restaurant_name}}{{ubereats.delivery_data}}" class="btn btn-primary ubereats-favorites">Add {{ ubereats.restaurant_name }} to favorites</button>
-          </form>
-          <br>
-          <br>
-        </div>
-      {% endfor %}
-    </div>
-
   </div>
 </div>
 

@@ -18,24 +18,28 @@ img {
 }
 
 #postmates-data {
-    background-color: aliceblue;
+    /* background-color: #F39F86; */
     font: black;
     padding: 20px;
     border: 1px solid black;
 }
 
 #doordash-data {
-    background-color: white;
+    /* background-color: #fff7f6; */
     font: black;
     padding: 20px;
     border: 1px solid black;
 }
 
 #ubereats-data {
-    background-color: lightblue;
+    /* background-color: #ffa36d; */
     font: black;
     padding: 20px;
     border: 1px solid black;
+}
+
+.link-data {
+    color: black;
 }
 
 .navbar-brand:hover {
@@ -68,15 +72,14 @@ img {
 
 #data-page {
     width: 100%;
-    overflow-x: scroll;
 }
 
 .food-service-data {
     height: 800px;
     overflow-y: scroll;
+    background-color: #5ca0f2;
+    background-image: linear-gradient(315deg, #5ca0f2 0%, #f5f7f6 74%);
 }
-
-
 
 .locationForm {
     width: 300px;
@@ -92,6 +95,11 @@ img {
     text-align: center;
     z-index: 1;
     font-family: 'Montserrat', sans-serif;
+}
+
+.btn btn-dark:hover {
+    background-color: black;
+    color: white;
 }
 
 .slogan {
