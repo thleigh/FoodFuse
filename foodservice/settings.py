@@ -17,8 +17,8 @@ import psycopg2
 import dj_database_url
 # from decouple import config
 
-# DATABASE_URL = os.environ['DATABASE_URL']
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # If the host name starts with 'live', DJANGO_HOST = "production"
 if socket.gethostname().startswith('live'):
@@ -43,10 +43,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_URL = '/static/'
 
-# SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-# STATICFILES_DIRS = (
-#   os.path.join(SITE_ROOT, 'static/'),
-# )
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+STATICFILES_DIRS = (
+  os.path.join(SITE_ROOT, 'static/'),
+)
 
 APPEND_SLASH=False
 DEBUG = True
@@ -127,10 +127,10 @@ DATABASES = {
 }
 
 # production
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
