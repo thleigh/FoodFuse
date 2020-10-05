@@ -8,8 +8,10 @@ FoodFuse searches and sorts through the 4 major food delivery apps Doordash, Ube
 
 Fun fact: FoodFuse utilizes the Pantone 2020 color of the year, Classic Blue. 😁🔷
 
-<!-- example images
-![Imgur Image](https://i.imgur.com/pb3hvSv.jpg) -->
+#### Homepage
+---
+![Imgur](https://i.imgur.com/4wh21ba.jpg) 
+
 
 ## Team
 ---
