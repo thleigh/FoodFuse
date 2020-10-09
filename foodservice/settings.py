@@ -16,6 +16,7 @@ import sys
 import socket
 import psycopg2
 import dj_database_url
+import django_heroku
 # from decouple import config
 
 DATABASE_URL = os.environ['DATABASE_URL']
