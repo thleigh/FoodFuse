@@ -14,7 +14,8 @@ import os
 from .chrome_driver import chrome_location
 options = Options()
 options.add_argument('--disable-extensions')
-options.add_argument('--window-size=1920,1080')
+options.add_argument('--window-size=800,600')
+options.add_argument('--remote-debugging-port=9222')
 options.add_argument('--proxy-byprass-list=*')
 options.add_argument('--start-maximized')
 options.add_argument('--disable-gpu')
