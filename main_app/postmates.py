@@ -10,27 +10,29 @@ import os
 ############# POSTMATES SELENIUM CODE (comments describing each step can be found on doordash.py) #############
 
 # For Development
-from .chrome_driver import chrome_location
-options = Options()
-options.add_argument('--disable-extensions')
-options.add_argument('--window-size=800,600')
-options.add_argument('--proxy-byprass-list=*')
-options.add_argument('--start-maximized')
-options.add_argument('--disable-gpu')
-options.add_argument('--no-sandbox')
-options.add_argument('--remote-debugging-port=9222')
-options.set_headless(True)
+# from .chrome_driver import chrome_location
+# options = Options()
+# options.add_argument('--disable-extensions')
+# options.add_argument('--window-size=800,600')
+# options.add_argument('--proxy-byprass-list=*')
+# options.add_argument('--start-maximized')
+# options.add_argument('--disable-gpu')
+# options.add_argument('--no-sandbox')
+# options.add_argument('--remote-debugging-port=9222')
+# options.set_headless(True)
 
-driver = webdriver.Chrome(chrome_location, chrome_options=options)
+# driver = webdriver.Chrome(chrome_location, chrome_options=options)
 #, chrome_options=options
 
 # For production
-# chrome_options = Options()
-# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--no-sandbox")
-# chrome_options.add_argument("--disable-dev-shm-usage")
-# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+chrome_options = Options()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument('--remote-debugging-port=9222')
+chrome_options.add_argument('--window-size=800,600')
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
 postmates_unparsed_list = []
