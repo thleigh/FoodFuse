@@ -171,7 +171,7 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-django_heroku.setting(locals())
+django_heroku.settings(locals())
 
 # Define EMAIL_BACKEND variable for DJANGO_HOST
 if DJANGO_HOST == "production":
